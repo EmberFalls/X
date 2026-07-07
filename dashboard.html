@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SimuTrade | Live Terminal</title>
+  <link rel="stylesheet" href="unified-theme.css" />
+  <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <span>SimuTrade</span><span class="nav-brand-name">Research Variant</span>
+      </div>
+      <div class="nav-links">
+        <a class="nav-btn" href="index.html">Strategy Lab</a>
+        <a class="nav-btn active" href="dashboard.html">Live Terminal</a>
+        <a class="nav-btn" href="history.html">History</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-container">
+    <div class="page-header">
+      <h1>Live Terminal</h1>
+      <p>Real-time NSE/BSE data, live strategy signals, and chart overlays.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h2>Controls</h2>
+        <div class="form-group">
+          <label>Quick Select</label>
+          <div class="grid-2">
+            <button class="btn btn-secondary" data-ticker="RELIANCE.NS" type="button">RELIANCE</button>
+            <button class="btn btn-secondary" data-ticker="HDFCBANK.NS" type="button">HDFCBANK</button>
+            <button class="btn btn-secondary" data-ticker="INFY.NS" type="button">INFY</button>
+            <button class="btn btn-secondary" data-ticker="TCS.NS" type="button">TCS</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="live-interval">Timeframe</label>
+          <select id="live-interval">
+            <option value="1m">1 Minute</option>
+            <option value="5m" selected>5 Minutes</option>
+            <option value="15m">15 Minutes</option>
+            <option value="1h">1 Hour</option>
+            <option value="1d">1 Day</option>
+          </select>
+        </div>
+
+        <div class="card" style="margin:0; padding:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
+            <h3 style="margin:0;">Active Strategy Overlay</h3>
+            <button id="apply-assistant-live" class="btn btn-primary" type="button">Sync from Lab</button>
+          </div>
+          <div id="assistant-live-context" class="info-message" style="margin-top:12px;">
+            No strategy synced yet. Go to the Strategy Lab first.
+          </div>
+        </div>
+
+        <div class="card" style="margin:0; padding:16px;">
+          <h3>Live Signals</h3>
+          <div class="metrics-grid" style="margin-bottom:14px;">
+            <div class="metric-card">
+              <div class="metric-label">Latest Trigger</div>
+              <div id="live-last-signal" class="metric-value neutral">--</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Current Trend</div>
+              <div id="live-trend" class="metric-value neutral">--</div>
+            </div>
+          </div>
+          <div id="signal-feed">
+            <div class="info-message">Waiting for active market signals...</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px;">
+          <div>
+            <div style="font-size:12px; color:var(--text-secondary); font-weight:700; letter-spacing:.04em;">TICKER DATA</div>
+            <div style="display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;">
+              <h1 id="current-price" style="margin:0; font-size:32px;">₹0.00</h1>
+              <span id="price-change" class="metric-value neutral" style="font-size:16px;">0.00 (0.00%)</span>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <div id="live-dot" style="width:8px;height:8px;border-radius:50%;background:var(--success);box-shadow:0 0 8px var(--success)"></div>
+              <span id="live-status" class="info-message" style="margin:0;">Connecting...</span>
+            </div>
+            <span id="refresh-countdown" class="info-message" style="margin:0;">Refreshing in 60s</span>
+            <button id="btn-pause-resume" class="btn btn-secondary" type="button">Pause</button>
+          </div>
+        </div>
+
+        <div id="live-chart" style="width:100%; height:420px;"></div>
+        <div id="volume-chart" style="width:100%; height:80px; margin-top:8px;"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

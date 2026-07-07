@@ -1,0 +1,62 @@
+[
+  {
+    "ticker": "RELIANCE.NS",
+    "name": "Reliance Industries",
+    "sector": "Energy / Conglomerate",
+    "basket_group": "nse_large_cap"
+  },
+  {
+    "ticker": "TCS.NS",
+    "name": "Tata Consultancy Services",
+    "sector": "Information Technology",
+    "basket_group": "nse_large_cap"
+  },
+  {
+    "ticker": "INFY.NS",
+    "name": "Infosys",
+    "sector": "Information Technology",
+    "basket_group": "nse_large_cap"
+  },
+  {
+    "ticker": "HDFCBANK.NS",
+    "name": "HDFC Bank",
+    "sector": "Banking",
+    "basket_group": "nse_large_cap"
+  },
+  {
+    "ticker": "ICICIBANK.NS",
+    "name": "ICICI Bank",
+    "sector": "Banking",
+    "basket_group": "nse_large_cap"
+  },
+  {
+    "ticker": "HINDUNILVR.NS",
+    "name": "Hindustan Unilever",
+    "sector": "FMCG",
+    "basket_group": "nse_large_cap"
+  },
+  {
+    "ticker": "ITC.NS",
+    "name": "ITC",
+    "sector": "FMCG",
+    "basket_group": "nse_large_cap"
+  },
+  {
+    "ticker": "SBIN.NS",
+    "name": "State Bank of India",
+    "sector": "Banking",
+    "basket_group": "nse_large_cap"
+  },
+  {
+    "ticker": "BAJFINANCE.NS",
+    "name": "Bajaj Finance",
+    "sector": "Financial Services",
+    "basket_group": "nse_large_cap"
+  },
+  {
+    "ticker": "KOTAKBANK.NS",
+    "name": "Kotak Mahindra Bank",
+    "sector": "Banking",
+    "basket_group": "nse_large_cap"
+  }
+]

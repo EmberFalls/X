@@ -1,0 +1,3483 @@
+
+
+=========================================
+FILE: .env
+=========================================
+
+# SimuTrade secret and runtime configuration
+# Replace only the placeholder value for GROQ_API_KEY.
+
+GROQ_API_KEY=your_groq_api_key_here
+SIMUTRADE_LOG_DIR=logs
+SIMUTRADE_OUTPUT_DIR=outputs
+SIMUTRADE_SESSION_ID=research-local-session
+SIMUTRADE_DEFAULT_INTERVAL=1d
+SIMUTRADE_DEFAULT_EXCHANGE=NSE
+SIMUTRADE_DEFAULT_INITIAL_CAPITAL=100000
+SIMUTRADE_DEFAULT_RISK_PERCENT=2.0
+SIMUTRADE_DEFAULT_SLIPPAGE_PCT=0.1
+SIMUTRADE_DEFAULT_TRANSACTION_COST_PCT=0.05
+
+=========================================
+FILE: README
+=========================================
+
+Build order for Version 1
+
+Replace auth-heavy files with this scaffold.
+
+Keep frontend simple for now: remove login, remove claims of LSTM, rename to assistant-guided strategy builder.
+
+Run backend first with the temporary YFinanceProvider.
+
+Test /api/assistant/suggest, /api/backtest, /api/live-chart/{ticker}.
+
+After backend is stable, implement UpstoxProvider in market_data.py.
+
+Then update dashboard.js to use assistant suggestion payloads and render rationale + overlays.
+
+Immediate tasks you must do next
+
+Put dashboard.html, dashboard.js, app.js, unified-theme.css in the same folder as main.py if serving UI from backend.
+
+Remove all token/auth code from frontend.
+
+Change any 'LSTM' label to 'Strategy Assistant' or 'Projection'.
+
+Add a simple assistant form that posts to /api/assistant/suggest.
+
+When suggestion is returned, autofill backtest parameters.
+
+Backtest using /api/backtest/from-assistant or /api/backtest.
+
+Upstox integration plan
+
+Add access token env handling.
+
+Build instrument lookup map.
+
+Implement get_history using official candle endpoint.
+
+Implement get_live_snapshot with websocket stream aggregation.
+
+Keep the same returned OHLCV structure so UI/backtester code does not change.
+
+Why this order
+
+Schema first keeps the assistant, UI, and backtester aligned.
+
+Provider abstraction prevents lock-in to yfinance.
+
+Backtester cleanup now avoids reworking metrics later.
+
+Live chart can evolve independently once provider output is normalized.
+
+=========================================
+FILE: SimuTrade_Research_Context_V2.md
+=========================================
+
+# SimuTrade: Research Variant - Master Context Document
+
+## 📌 Project Overview & Thesis
+**SimuTrade** is being developed into a research paper targeting an IEEE student conference or an A-grade journal (e.g., IJCRT). 
+**Paper Thesis:** *"Bridging the Gap in Retail Quantitative Finance: A Heuristic NLP-to-Parameters Mapping System for Algorithmic Trading."*
+
+The academic novelty is **NOT** execution speed/latency or market prediction. The novelty is **Retail Accessibility & Decision Support**—translating unstructured natural language intent (e.g., "safe trend-following for large caps") into a structured, executable JSON strategy specification, which is then validated via a backtester and visualized for interpretability.
+
+## 📂 Current Codebase State (Do NOT Rebuild)
+The base infrastructure is perfectly functional and must not be cosmetically rebuilt:
+- **Backend (FastAPI):** `main.py`, `backtester.py`, `market_data.py`, `optimizer.py`, `schemas.py`, `strategy_assistant.py` (Version 1 heuristic mapper).
+- **Frontend (Vanilla JS/HTML/CSS):** Fully styled dashboard mapping prompts to the backtest form, live chart polling, and metrics display.
+
+## 🚀 Version Plan & Scope
+### **Version 1 (Currently Implemented):**
+- Fixed Data Source (yfinance/local OHLCV cache).
+- Fixed Strategy Registry: `golden_cross`, `mean_reversion`, `rsi_strategy`, `macd_crossover`, `momentum_breakout`.
+- Rule-based / Heuristic NLP mapping (`strategy_assistant.py`).
+
+### **Version 2 (Immediate Next Steps for the AI):**
+- **LLM-Backed NLP Mapper:** Integrate **Groq API** or **HuggingFace API (Llama 3)** to replace/augment the heuristic mapper.
+- **Prompt Engineering:** System prompt must enforce strict structured output matching the parameter schema below.
+- **Live Chart Interpretability Layer:** Upgrade the live chart to show real-time strategy rationale, generated visual overlays (e.g., EMA lines, RSI bands), and side-by-side prompt-to-chart traceability.
+
+## 🧩 Fixed Parameter Schema (Target Output for LLM)
+The LLM integration must output EXACTLY this JSON structure:
+```json
+{
+  "user_intent": "low risk trend-following strategy for large cap stocks",
+  "strategy_id": "golden_cross",
+  "ticker": "RELIANCE",
+  "exchange": "NSE",
+  "interval": "1d",
+  "market_mode": "trend_following",
+  "risk_profile": "low",
+  "entry_logic": {
+    "fast_ma": 20,
+    "slow_ma": 50,
+    "rsi_confirm": false,
+    "macd_confirm": false
+  },
+  "exit_logic": {
+    "stop_loss_pct": 2.0,
+    "take_profit_pct": 6.0,
+    "trailing_stop_pct": null
+  },
+  "execution_rules": {
+    "initial_capital": 100000,
+    "risk_percent": 2.0,
+    "slippage_pct": 0.1,
+    "transaction_cost_pct": 0.05
+  },
+  "assistant_rationale": "Selected a moving-average crossover because the prompt suggests a lower-risk trend-following approach."
+}
+```
+
+## 📊 Experiment & Evaluation Plan (What we are measuring)
+The paper requires empirical evaluation across 3 domains. Future coding tasks must help generate data for:
+1. **Technical Evaluation:** Valid output rate, JSON schema compliance, backtest completion rate.
+2. **Trading Evaluation:** Total return, Sharpe ratio, Max drawdown, Win rate across a fixed basket of NSE large-caps.
+3. **Usability Evaluation:** Manual setup vs. Heuristic NLP vs. LLM NLP comparison (time taken, error reduction).
+
+## 🤖 Instructions for AI in the New Chat
+1. **Context Assumption:** The base backtester, UI, and data pipelines work. Do NOT refactor CSS, HTML, or basic API routes.
+2. **Focus:** Only write code that implements the **Groq/Llama-3 LLM Endpoint**, the **Live Chart Interpretability Overlays/Rationale**, or scripts for **Experiment Data Logging**.
+3. **Framing:** Always treat this as a "translation system" for retail users, not a "prediction engine".
+
+
+=========================================
+FILE: api_smoke_test.py
+=========================================
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+import time
+from typing import Any, Dict
+
+import requests
+
+
+def check(name: str, ok: bool, detail: str = "") -> bool:
+    status = "PASS" if ok else "FAIL"
+    print(f"[{status}] {name}" + (f" -> {detail}" if detail else ""))
+    return ok
+
+
+def post_json(url: str, payload: Dict[str, Any], timeout: int = 60):
+    return requests.post(url, json=payload, timeout=timeout)
+
+
+def get_url(url: str, timeout: int = 60):
+    return requests.get(url, timeout=timeout)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="SimuTrade API smoke tests")
+    parser.add_argument("--base", default="http://127.0.0.1:8000")
+    parser.add_argument("--ticker", default="RELIANCE.NS")
+    parser.add_argument("--interval", default="1d")
+    parser.add_argument("--use-llm", action="store_true")
+    parser.add_argument("--groq-api-key", default=None)
+    args = parser.parse_args()
+
+    base = args.base.rstrip("/")
+    ok_all = True
+
+    r = get_url(f"{base}/api/health")
+    ok_all &= check("health endpoint", r.ok, r.text[:200])
+
+    assistant_payload = {
+        "prompt": "low risk trend-following strategy for large cap stocks",
+        "ticker": args.ticker,
+        "interval": args.interval,
+    }
+    if args.groq_api_key:
+        assistant_payload["groq_api_key"] = args.groq_api_key
+
+    assistant_route = "/api/assistant/suggest_llm" if args.use_llm else "/api/assistant/suggest"
+    r = post_json(f"{base}{assistant_route}", assistant_payload)
+    ok_all &= check("assistant endpoint", r.ok, r.text[:300])
+    data = r.json() if r.ok else {}
+
+    required_keys = [
+        "user_intent", "strategy_id", "ticker", "interval",
+        "market_mode", "risk_profile", "entry_logic",
+        "exit_logic", "execution_rules", "assistant_rationale"
+    ]
+    missing = [k for k in required_keys if k not in data]
+    ok_all &= check("assistant schema keys", len(missing) == 0, f"missing={missing}")
+
+    backtest_payload = {
+        "strategy": data.get("strategy_id", "golden_cross"),
+        "ticker": args.ticker,
+        "startDate": "2024-01-01",
+        "endDate": "2024-12-31",
+        "fastMA": data.get("entry_logic", {}).get("fast_ma") or 20,
+        "slowMA": data.get("entry_logic", {}).get("slow_ma") or 50,
+        "mrK": data.get("entry_logic", {}).get("mr_k") or 2.0,
+        "initialCapital": data.get("execution_rules", {}).get("initial_capital") or 100000,
+        "riskPercent": data.get("execution_rules", {}).get("risk_percent") or 2.0,
+        "atrPeriod": 14,
+        "stopLoss": data.get("exit_logic", {}).get("stop_loss_pct") or 2.0,
+        "takeProfit": data.get("exit_logic", {}).get("take_profit_pct") or 6.0,
+        "slippage": data.get("execution_rules", {}).get("slippage_pct") or 0.1,
+        "transactionCost": data.get("execution_rules", {}).get("transaction_cost_pct") or 0.05,
+        "interval": args.interval,
+    }
+
+    r = post_json(f"{base}/api/backtest", backtest_payload, timeout=120)
+    ok_all &= check("backtest endpoint", r.ok, r.text[:300])
+    bt = r.json() if r.ok else {}
+    ok_all &= check("backtest metrics present", "metrics" in bt and isinstance(bt.get("metrics"), dict), str(bt.get("metrics", {}))[:300])
+
+    r = get_url(f"{base}/api/live-chart/{args.ticker}?interval=5m", timeout=120)
+    ok_all &= check("live chart v1", r.ok, r.text[:200])
+
+    if args.use_llm:
+        strategy_id = data.get("strategy_id", "golden_cross")
+        r = get_url(f"{base}/api/live-chart-v2/{args.ticker}?interval=5m&strategy_id={strategy_id}", timeout=120)
+        ok_all &= check("live chart v2", r.ok, r.text[:300])
+        if r.ok:
+            live_v2 = r.json()
+            ok_all &= check("interpretability present", "interpretability" in live_v2, json.dumps(live_v2)[:300])
+
+    usability_payload = {
+        "flow_type": "llm" if args.use_llm else "heuristic_fallback",
+        "prompt": assistant_payload["prompt"],
+        "time_to_submit_sec": 2.4,
+        "form_errors": 0,
+        "apply_button_used": True,
+        "backtest_triggered": True,
+        "user_id": "local-smoke-test"
+    }
+    r = post_json(f"{base}/api/log/usability", usability_payload)
+    ok_all &= check("usability log endpoint", r.ok, r.text[:200])
+
+    print("\nOVERALL:", "PASS" if ok_all else "FAIL")
+    sys.exit(0 if ok_all else 1)
+
+
+if __name__ == "__main__":
+    main()
+
+=========================================
+FILE: app.js
+=========================================
+
+const API = 'http://127.0.0.1:8000';
+let lastAssistantPayload = null;
+let equityChartInstance = null;
+
+function $(id) { return document.getElementById(id); }
+function setValue(id, val) { const el = $(id); if (el && val !== undefined && val !== null) el.value = val; }
+function setMetric(id, val, isPercent) {
+  const el = $(id);
+  if (!el) return;
+  el.textContent = isPercent ? `${val}%` : val;
+  el.className = 'metric-value ' + (typeof val === 'number' ? (val >= 0 ? 'positive' : 'negative') : 'neutral');
+}
+function formatStrategyLabel(id) {
+  return {
+    golden_cross: 'Golden Cross',
+    mean_reversion: 'Mean Reversion',
+    rsi_strategy: 'RSI Bounce',
+    macd_crossover: 'MACD Crossover',
+    momentum_breakout: 'Momentum Breakout',
+  }[id] || id;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  bindStrategyVisibility();
+  bindAssistant();
+  bindBacktest();
+  bindOptimize();
+  bindTabSwitcher();
+});
+
+function bindTabSwitcher() {
+  document.querySelectorAll('[data-tab-target]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tabTarget;
+      document.querySelectorAll('[data-tab-target]').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('[data-tab]').forEach(p => p.classList.toggle('hidden', p.dataset.tab !== target));
+      btn.classList.add('active');
+    });
+  });
+}
+
+function bindStrategyVisibility() {
+  const sel = $('strategy-select');
+  if (!sel) return;
+  const apply = () => {
+    const isMR = sel.value === 'mean_reversion';
+    const sg = $('slow-ma-group'), mk = $('mr-k-group');
+    if (sg) sg.style.display = isMR ? 'none' : '';
+    if (mk) mk.style.display = isMR ? '' : 'none';
+  };
+  sel.addEventListener('change', apply);
+  apply();
+}
+
+function bindAssistant() {
+  const btn = $('bt-ai-submit');
+  const input = $('bt-ai-input');
+  const apply = $('bt-ai-apply');
+  if (btn) btn.addEventListener('click', () => runAssistant());
+  if (input) input.addEventListener('keydown', e => { if (e.key === 'Enter') runAssistant(); });
+  if (apply) apply.addEventListener('click', applyAssistantPayloadToForm);
+  document.querySelectorAll('.bt-ai-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      if (input) input.value = chip.dataset.prompt || '';
+      runAssistant(chip.dataset.prompt || '');
+    });
+  });
+}
+
+async function runAssistant(promptOverride = '') {
+  const input = $('bt-ai-input');
+  const result = $('bt-ai-result');
+  const status = $('bt-ai-status');
+  const btn = $('bt-ai-submit');
+  const prompt = (promptOverride || input?.value || '').trim();
+  if (!prompt) { if (status) status.textContent = 'Enter a strategy prompt first.'; return; }
+  try {
+    if (btn) btn.disabled = true;
+    if (status) status.textContent = 'Generating strategy suggestion...';
+    const res = await fetch(`${API}/api/assistant/suggest`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt, ticker: ($('ticker')?.value || 'RELIANCE.NS').trim(), interval: $('interval')?.value || '1d' })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || 'Assistant request failed.');
+    lastAssistantPayload = data;
+    sessionStorage.setItem('assistant_payload', JSON.stringify(data));
+    renderAssistantSuggestion(data);
+    if (result) result.style.display = 'block';
+    if (status) status.textContent = 'Suggestion ready — review and apply it.';
+  } catch (err) {
+    if (status) status.textContent = `Assistant error: ${err.message}`;
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
+function renderAssistantSuggestion(s) {
+  const label = $('bt-ai-label'), desc = $('bt-ai-description'), meta = $('bt-ai-meta'), schema = $('bt-ai-schema');
+  if (label) label.textContent = formatStrategyLabel(s.strategy_id);
+  if (desc) desc.textContent = s.assistant_rationale || '';
+  if (meta) meta.textContent = `Ticker: ${s.ticker}  ·  Interval: ${s.interval}  ·  Risk: ${s.risk_profile}  ·  Mode: ${s.market_mode}`;
+  if (schema) schema.textContent = JSON.stringify(s, null, 2);
+}
+
+function applyAssistantPayloadToForm() {
+  const s = lastAssistantPayload;
+  if (!s) return;
+  setValue('strategy-select', s.strategy_id);
+  setValue('ticker', s.ticker);
+  setValue('interval', s.interval);
+  setValue('fast-ma', s.entry_logic?.fast_ma ?? 20);
+  setValue('slow-ma', s.entry_logic?.slow_ma ?? 50);
+  setValue('mr-k', s.entry_logic?.mr_k ?? 2.0);
+  setValue('capital', s.execution_rules?.initial_capital ?? 100000);
+  setValue('risk', s.execution_rules?.risk_percent ?? 2.0);
+  setValue('stop-loss', s.exit_logic?.stop_loss_pct ?? 2.0);
+  setValue('take-profit', s.exit_logic?.take_profit_pct ?? 6.0);
+  setValue('slippage', s.execution_rules?.slippage_pct ?? 0.1);
+  setValue('transaction-cost', s.execution_rules?.transaction_cost_pct ?? 0.05);
+  bindStrategyVisibility();
+  const rationale = $('assistant-rationale');
+  if (rationale) rationale.textContent = s.assistant_rationale || '';
+}
+
+function bindBacktest() {
+  const form = $('backtest-form');
+  if (!form) return;
+  form.addEventListener('submit', e => { e.preventDefault(); runBacktest(); });
+}
+
+async function runBacktest() {
+  const statusEl = $('results-status');
+  const btn = document.querySelector('#backtest-form button[type="submit"]');
+  if (statusEl) statusEl.textContent = 'Running backtest...';
+  if (btn) { btn.disabled = true; btn.textContent = 'Running...'; }
+  try {
+    const payload = {
+      strategy: $('strategy-select')?.value,
+      ticker: ($('ticker')?.value || '').trim().toUpperCase(),
+      startDate: $('start-date')?.value,
+      endDate: $('end-date')?.value,
+      fastMA: parseFloat($('fast-ma')?.value || 20),
+      slowMA: parseFloat($('slow-ma')?.value || 50),
+      mrK: parseFloat($('mr-k')?.value || 2.0),
+      initialCapital: parseFloat($('capital')?.value || 100000),
+      riskPercent: parseFloat($('risk')?.value || 2.0),
+      atrPeriod: parseFloat($('atr-period')?.value || 14),
+      stopLoss: parseFloat($('stop-loss')?.value || 2.0),
+      takeProfit: parseFloat($('take-profit')?.value || 6.0),
+      slippage: parseFloat($('slippage')?.value || 0.1),
+      transactionCost: parseFloat($('transaction-cost')?.value || 0.05),
+      interval: $('interval')?.value || '1d',
+    };
+    const res = await fetch(`${API}/api/backtest`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || 'Backtest failed.');
+    if (statusEl) { statusEl.textContent = `✅ Backtest complete for ${data.ticker}.`; statusEl.style.color = 'var(--success, #10b981)'; }
+    renderMetrics(data.metrics);
+    renderTradeTable(data.trades || []);
+    renderEquityChart(data.chartData || []);
+  } catch (err) {
+    if (statusEl) { statusEl.textContent = `❌ ${err.message}`; statusEl.style.color = 'var(--danger, #ef4444)'; }
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = 'Run Backtest'; }
+  }
+}
+
+function renderMetrics(m) {
+  setMetric('metric-total-return', m.totalReturn, true);
+  setMetric('metric-max-dd', m.maxDrawdown, true);
+  setMetric('metric-sharpe', m.sharpeRatio, false);
+  setMetric('metric-winrate', m.winRate, true);
+  setMetric('metric-trades', m.totalTrades, false);
+  const fin = $('metric-final');
+  if (fin) fin.textContent = `₹${Number(m.finalValue || 0).toLocaleString('en-IN')}`;
+}
+
+function renderTradeTable(trades) {
+  const tbody = $('trade-table-body');
+  if (!tbody) return;
+  if (!trades.length) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--text-muted)">No completed trades found.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = trades.map(t => {
+    const win = (t.pnl ?? 0) >= 0;
+    return `<tr>
+      <td>${t.date ?? '--'}</td>
+      <td style="color:${t.signal === 'BUY' ? '#22d3ee' : '#f43f5e'};font-weight:600">${t.signal ?? '--'}</td>
+      <td>${t.entryPrice ?? '--'}</td>
+      <td>${t.exitPrice ?? '--'}</td>
+      <td style="color:${win ? '#10b981' : '#ef4444'}">${t.pnl ?? '--'}</td>
+      <td style="color:${win ? '#10b981' : '#ef4444'}">${t.pnlPct ?? '--'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderEquityChart(points) {
+  const canvas = $('equity-chart');
+  if (!canvas || typeof Chart === 'undefined' || !points.length) return;
+  if (equityChartInstance) equityChartInstance.destroy();
+  const tickCol = '#a1a1aa', gridCol = 'rgba(255,255,255,0.06)';
+  equityChartInstance = new Chart(canvas.getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: points.map(p => p.date),
+      datasets: [
+        { label: 'Strategy', data: points.map(p => p.strategy), borderColor: '#22d3ee', borderWidth: 2, pointRadius: 0, fill: true, backgroundColor: 'rgba(34,211,238,0.07)', tension: 0.3 },
+        { label: 'Buy & Hold', data: points.map(p => p.buyHold), borderColor: '#f59e0b', borderWidth: 1.5, pointRadius: 0, borderDash: [5, 4], tension: 0.3 },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { labels: { color: tickCol, boxWidth: 16 } } },
+      scales: {
+        x: { ticks: { color: tickCol, maxTicksLimit: 8 }, grid: { color: gridCol } },
+        y: { ticks: { color: tickCol }, grid: { color: gridCol } },
+      },
+    },
+  });
+}
+
+function bindOptimize() {
+  const form = $('optimize-form');
+  if (form) form.addEventListener('submit', e => { e.preventDefault(); runOptimize(); });
+}
+
+async function runOptimize() {
+  const statusEl = $('opt-status');
+  const btn = document.querySelector('#optimize-form button[type="submit"]');
+  if (statusEl) statusEl.textContent = '⏳ Running optimization...';
+  if (btn) { btn.disabled = true; btn.textContent = 'Running...'; }
+  try {
+    const payload = {
+      strategy: $('strategy-select')?.value,
+      ticker: ($('ticker')?.value || '').trim().toUpperCase(),
+      startDate: $('start-date')?.value,
+      endDate: $('end-date')?.value,
+      fastMAList: $('opt-fast-list')?.value || '20,50,100',
+      slowMAList: $('opt-slow-list')?.value || '150,200,250',
+      topN: parseInt($('opt-topn')?.value || 10),
+      initialCapital: parseFloat($('capital')?.value || 100000),
+      riskPercent: parseFloat($('risk')?.value || 2.0),
+      interval: $('interval')?.value || '1d',
+    };
+    const res = await fetch(`${API}/api/optimize`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || 'Optimization failed.');
+    renderOptTable(data.results || []);
+    if (statusEl) statusEl.textContent = `✅ Done — ${(data.results || []).length} combinations tested.`;
+  } catch (err) {
+    if (statusEl) statusEl.textContent = `❌ ${err.message}`;
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = 'Run Optimization'; }
+  }
+}
+
+function renderOptTable(results) {
+  const tbody = $('opt-table-body');
+  if (!tbody) return;
+  if (!results.length) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--text-muted)">No results.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = results.map(r => {
+    const m = r.metrics, p = r.params;
+    return `<tr>
+      <td>${p.fastMA}</td><td>${p.slowMA}</td>
+      <td style="color:${m.totalReturn >= 0 ? '#10b981' : '#ef4444'}">${m.totalReturn}%</td>
+      <td style="color:#ef4444">-${m.maxDrawdown}%</td>
+      <td>${m.sharpeRatio}</td>
+      <td>${m.winRate}%</td>
+    </tr>`;
+  }).join('');
+}
+
+=========================================
+FILE: backtester.py
+=========================================
+
+from __future__ import annotations
+
+from typing import Dict, List, Tuple, Any
+import numpy as np
+import pandas as pd
+
+
+def _col(df: pd.DataFrame, name: str) -> str:
+    if name in df.columns:
+        return name
+    for c in df.columns:
+        if c.lower() == name.lower():
+            return c
+    raise KeyError(f"Missing column: {name}")
+
+
+def add_indicators(df: pd.DataFrame, params: Dict[str, Any]) -> pd.DataFrame:
+    df = df.copy()
+
+    open_col = _col(df, "Open")
+    high_col = _col(df, "High")
+    low_col = _col(df, "Low")
+    close_col = _col(df, "Close")
+    volume_col = _col(df, "Volume")
+
+    fast = int(params.get("fastMA", 20))
+    slow = int(params.get("slowMA", 50))
+    atr_period = int(params.get("atrPeriod", 14))
+
+    df["EMA_FAST"] = df[close_col].ewm(span=fast, adjust=False).mean()
+    df["EMA_SLOW"] = df[close_col].ewm(span=slow, adjust=False).mean()
+
+    prev_close = df[close_col].shift(1)
+    tr1 = df[high_col] - df[low_col]
+    tr2 = (df[high_col] - prev_close).abs()
+    tr3 = (df[low_col] - prev_close).abs()
+    df["TR"] = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
+    df["ATR"] = df["TR"].rolling(atr_period).mean()
+
+    delta = df[close_col].diff()
+    gain = delta.clip(lower=0)
+    loss = -delta.clip(upper=0)
+    avg_gain = gain.rolling(14).mean()
+    avg_loss = loss.rolling(14).mean()
+    rs = avg_gain / avg_loss.replace(0, np.nan)
+    df["RSI"] = 100 - (100 / (1 + rs))
+
+    ema12 = df[close_col].ewm(span=12, adjust=False).mean()
+    ema26 = df[close_col].ewm(span=26, adjust=False).mean()
+    df["MACD"] = ema12 - ema26
+    df["MACD_SIGNAL"] = df["MACD"].ewm(span=9, adjust=False).mean()
+    df["MACD_HIST"] = df["MACD"] - df["MACD_SIGNAL"]
+
+    df["BB_MID"] = df[close_col].rolling(20).mean()
+    bb_std = df[close_col].rolling(20).std()
+    k = float(params.get("mrK", 2.0))
+    df["BB_UPPER"] = df["BB_MID"] + (k * bb_std)
+    df["BB_LOWER"] = df["BB_MID"] - (k * bb_std)
+
+    df["Volume_SMA"] = df[volume_col].rolling(20).mean()
+    return df
+
+
+def _make_trade(date, signal, entry_price, exit_price, qty, fees):
+    pnl = (exit_price - entry_price) * qty if signal == "BUY" else (entry_price - exit_price) * qty
+    pnl -= fees
+    pnl_pct = (pnl / (entry_price * qty) * 100) if entry_price and qty else 0
+    return {
+        "date": str(date),
+        "signal": signal,
+        "entryPrice": round(float(entry_price), 2),
+        "exitPrice": round(float(exit_price), 2),
+        "shares": int(qty),
+        "fees": round(float(fees), 2),
+        "pnl": round(float(pnl), 2),
+        "pnlPct": round(float(pnl_pct), 2),
+    }
+
+
+def run_strategy(strategy: str, df: pd.DataFrame, params: Dict[str, Any]) -> Tuple[List[Dict], List[Dict], float, float, float]:
+    close_col = _col(df, "Close")
+    open_col = _col(df, "Open")
+
+    initial_capital = float(params.get("initialCapital", 100000))
+    stop_loss = float(params.get("stopLoss", 2.0)) / 100.0
+    take_profit = float(params.get("takeProfit", 6.0)) / 100.0
+    slippage = float(params.get("slippage", 0.1)) / 100.0
+    tx_cost = float(params.get("transactionCost", 0.05)) / 100.0
+
+    cash = initial_capital
+    position = 0
+    entry_price = None
+    entry_date = None
+    trades = []
+    equity_curve = []
+
+    rsi_buy_thresh = float(params.get("rsiBuy", params.get("rsi_buy", 30.0)))
+    rsi_sell_thresh = float(params.get("rsiSell", params.get("rsi_sell", 70.0)))
+
+    def fees_for(value):
+        return value * tx_cost
+
+    for i in range(len(df)):
+        row = df.iloc[i]
+        date = df.index[i] if df.index is not None else i
+        price = float(row[close_col])
+        open_price = float(row[open_col])
+
+        signal = None
+
+        if strategy == "golden_cross":
+            if i > 0 and df["EMA_FAST"].iloc[i - 1] <= df["EMA_SLOW"].iloc[i - 1] and row["EMA_FAST"] > row["EMA_SLOW"]:
+                signal = "BUY"
+            elif i > 0 and df["EMA_FAST"].iloc[i - 1] >= df["EMA_SLOW"].iloc[i - 1] and row["EMA_FAST"] < row["EMA_SLOW"]:
+                signal = "SELL"
+
+        elif strategy == "mean_reversion":
+            if price < row["BB_LOWER"]:
+                signal = "BUY"
+            elif price > row["BB_UPPER"]:
+                signal = "SELL"
+
+
+        elif strategy == "rsi_strategy":
+
+            if row["RSI"] < rsi_buy_thresh:
+
+                signal = "BUY"
+
+            elif row["RSI"] > rsi_sell_thresh:
+
+                signal = "SELL"
+
+        elif strategy == "macd_crossover":
+            if i > 0 and df["MACD"].iloc[i - 1] <= df["MACD_SIGNAL"].iloc[i - 1] and row["MACD"] > row["MACD_SIGNAL"]:
+                signal = "BUY"
+            elif i > 0 and df["MACD"].iloc[i - 1] >= df["MACD_SIGNAL"].iloc[i - 1] and row["MACD"] < row["MACD_SIGNAL"]:
+                signal = "SELL"
+
+        elif strategy == "momentum_breakout":
+            if i >= 20:
+                hh = df[close_col].iloc[i - 20:i].max()
+                ll = df[close_col].iloc[i - 20:i].min()
+                if price > hh:
+                    signal = "BUY"
+                elif price < ll:
+                    signal = "SELL"
+
+        if position == 0 and signal == "BUY":
+            buy_price = price * (1 + slippage)
+            qty = int(cash / buy_price)
+            if qty > 0:
+                cost = buy_price * qty
+                f = fees_for(cost)
+                cash -= (cost + f)
+                position = qty
+                entry_price = buy_price
+                entry_date = date
+
+        elif position > 0:
+            stop_price = entry_price * (1 - stop_loss)
+            target_price = entry_price * (1 + take_profit)
+
+            exit_now = False
+            if signal == "SELL":
+                exit_now = True
+            elif price <= stop_price:
+                exit_now = True
+            elif price >= target_price:
+                exit_now = True
+
+            if exit_now:
+                sell_price = price * (1 - slippage)
+                proceeds = sell_price * position
+                f = fees_for(proceeds)
+                cash += (proceeds - f)
+                trades.append(_make_trade(entry_date, "BUY", entry_price, sell_price, position, f))
+                position = 0
+                entry_price = None
+                entry_date = None
+
+        equity = cash + (position * price if position > 0 else 0)
+        buy_hold = initial_capital / float(df[close_col].iloc[0]) * price
+        equity_curve.append({
+            "date": str(date),
+            "strategy": round(float(equity), 2),
+            "buyHold": round(float(buy_hold), 2),
+        })
+
+    last_price = float(df[close_col].iloc[-1])
+    bh_shares = initial_capital / float(df[close_col].iloc[0])
+    return equity_curve, trades, cash, bh_shares, last_price
+
+
+def calculate_metrics(equity: List[Dict], trades: List[Dict], initial_capital: float, bh_shares: float, last_price: float) -> Dict[str, Any]:
+    if not equity:
+        return {
+            "totalReturn": 0,
+            "maxDrawdown": 0,
+            "sharpeRatio": 0,
+            "winRate": 0,
+            "totalTrades": 0,
+            "finalValue": initial_capital,
+            "buyHoldValue": round(float(bh_shares * last_price), 2),
+        }
+
+    values = pd.Series([p["strategy"] for p in equity], dtype="float64")
+    returns = values.pct_change().dropna()
+
+    total_return = ((values.iloc[-1] / initial_capital) - 1) * 100
+    rolling_max = values.cummax()
+    drawdown = ((values / rolling_max) - 1) * 100
+    max_dd = abs(drawdown.min()) if not drawdown.empty else 0
+
+    sharpe = 0.0
+    if len(returns) > 1 and returns.std() != 0:
+        sharpe = (returns.mean() / returns.std()) * np.sqrt(252)
+
+    wins = sum(1 for t in trades if t.get("pnl", 0) > 0)
+    win_rate = (wins / len(trades) * 100) if trades else 0
+
+    final_value = float(values.iloc[-1])
+    buy_hold_value = float(bh_shares * last_price)
+
+    return {
+        "totalReturn": round(float(total_return), 2),
+        "maxDrawdown": round(float(max_dd), 2),
+        "sharpeRatio": round(float(sharpe), 2),
+        "winRate": round(float(win_rate), 2),
+        "totalTrades": len(trades),
+        "finalValue": round(final_value, 2),
+        "buyHoldValue": round(buy_hold_value, 2),
+    }
+
+=========================================
+FILE: benchmark_prompts.json
+=========================================
+
+[
+  {
+    "id": "P01",
+    "prompt": "safe trend-following strategy for large cap stocks",
+    "expected_strategy": "golden_cross",
+    "expected_risk_profile": "low",
+    "difficulty": "easy",
+    "category": "trend"
+  },
+  {
+    "id": "P02",
+    "prompt": "buy the dip on Infosys using bollinger bands",
+    "expected_strategy": "mean_reversion",
+    "expected_risk_profile": "medium",
+    "difficulty": "easy",
+    "category": "mean_reversion"
+  },
+  {
+    "id": "P03",
+    "prompt": "RSI oversold bounce strategy with tight stop loss",
+    "expected_strategy": "rsi_strategy",
+    "expected_risk_profile": "low",
+    "difficulty": "easy",
+    "category": "reversal"
+  },
+  {
+    "id": "P04",
+    "prompt": "MACD crossover with momentum confirmation on TCS",
+    "expected_strategy": "macd_crossover",
+    "expected_risk_profile": "medium",
+    "difficulty": "medium",
+    "category": "momentum"
+  },
+  {
+    "id": "P05",
+    "prompt": "aggressive breakout strategy for high volatility stocks",
+    "expected_strategy": "momentum_breakout",
+    "expected_risk_profile": "high",
+    "difficulty": "easy",
+    "category": "breakout"
+  },
+  {
+    "id": "P06",
+    "prompt": "I want to trade Reliance with moderate risk using moving average crossover",
+    "expected_strategy": "golden_cross",
+    "expected_risk_profile": "medium",
+    "difficulty": "medium",
+    "category": "trend"
+  },
+  {
+    "id": "P07",
+    "prompt": "sideways market mean reversion play on HDFC Bank with wider bands",
+    "expected_strategy": "mean_reversion",
+    "expected_risk_profile": "medium",
+    "difficulty": "medium",
+    "category": "mean_reversion"
+  },
+  {
+    "id": "P08",
+    "prompt": "something safe for beginners that follows the trend",
+    "expected_strategy": "golden_cross",
+    "expected_risk_profile": "low",
+    "difficulty": "hard",
+    "category": "trend"
+  },
+  {
+    "id": "P09",
+    "prompt": "scalp high momentum breakouts on BAJFINANCE intraday",
+    "expected_strategy": "momentum_breakout",
+    "expected_risk_profile": "high",
+    "difficulty": "medium",
+    "category": "breakout"
+  },
+  {
+    "id": "P10",
+    "prompt": "overbought overbought sell signal with RSI 70 on ITC",
+    "expected_strategy": "rsi_strategy",
+    "expected_risk_profile": "medium",
+    "difficulty": "hard",
+    "category": "reversal"
+  }
+]
+
+=========================================
+FILE: benchmark_tickers.json
+=========================================
+
+[
+  {
+    "ticker": "RELIANCE.NS",
+    "name": "Reliance Industries",
+    "sector": "Energy / Conglomerate",
+    "basket_group": "nse_large_cap"
+  },
+  {
+    "ticker": "TCS.NS",
+    "name": "Tata Consultancy Services",
+    "sector": "Information Technology",
+    "basket_group": "nse_large_cap"
+  },
+  {
+    "ticker": "INFY.NS",
+    "name": "Infosys",
+    "sector": "Information Technology",
+    "basket_group": "nse_large_cap"
+  },
+  {
+    "ticker": "HDFCBANK.NS",
+    "name": "HDFC Bank",
+    "sector": "Banking",
+    "basket_group": "nse_large_cap"
+  },
+  {
+    "ticker": "ICICIBANK.NS",
+    "name": "ICICI Bank",
+    "sector": "Banking",
+    "basket_group": "nse_large_cap"
+  },
+  {
+    "ticker": "HINDUNILVR.NS",
+    "name": "Hindustan Unilever",
+    "sector": "FMCG",
+    "basket_group": "nse_large_cap"
+  },
+  {
+    "ticker": "ITC.NS",
+    "name": "ITC",
+    "sector": "FMCG",
+    "basket_group": "nse_large_cap"
+  },
+  {
+    "ticker": "SBIN.NS",
+    "name": "State Bank of India",
+    "sector": "Banking",
+    "basket_group": "nse_large_cap"
+  },
+  {
+    "ticker": "BAJFINANCE.NS",
+    "name": "Bajaj Finance",
+    "sector": "Financial Services",
+    "basket_group": "nse_large_cap"
+  },
+  {
+    "ticker": "KOTAKBANK.NS",
+    "name": "Kotak Mahindra Bank",
+    "sector": "Banking",
+    "basket_group": "nse_large_cap"
+  }
+]
+
+=========================================
+FILE: config_loader.py
+=========================================
+
+from __future__ import annotations
+
+import json
+import os
+from pathlib import Path
+from typing import Any, Dict
+
+BASE_DIR = Path(__file__).resolve().parent
+DEFAULT_CONFIG_PATH = BASE_DIR / "experiment_config.json"
+
+
+def load_experiment_config(path: str | None = None) -> Dict[str, Any]:
+    config_path = Path(path) if path else DEFAULT_CONFIG_PATH
+    if not config_path.exists():
+        raise FileNotFoundError(f"Experiment config file not found: {config_path}")
+    return json.loads(config_path.read_text(encoding="utf-8"))
+
+
+def env_or_default(name: str, default: Any) -> Any:
+    return os.getenv(name, default)
+
+
+def get_runtime_paths(config: Dict[str, Any]) -> Dict[str, str]:
+    proto = config.get("evaluation_protocol", {})
+    return {
+        "log_dir": str(env_or_default("SIMUTRADE_LOG_DIR", proto.get("log_dir", "logs"))),
+        "output_dir": str(env_or_default("SIMUTRADE_OUTPUT_DIR", proto.get("output_dir", "outputs"))),
+        "benchmark_prompt_file": str(proto.get("benchmark_prompt_file", "benchmark_prompts.json")),
+        "benchmark_ticker_file": str(proto.get("benchmark_ticker_file", "benchmark_tickers.json")),
+    }
+
+
+def get_runtime_defaults(config: Dict[str, Any]) -> Dict[str, Any]:
+    proto = config.get("evaluation_protocol", {})
+    return {
+        "start_date": proto.get("start_date", "2023-01-01"),
+        "end_date": proto.get("end_date", "2024-12-31"),
+        "interval": env_or_default("SIMUTRADE_DEFAULT_INTERVAL", proto.get("default_interval", "1d")),
+        "exchange": env_or_default("SIMUTRADE_DEFAULT_EXCHANGE", proto.get("exchange", "NSE")),
+        "methods": proto.get("methods", ["heuristic_fallback", "llm"]),
+    }
+
+
+def get_execution_defaults() -> Dict[str, float]:
+    return {
+        "initial_capital": float(env_or_default("SIMUTRADE_DEFAULT_INITIAL_CAPITAL", 100000)),
+        "risk_percent": float(env_or_default("SIMUTRADE_DEFAULT_RISK_PERCENT", 2.0)),
+        "stop_loss_pct": float(env_or_default("SIMUTRADE_DEFAULT_STOP_LOSS_PCT", 2.0)),
+        "take_profit_pct": float(env_or_default("SIMUTRADE_DEFAULT_TAKE_PROFIT_PCT", 6.0)),
+        "slippage_pct": float(env_or_default("SIMUTRADE_DEFAULT_SLIPPAGE_PCT", 0.1)),
+        "transaction_cost_pct": float(env_or_default("SIMUTRADE_DEFAULT_TRANSACTION_COST_PCT", 0.05)),
+    }
+
+=========================================
+FILE: dashboard.js
+=========================================
+
+const API = 'http://127.0.0.1:8000';
+
+const state = {
+  currentTicker: 'RELIANCE.NS',
+  currentInterval: '5m',
+  lastAssistantPayload: null,
+  chart: null,
+  candleSeries: null,
+  volumeChart: null,
+  volumeSeries: null,
+  overlays: {},
+  refreshTimer: null,
+  countdown: 60,
+  isPaused: false,
+};
+
+const REFRESH_PERIOD = { '1m': 30, '5m': 60, '15m': 120, '1h': 300, '1d': 600 };
+
+document.addEventListener('DOMContentLoaded', () => {
+  initCharts();
+  bindLiveControls();
+  bindAssistantLink();
+  bindTheme();
+  loadFromSession();
+  loadTicker(state.currentTicker, state.currentInterval);
+  startRefreshTimer();
+});
+
+function getTheme() {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  return {
+    layout: { background: { type: 'solid', color: isLight ? '#f9f9f8' : '#101418' }, textColor: isLight ? '#52525b' : '#a1a1aa' },
+    grid: {
+      vertLines: { color: isLight ? 'rgba(0,0,0,0.04)' : 'rgba(255,255,255,0.04)' },
+      horzLines: { color: isLight ? 'rgba(0,0,0,0.04)' : 'rgba(255,255,255,0.04)' },
+    },
+  };
+}
+
+function initCharts() {
+  const chartEl = document.getElementById('live-chart');
+  const volEl = document.getElementById('volume-chart');
+  if (!chartEl || typeof LightweightCharts === 'undefined') return;
+
+  state.chart = LightweightCharts.createChart(chartEl, {
+    width: chartEl.clientWidth,
+    height: 420,
+    ...getTheme(),
+    timeScale: { timeVisible: true, secondsVisible: false },
+    rightPriceScale: { borderVisible: false },
+    crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
+  });
+  state.candleSeries = state.chart.addCandlestickSeries({
+    upColor: '#10b981',
+    downColor: '#ef4444',
+    borderVisible: false,
+    wickUpColor: '#10b981',
+    wickDownColor: '#ef4444',
+  });
+
+  if (volEl) {
+    state.volumeChart = LightweightCharts.createChart(volEl, {
+      width: volEl.clientWidth,
+      height: 80,
+      ...getTheme(),
+      timeScale: { visible: false },
+      rightPriceScale: { visible: false },
+      leftPriceScale: { visible: false },
+      handleScroll: false,
+      handleScale: false,
+    });
+    state.volumeSeries = state.volumeChart.addHistogramSeries({ priceFormat: { type: 'volume' }, priceScaleId: '' });
+    state.volumeChart.priceScale('').applyOptions({ scaleMargins: { top: 0.1, bottom: 0 } });
+    state.chart.timeScale().subscribeVisibleLogicalRangeChange(r => {
+      if (r) state.volumeChart.timeScale().setVisibleLogicalRange(r);
+    });
+  }
+
+  window.addEventListener('resize', () => {
+    state.chart.resize(chartEl.clientWidth, 420);
+    if (volEl) state.volumeChart.resize(volEl.clientWidth, 80);
+  });
+}
+
+function bindTheme() {
+  window.addEventListener('themeChanged', () => {
+    const t = getTheme();
+    state.chart?.applyOptions(t);
+    state.volumeChart?.applyOptions(t);
+  });
+}
+
+function bindLiveControls() {
+  document.querySelectorAll('[data-ticker]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.currentTicker = btn.dataset.ticker;
+      loadTicker(state.currentTicker, state.currentInterval);
+    });
+  });
+
+  document.querySelectorAll('.tf-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.currentInterval = btn.dataset.tf;
+      state.countdown = REFRESH_PERIOD[state.currentInterval] || 60;
+      loadTicker(state.currentTicker, state.currentInterval);
+    });
+  });
+
+  const intervalSel = document.getElementById('live-interval');
+  if (intervalSel) {
+    intervalSel.addEventListener('change', () => {
+      state.currentInterval = intervalSel.value;
+      loadTicker(state.currentTicker, state.currentInterval);
+    });
+  }
+
+  const pauseBtn = document.getElementById('btn-pause-resume');
+  if (pauseBtn) {
+    pauseBtn.addEventListener('click', () => {
+      state.isPaused = !state.isPaused;
+      pauseBtn.textContent = state.isPaused ? 'Resume' : 'Pause';
+      const dot = document.getElementById('live-dot');
+      if (dot) dot.classList.toggle('paused', state.isPaused);
+    });
+  }
+}
+
+function startRefreshTimer() {
+  if (state.refreshTimer) clearInterval(state.refreshTimer);
+  state.countdown = REFRESH_PERIOD[state.currentInterval] || 60;
+  state.refreshTimer = setInterval(() => {
+    if (state.isPaused) return;
+    state.countdown--;
+    const el = document.getElementById('refresh-countdown');
+    if (el) el.textContent = `Refreshing in ${state.countdown}s`;
+    if (state.countdown <= 0) {
+      state.countdown = REFRESH_PERIOD[state.currentInterval] || 60;
+      loadTicker(state.currentTicker, state.currentInterval);
+    }
+  }, 1000);
+}
+
+function loadFromSession() {
+  const raw = sessionStorage.getItem('assistant_payload');
+  if (!raw) return;
+  state.lastAssistantPayload = JSON.parse(raw);
+  renderAssistantContext();
+}
+
+function bindAssistantLink() {
+  const applyBtn = document.getElementById('apply-assistant-live');
+  if (applyBtn) {
+    applyBtn.addEventListener('click', () => {
+      const raw = sessionStorage.getItem('assistant_payload');
+      if (!raw) return;
+      state.lastAssistantPayload = JSON.parse(raw);
+      renderAssistantContext();
+      const p = state.lastAssistantPayload;
+      if (p.ticker) state.currentTicker = p.ticker;
+      if (p.interval) state.currentInterval = p.interval;
+      loadTicker(state.currentTicker, state.currentInterval);
+    });
+  }
+}
+
+function renderAssistantContext() {
+  const box = document.getElementById('assistant-live-context');
+  const s = state.lastAssistantPayload;
+  if (!box || !s) return;
+  box.innerHTML = `
+    <div style="font-size:13px;line-height:1.8">
+      <strong>${formatStrategyLabel(s.strategy_id)}</strong><br/>
+      <span style="color:var(--text-muted,#a1a1aa)">${s.assistant_rationale || ''}</span><br/>
+      <span style="font-size:11px;color:var(--text-muted,#a1a1aa)">
+        Risk: ${s.risk_profile || '—'} &nbsp;·&nbsp; Mode: ${s.market_mode || '—'}
+      </span>
+    </div>`;
+}
+
+function formatStrategyLabel(id) {
+  return {
+    golden_cross: 'Golden Cross',
+    mean_reversion: 'Mean Reversion',
+    rsi_strategy: 'RSI Bounce',
+    macd_crossover: 'MACD Crossover',
+    momentum_breakout: 'Momentum Breakout'
+  }[id] || id;
+}
+
+async function loadTicker(ticker, interval) {
+  const statusEl = document.getElementById('live-status');
+  try {
+    if (statusEl) statusEl.textContent = `Loading ${ticker}...`;
+    const res = await fetch(`${API}/api/live-chart/${encodeURIComponent(ticker)}?interval=${encodeURIComponent(interval)}`);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || 'Live chart load failed.');
+    renderLiveData(data);
+    if (statusEl) statusEl.textContent = `${ticker} · ${interval}`;
+  } catch (err) {
+    if (statusEl) statusEl.textContent = `Error: ${err.message}`;
+  }
+}
+
+function renderLiveData(data) {
+  const candles = data.candles || [];
+  state.candleSeries?.setData(candles);
+  state.volumeSeries?.setData(candles.map(c => ({
+    time: c.time,
+    value: c.volume,
+    color: c.close >= c.open ? 'rgba(16,185,129,0.5)' : 'rgba(239,68,68,0.5)',
+  })));
+  state.chart?.timeScale().fitContent();
+  updateQuote(data);
+  applyAssistantOverlay(candles);
+}
+
+function updateQuote(data) {
+  const priceEl = document.getElementById('current-price');
+  const changeEl = document.getElementById('price-change');
+  if (priceEl) priceEl.textContent = `₹${Number(data.current_price || 0).toLocaleString('en-IN')}`;
+  if (changeEl) {
+    const pos = (data.change ?? 0) >= 0;
+    changeEl.textContent = `${pos ? '+' : ''}${data.change} (${data.change_pct}%)`;
+    changeEl.style.color = pos ? '#10b981' : '#ef4444';
+  }
+}
+
+function applyAssistantOverlay(candles) {
+  const s = state.lastAssistantPayload;
+  clearOverlays();
+  if (!s || !candles.length || !state.chart) return;
+
+  const fast = s.entry_logic?.fast_ma;
+  const slow = s.entry_logic?.slow_ma;
+  if (fast) _addMALine(candles, fast, '#22d3ee', `ema${fast}`);
+  if (slow) _addMALine(candles, slow, '#f59e0b', `ema${slow}`);
+  if (fast && slow) {
+    const markers = _buildCrossoverMarkers(candles, fast, slow);
+    state.candleSeries?.setMarkers(markers);
+    updateSignalSummary(markers, candles);
+  }
+}
+
+function _addMALine(candles, period, color, id) {
+  if (!state.chart) return;
+  const k = 2 / (period + 1);
+  let ema = candles[0].close;
+  const data = candles.map((c, i) => {
+    ema = i === 0 ? c.close : c.close * k + ema * (1 - k);
+    return { time: c.time, value: parseFloat(ema.toFixed(2)) };
+  });
+  const series = state.chart.addLineSeries({ color, lineWidth: 1, lastValueVisible: false, priceLineVisible: false });
+  series.setData(data);
+  state.overlays[id] = series;
+}
+
+function clearOverlays() {
+  for (const [, s] of Object.entries(state.overlays)) {
+    try { state.chart?.removeSeries(s); } catch (_) {}
+  }
+  state.overlays = {};
+  state.candleSeries?.setMarkers([]);
+}
+
+function _buildCrossoverMarkers(candles, fastP, slowP) {
+  const ema = (arr, p) => {
+    const k = 2 / (p + 1); let e = arr[0].close;
+    return arr.map((c, i) => { e = i === 0 ? c.close : c.close * k + e * (1 - k); return e; });
+  };
+  const fast = ema(candles, fastP), slow = ema(candles, slowP);
+  const markers = [];
+  for (let i = 1; i < candles.length; i++) {
+    if (fast[i - 1] <= slow[i - 1] && fast[i] > slow[i])
+      markers.push({ time: candles[i].time, position: 'belowBar', color: '#22d3ee', shape: 'arrowUp', text: 'BUY' });
+    else if (fast[i - 1] >= slow[i - 1] && fast[i] < slow[i])
+      markers.push({ time: candles[i].time, position: 'aboveBar', color: '#f43f5e', shape: 'arrowDown', text: 'SELL' });
+  }
+  return markers;
+}
+
+function updateSignalSummary(markers, candles) {
+  const last = markers[markers.length - 1];
+  const sigEl = document.getElementById('live-last-signal');
+  const trendEl = document.getElementById('live-trend');
+  if (!last) {
+    if (sigEl) sigEl.textContent = '--';
+    if (trendEl) trendEl.textContent = '--';
+    return;
+  }
+  if (sigEl) {
+    sigEl.textContent = last.text;
+    sigEl.style.color = last.text === 'BUY' ? '#10b981' : '#ef4444';
+  }
+  if (trendEl) {
+    trendEl.textContent = last.text === 'BUY' ? 'BULLISH' : 'BEARISH';
+    trendEl.style.color = last.text === 'BUY' ? '#10b981' : '#ef4444';
+  }
+  addToSignalFeed(last, candles);
+}
+
+function addToSignalFeed(marker, candles) {
+  const feed = document.getElementById('signal-feed');
+  if (!feed) return;
+  const candle = candles.find(c => c.time === marker.time);
+  const time = new Date(marker.time * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const placeholder = feed.querySelector('p');
+  if (placeholder) placeholder.remove();
+  const div = document.createElement('div');
+  div.style.cssText = `padding:12px;background:var(--bg-input,#1e2025);border-left:3px solid ${marker.color};border-radius:4px;font-size:13px;margin-bottom:6px`;
+  div.innerHTML = `<strong>⚡ ${marker.text}</strong> <span style="color:#a1a1aa">${time} — ₹${candle?.close ?? '--'}</span>`;
+  feed.insertBefore(div, feed.firstChild);
+  while (feed.children.length > 20) feed.removeChild(feed.lastChild);
+}
+
+=========================================
+FILE: experiment_config.json
+=========================================
+
+{
+  "project": {
+    "name": "SimuTrade",
+    "version": "2.0",
+    "paper_target": "IEEE Student Conference / IJCRT",
+    "thesis": "Bridging the Gap in Retail Quantitative Finance: A Heuristic NLP-to-Parameters Mapping System for Algorithmic Trading"
+  },
+
+  "evaluation_protocol": {
+    "log_dir": "logs",
+    "output_dir": "outputs",
+
+    "start_date": "2023-01-01",
+    "end_date": "2024-12-31",
+    "default_interval": "1d",
+    "exchange": "NSE",
+
+    "methods": [
+      "heuristic_fallback",
+      "llm"
+    ],
+
+    "benchmark_prompt_file": "benchmark_prompts.json",
+    "benchmark_ticker_file": "benchmark_tickers.json"
+  },
+
+  "execution_defaults": {
+    "initial_capital": 100000,
+    "risk_percent": 2.0,
+    "slippage_pct": 0.1,
+    "transaction_cost_pct": 0.05,
+    "atr_period": 14
+  },
+
+  "nse_basket": [
+    "RELIANCE.NS",
+    "TCS.NS",
+    "INFY.NS",
+    "HDFCBANK.NS",
+    "ICICIBANK.NS",
+    "HINDUNILVR.NS",
+    "ITC.NS",
+    "SBIN.NS",
+    "BAJFINANCE.NS",
+    "KOTAKBANK.NS"
+  ],
+
+  "strategy_registry": [
+    "golden_cross",
+    "mean_reversion",
+    "rsi_strategy",
+    "macd_crossover",
+    "momentum_breakout"
+  ],
+
+  "benchmark_prompts": [
+    {
+      "id": "P01",
+      "prompt": "safe trend-following strategy for large cap stocks",
+      "expected_strategy": "golden_cross",
+      "expected_risk_profile": "low",
+      "difficulty": "easy",
+      "category": "trend"
+    },
+    {
+      "id": "P02",
+      "prompt": "buy the dip on Infosys using bollinger bands",
+      "expected_strategy": "mean_reversion",
+      "expected_risk_profile": "medium",
+      "difficulty": "easy",
+      "category": "mean_reversion"
+    },
+    {
+      "id": "P03",
+      "prompt": "RSI oversold bounce strategy with tight stop loss",
+      "expected_strategy": "rsi_strategy",
+      "expected_risk_profile": "low",
+      "difficulty": "easy",
+      "category": "reversal"
+    },
+    {
+      "id": "P04",
+      "prompt": "MACD crossover with momentum confirmation on TCS",
+      "expected_strategy": "macd_crossover",
+      "expected_risk_profile": "medium",
+      "difficulty": "medium",
+      "category": "momentum"
+    },
+    {
+      "id": "P05",
+      "prompt": "aggressive breakout strategy for high volatility stocks",
+      "expected_strategy": "momentum_breakout",
+      "expected_risk_profile": "high",
+      "difficulty": "easy",
+      "category": "breakout"
+    },
+    {
+      "id": "P06",
+      "prompt": "I want to trade Reliance with moderate risk using moving average crossover",
+      "expected_strategy": "golden_cross",
+      "expected_risk_profile": "medium",
+      "difficulty": "medium",
+      "category": "trend"
+    },
+    {
+      "id": "P07",
+      "prompt": "sideways market mean reversion play on HDFC Bank with wider bands",
+      "expected_strategy": "mean_reversion",
+      "expected_risk_profile": "medium",
+      "difficulty": "medium",
+      "category": "mean_reversion"
+    },
+    {
+      "id": "P08",
+      "prompt": "something safe for beginners that follows the trend",
+      "expected_strategy": "golden_cross",
+      "expected_risk_profile": "low",
+      "difficulty": "hard",
+      "category": "trend"
+    },
+    {
+      "id": "P09",
+      "prompt": "scalp high momentum breakouts on BAJFINANCE intraday",
+      "expected_strategy": "momentum_breakout",
+      "expected_risk_profile": "high",
+      "difficulty": "medium",
+      "category": "breakout"
+    },
+    {
+      "id": "P10",
+      "prompt": "overbought overbought sell signal with RSI 70 on ITC",
+      "expected_strategy": "rsi_strategy",
+      "expected_risk_profile": "medium",
+      "difficulty": "hard",
+      "category": "reversal"
+    }
+  ],
+
+  "benchmark_tickers": [
+    "RELIANCE.NS",
+    "TCS.NS",
+    "INFY.NS",
+    "HDFCBANK.NS",
+    "ICICIBANK.NS"
+  ],
+
+  "technical_eval": {
+    "valid_output_rate_target": 0.90,
+    "backtest_completion_rate_target": 0.85,
+    "max_acceptable_latency_ms": 5000
+  },
+
+  "trading_eval": {
+    "benchmark_index": "^NSEI",
+    "min_trades_per_run": 3,
+    "metrics": [
+      "totalReturn",
+      "sharpeRatio",
+      "maxDrawdown",
+      "winRate",
+      "totalTrades",
+      "finalValue",
+      "buyHoldValue"
+    ]
+  },
+
+  "usability_eval": {
+    "flows": ["manual", "heuristic_fallback", "llm"],
+    "metrics": [
+      "time_to_submit_sec",
+      "form_errors",
+      "apply_button_used",
+      "backtest_triggered"
+    ]
+  }
+}
+
+=========================================
+FILE: experiment_logger.py
+=========================================
+
+from __future__ import annotations
+
+import json
+import os
+import time
+import uuid
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Dict, Literal, Optional
+
+LOG_DIR = Path(os.getenv("SIMUTRADE_LOG_DIR", "logs"))
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+
+NSE_BASKET = [
+    "RELIANCE.NS", "TCS.NS", "INFY.NS", "HDFCBANK.NS", "ICICIBANK.NS",
+    "HINDUNILVR.NS", "ITC.NS", "SBIN.NS", "BAJFINANCE.NS", "KOTAKBANK.NS",
+]
+
+MappingSource = Literal["llm", "heuristic_fallback", "manual"]
+
+_TECH_LOG = LOG_DIR / "technical_eval.ndjson"
+_TRADING_LOG = LOG_DIR / "trading_eval.ndjson"
+_USABILITY_LOG = LOG_DIR / "usability_eval.ndjson"
+
+
+def _write(path: Path, record: Dict[str, Any]) -> None:
+    record.setdefault("logged_at", datetime.now(timezone.utc).isoformat())
+    record.setdefault("session_id", os.getenv("SIMUTRADE_SESSION_ID", "default"))
+    with path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(record) + "\n")
+
+
+def log_technical(
+    prompt: str,
+    mapping_source: MappingSource,
+    schema_valid: bool,
+    backtest_completed: bool,
+    latency_ms: float,
+    fallback_reason: Optional[str] = None,
+    llm_model: Optional[str] = None,
+    error: Optional[str] = None,
+    expected_strategy: Optional[str] = None,
+    produced_strategy: Optional[str] = None,
+    strategy_match: Optional[bool] = None,
+    ticker: Optional[str] = None,
+    interval: Optional[str] = None,
+) -> str:
+    record_id = str(uuid.uuid4())[:8]
+    _write(_TECH_LOG, {
+        "record_id": record_id,
+        "prompt": prompt,
+        "mapping_source": mapping_source,
+        "schema_valid": schema_valid,
+        "backtest_completed": backtest_completed,
+        "latency_ms": round(latency_ms, 2),
+        "fallback_reason": fallback_reason,
+        "llm_model": llm_model,
+        "error": error,
+        "expected_strategy": expected_strategy,
+        "produced_strategy": produced_strategy,
+        "strategy_match": strategy_match,
+        "ticker": ticker,
+        "interval": interval,
+    })
+    return record_id
+
+
+def log_trading(
+    record_id: str,
+    ticker: str,
+    strategy_id: str,
+    mapping_source: MappingSource,
+    metrics: Dict[str, Any],
+    params_snapshot: Optional[Dict[str, Any]] = None,
+) -> None:
+    _write(_TRADING_LOG, {
+        "record_id": record_id,
+        "ticker": ticker,
+        "strategy_id": strategy_id,
+        "mapping_source": mapping_source,
+        "total_return_pct": metrics.get("totalReturn"),
+        "max_drawdown_pct": metrics.get("maxDrawdown"),
+        "sharpe_ratio": metrics.get("sharpeRatio"),
+        "win_rate_pct": metrics.get("winRate"),
+        "total_trades": metrics.get("totalTrades"),
+        "final_value": metrics.get("finalValue"),
+        "buy_hold_value": metrics.get("buyHoldValue"),
+        "params_snapshot": params_snapshot,
+    })
+
+
+def log_usability(
+    flow_type: MappingSource,
+    prompt: str,
+    time_to_submit_sec: float,
+    form_errors: int,
+    apply_button_used: bool,
+    backtest_triggered: bool,
+    user_id: Optional[str] = None,
+) -> None:
+    _write(_USABILITY_LOG, {
+        "flow_type": flow_type,
+        "prompt": prompt,
+        "time_to_submit_sec": round(time_to_submit_sec, 3),
+        "form_errors": form_errors,
+        "apply_button_used": apply_button_used,
+        "backtest_triggered": backtest_triggered,
+        "user_id": user_id or "anonymous",
+    })
+
+
+class TimedBlock:
+    def __enter__(self):
+        self._start = time.perf_counter()
+        return self
+
+    def __exit__(self, *_):
+        self.ms = (time.perf_counter() - self._start) * 1000
+
+    @property
+    def seconds(self) -> float:
+        return self.ms / 1000
+
+=========================================
+FILE: interpretability.py
+=========================================
+
+"""
+interpretability.py
+Live chart interpretability layer for SimuTrade v2.
+Computes strategy-specific overlays and annotated BUY/SELL signal points
+from raw OHLCV candles. Returns a structured dict consumed by the frontend
+and by /api/assistant/suggest_llm for paper traceability.
+
+No prediction. No ML. Pure indicator math on top of existing OHLCV data.
+"""
+from __future__ import annotations
+
+from typing import Any, Dict, List, Optional
+import pandas as pd
+import numpy as np
+
+
+# ---------------------------------------------------------------------------
+# Main entrypoint
+# ---------------------------------------------------------------------------
+def build_interpretability_layer(
+    df: pd.DataFrame,
+    payload: Dict[str, Any],
+) -> Dict[str, Any]:
+    """
+    Build overlay data for a given strategy payload and OHLCV DataFrame.
+
+    Parameters
+    ----------
+    df       : DataFrame with columns [Open, High, Low, Close, Volume] (or lowercase).
+               Minimum 30 rows for meaningful computation.
+    payload  : StrategyPayload dict (output of llm_mapper or heuristic mapper).
+
+    Returns
+    -------
+    dict with keys:
+        strategy_id        : str
+        overlays           : list[dict]  — indicator series for chart rendering
+        signal_annotations : list[dict]  — BUY/SELL points with labels
+        rationale_trace    : list[str]   — step-by-step decision chain (paper figure)
+    """
+    df = _normalise_columns(df)
+    if len(df) < 10:
+        return {"strategy_id": payload.get("strategy_id"), "overlays": [], "signal_annotations": [], "rationale_trace": []}
+
+    strategy_id = payload.get("strategy_id", "golden_cross")
+    entry = payload.get("entry_logic", {}) or {}
+
+    dispatch = {
+        "golden_cross":      _golden_cross_layer,
+        "mean_reversion":    _mean_reversion_layer,
+        "rsi_strategy":      _rsi_strategy_layer,
+        "macd_crossover":    _macd_crossover_layer,
+        "momentum_breakout": _momentum_breakout_layer,
+    }
+
+    handler = dispatch.get(strategy_id, _golden_cross_layer)
+    overlays, signals, trace = handler(df, entry)
+
+    return {
+        "strategy_id": strategy_id,
+        "overlays": overlays,
+        "signal_annotations": signals,
+        "rationale_trace": trace,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Strategy-specific layer builders
+# ---------------------------------------------------------------------------
+
+def _golden_cross_layer(df: pd.DataFrame, entry: dict):
+    fast = int(entry.get("fast_ma") or 20)
+    slow = int(entry.get("slow_ma") or 50)
+
+    ema_fast = _ema_series(df["Close"], fast)
+    ema_slow = _ema_series(df["Close"], slow)
+
+    overlays = [
+        _series_to_overlay(df, ema_fast, f"EMA{fast}", "line", "#f59e0b"),
+        _series_to_overlay(df, ema_slow, f"EMA{slow}", "line", "#3b82f6"),
+    ]
+
+    signals = []
+    for i in range(1, len(df)):
+        if pd.isna(ema_fast.iloc[i]) or pd.isna(ema_slow.iloc[i]):
+            continue
+        prev_above = ema_fast.iloc[i - 1] > ema_slow.iloc[i - 1]
+        curr_above = ema_fast.iloc[i] > ema_slow.iloc[i]
+        if not prev_above and curr_above:
+            signals.append(_annotation(df, i, "BUY", f"EMA{fast} crosses EMA{slow} ↑"))
+        elif prev_above and not curr_above:
+            signals.append(_annotation(df, i, "SELL", f"EMA{fast} crosses EMA{slow} ↓"))
+
+    trace = [
+        f"1. User intent mapped to 'golden_cross' strategy.",
+        f"2. EMA{fast} (fast) and EMA{slow} (slow) computed on Close prices.",
+        f"3. BUY signal generated when EMA{fast} crosses above EMA{slow}.",
+        f"4. SELL signal generated when EMA{fast} crosses below EMA{slow}.",
+        f"5. {len(signals)} crossover event(s) detected in this window.",
+    ]
+
+    return overlays, signals, trace
+
+
+def _mean_reversion_layer(df: pd.DataFrame, entry: dict):
+    k = float(entry.get("mr_k") or 2.0)
+    period = 20
+
+    sma = df["Close"].rolling(period).mean()
+    std = df["Close"].rolling(period).std()
+    upper = sma + k * std
+    lower = sma - k * std
+
+    overlays = [
+        _series_to_overlay(df, sma,   "BB Mid",   "line",   "#6366f1"),
+        _series_to_overlay(df, upper, "BB Upper", "dashed", "#ef4444"),
+        _series_to_overlay(df, lower, "BB Lower", "dashed", "#22c55e"),
+    ]
+
+    signals = []
+    for i in range(1, len(df)):
+        if pd.isna(lower.iloc[i]) or pd.isna(upper.iloc[i]):
+            continue
+        if df["Close"].iloc[i - 1] >= lower.iloc[i - 1] and df["Close"].iloc[i] < lower.iloc[i]:
+            signals.append(_annotation(df, i, "BUY", f"Close touches lower BB (k={k})"))
+        elif df["Close"].iloc[i - 1] <= upper.iloc[i - 1] and df["Close"].iloc[i] > upper.iloc[i]:
+            signals.append(_annotation(df, i, "SELL", f"Close touches upper BB (k={k})"))
+
+    trace = [
+        "1. Intent mapped to 'mean_reversion' — sideways/choppy market regime.",
+        f"2. Bollinger Bands computed: SMA{period} ± {k}×σ.",
+        "3. BUY when Close dips below lower band (oversold).",
+        "4. SELL when Close rises above upper band (overbought).",
+        f"5. {len(signals)} band-touch event(s) detected.",
+    ]
+
+    return overlays, signals, trace
+
+
+def _rsi_strategy_layer(df: pd.DataFrame, entry: dict):
+    rsi_buy  = float(entry.get("rsi_buy")  or 30.0)
+    rsi_sell = float(entry.get("rsi_sell") or 70.0)
+
+    rsi = _rsi_series(df["Close"], 14)
+
+    overlays = [
+        _series_to_overlay(df, rsi, "RSI(14)", "line", "#a855f7", secondary=True),
+        _constant_overlay(df, rsi_buy,  f"RSI Buy={rsi_buy}",  "dashed", "#22c55e", secondary=True),
+        _constant_overlay(df, rsi_sell, f"RSI Sell={rsi_sell}", "dashed", "#ef4444", secondary=True),
+    ]
+
+    signals = []
+    for i in range(1, len(df)):
+        if pd.isna(rsi.iloc[i]):
+            continue
+        if rsi.iloc[i - 1] >= rsi_buy and rsi.iloc[i] < rsi_buy:
+            signals.append(_annotation(df, i, "BUY", f"RSI dips below {rsi_buy} (oversold)"))
+        elif rsi.iloc[i - 1] <= rsi_sell and rsi.iloc[i] > rsi_sell:
+            signals.append(_annotation(df, i, "SELL", f"RSI rises above {rsi_sell} (overbought)"))
+
+    trace = [
+        "1. Intent mapped to 'rsi_strategy' — reversal/bounce regime.",
+        "2. RSI(14) computed on Close prices.",
+        f"3. BUY when RSI crosses below {rsi_buy} (oversold threshold).",
+        f"4. SELL when RSI crosses above {rsi_sell} (overbought threshold).",
+        f"5. {len(signals)} RSI threshold crossing(s) detected.",
+    ]
+
+    return overlays, signals, trace
+
+
+def _macd_crossover_layer(df: pd.DataFrame, entry: dict):
+    ema12  = _ema_series(df["Close"], 12)
+    ema26  = _ema_series(df["Close"], 26)
+    macd   = ema12 - ema26
+    signal = _ema_series(macd, 9)
+    hist   = macd - signal
+
+    overlays = [
+        _series_to_overlay(df, macd,   "MACD",        "line",      "#6366f1", secondary=True),
+        _series_to_overlay(df, signal, "MACD Signal", "line",      "#f59e0b", secondary=True),
+        _series_to_overlay(df, hist,   "MACD Hist",   "histogram", "#94a3b8", secondary=True),
+    ]
+
+    signals = []
+    for i in range(1, len(df)):
+        if pd.isna(macd.iloc[i]) or pd.isna(signal.iloc[i]):
+            continue
+        prev_above = macd.iloc[i - 1] > signal.iloc[i - 1]
+        curr_above = macd.iloc[i] > signal.iloc[i]
+        if not prev_above and curr_above:
+            signals.append(_annotation(df, i, "BUY", "MACD crosses above Signal ↑"))
+        elif prev_above and not curr_above:
+            signals.append(_annotation(df, i, "SELL", "MACD crosses below Signal ↓"))
+
+    trace = [
+        "1. Intent mapped to 'macd_crossover' — momentum-with-confirmation regime.",
+        "2. MACD = EMA12 − EMA26; Signal = EMA9(MACD); Histogram = MACD − Signal.",
+        "3. BUY when MACD crosses above Signal line.",
+        "4. SELL when MACD crosses below Signal line.",
+        f"5. {len(signals)} MACD crossover(s) detected.",
+    ]
+
+    return overlays, signals, trace
+
+
+def _momentum_breakout_layer(df: pd.DataFrame, entry: dict):
+    period = 20
+    high_channel = df["High"].rolling(period).max()
+    low_channel  = df["Low"].rolling(period).min()
+
+    overlays = [
+        _series_to_overlay(df, high_channel, f"{period}-High Channel", "dashed", "#f59e0b"),
+        _series_to_overlay(df, low_channel,  f"{period}-Low Channel",  "dashed", "#6366f1"),
+    ]
+
+    signals = []
+    for i in range(1, len(df)):
+        if pd.isna(high_channel.iloc[i]) or pd.isna(low_channel.iloc[i]):
+            continue
+        if df["Close"].iloc[i] > high_channel.iloc[i - 1]:
+            signals.append(_annotation(df, i, "BUY", f"Breakout above {period}-period high"))
+        elif df["Close"].iloc[i] < low_channel.iloc[i - 1]:
+            signals.append(_annotation(df, i, "SELL", f"Breakdown below {period}-period low"))
+
+    trace = [
+        "1. Intent mapped to 'momentum_breakout' — breakout/aggressive regime.",
+        f"2. {period}-period rolling High channel and Low channel computed.",
+        f"3. BUY when Close breaks above rolling {period}-High.",
+        f"4. SELL when Close breaks below rolling {period}-Low.",
+        f"5. {len(signals)} breakout/breakdown event(s) detected.",
+    ]
+
+    return overlays, signals, trace
+
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+def _normalise_columns(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.copy()
+    df.columns = [c.strip().capitalize() for c in df.columns]
+    rename = {"Timestamp": "Date", "Time": "Date", "Datetime": "Date"}
+    df.rename(columns=rename, inplace=True)
+    if "Date" not in df.columns:
+        df["Date"] = list(range(len(df)))
+    return df
+
+
+def _ema_series(series: pd.Series, span: int) -> pd.Series:
+    return series.ewm(span=span, adjust=False).mean()
+
+
+def _rsi_series(series: pd.Series, period: int = 14) -> pd.Series:
+    delta = series.diff()
+    gain  = delta.clip(lower=0).rolling(period).mean()
+    loss  = (-delta.clip(upper=0)).rolling(period).mean()
+    rs    = gain / loss.replace(0, np.nan)
+    return 100 - (100 / (1 + rs))
+
+
+def _series_to_overlay(
+    df: pd.DataFrame,
+    series: pd.Series,
+    label: str,
+    line_type: str,
+    color: str,
+    secondary: bool = False,
+) -> Dict[str, Any]:
+    points = []
+    for i, val in enumerate(series):
+        if not pd.isna(val):
+            date_val = df["Date"].iloc[i] if "Date" in df.columns else i
+            points.append({"x": str(date_val), "y": round(float(val), 4)})
+    return {"label": label, "type": line_type, "color": color, "secondary": secondary, "data": points}
+
+
+def _constant_overlay(
+    df: pd.DataFrame,
+    value: float,
+    label: str,
+    line_type: str,
+    color: str,
+    secondary: bool = False,
+) -> Dict[str, Any]:
+    points = []
+    for i in range(len(df)):
+        date_val = df["Date"].iloc[i] if "Date" in df.columns else i
+        points.append({"x": str(date_val), "y": value})
+    return {"label": label, "type": line_type, "color": color, "secondary": secondary, "data": points}
+
+
+def _annotation(df: pd.DataFrame, idx: int, signal_type: str, label: str) -> Dict[str, Any]:
+    date_val = df["Date"].iloc[idx] if "Date" in df.columns else idx
+    price    = round(float(df["Close"].iloc[idx]), 4)
+    return {"x": str(date_val), "y": price, "type": signal_type, "label": label}
+
+=========================================
+FILE: llm_mapper.py
+=========================================
+
+"""
+llm_mapper.py
+LLM-backed NLP-to-Parameters mapper for SimuTrade (Version 2).
+Uses Groq API (Llama 3) to replace the heuristic mapper.
+Enforces strict JSON output matching the fixed StrategyPayload schema.
+Paper framing: "translation system" for retail users — NOT a prediction engine.
+"""
+from __future__ import annotations
+
+import json
+import os
+import re
+from typing import Any, Dict
+
+# --- Groq client (pip install groq) ---
+try:
+    from groq import Groq
+    _GROQ_AVAILABLE = True
+except ImportError:
+    _GROQ_AVAILABLE = False
+
+# ---------------------------------------------------------------------------
+# Fixed registry and schema constants
+# ---------------------------------------------------------------------------
+VALID_STRATEGY_IDS = {
+    "golden_cross",
+    "mean_reversion",
+    "rsi_strategy",
+    "macd_crossover",
+    "momentum_breakout",
+}
+
+VALID_MARKET_MODES = {"trend_following", "mean_reversion", "momentum", "reversal"}
+VALID_RISK_PROFILES = {"low", "medium", "high"}
+VALID_INTERVALS = {"1m", "5m", "15m", "1h", "1d"}
+VALID_EXCHANGES = {"NSE", "BSE", "AUTO"}
+
+# ---------------------------------------------------------------------------
+# System prompt — strict JSON enforcement
+# ---------------------------------------------------------------------------
+_SYSTEM_PROMPT = """
+You are a quantitative strategy mapping engine for a retail algorithmic trading research system called SimuTrade.
+Your ONLY job is to translate a user's natural language trading intent into a structured, executable JSON strategy specification.
+
+You are NOT a market predictor. You do NOT forecast prices or returns.
+You ARE a "translation system" — you map user intent to a valid, backtestable strategy configuration.
+
+You MUST return ONLY a single JSON object — no markdown, no commentary, no explanation outside the JSON.
+The JSON MUST conform exactly to this schema:
+
+{
+  "user_intent": "<original user prompt verbatim>",
+  "strategy_id": "<one of: golden_cross | mean_reversion | rsi_strategy | macd_crossover | momentum_breakout>",
+  "ticker": "<ticker symbol, e.g. RELIANCE.NS, TCS.NS, INFY.NS>",
+  "exchange": "<one of: NSE | BSE | AUTO>",
+  "interval": "<one of: 1m | 5m | 15m | 1h | 1d>",
+  "market_mode": "<one of: trend_following | mean_reversion | momentum | reversal>",
+  "risk_profile": "<one of: low | medium | high>",
+  "entry_logic": {
+    "fast_ma": <integer or null>,
+    "slow_ma": <integer or null>,
+    "rsi_buy": <float or null>,
+    "rsi_sell": <float or null>,
+    "mr_k": <float or null>,
+    "rsi_confirm": <true | false>,
+    "macd_confirm": <true | false>
+  },
+  "exit_logic": {
+    "stop_loss_pct": <float>,
+    "take_profit_pct": <float>,
+    "trailing_stop_pct": <float or null>
+  },
+  "execution_rules": {
+    "initial_capital": <float>,
+    "risk_percent": <float>,
+    "slippage_pct": <float>,
+    "transaction_cost_pct": <float>
+  },
+  "assistant_rationale": "<1-2 sentence plain-English explanation of why this strategy fits the user's intent>"
+}
+
+Strategy selection rules:
+- "golden_cross" → trend-following, safe/long-term, moving-average crossover intent
+- "mean_reversion" → sideways/choppy market, bollinger bands, buy dip/sell rally intent
+- "rsi_strategy" → RSI-based, oversold/overbought, reversal/bounce intent
+- "macd_crossover" → MACD, signal-line, histogram, momentum-with-confirmation intent
+- "momentum_breakout" → breakout, aggressive, high-frequency, scalping intent
+
+Risk defaults by risk_profile:
+- low:    stop_loss_pct=2.0, take_profit_pct=6.0,  risk_percent=1.0
+- medium: stop_loss_pct=2.5, take_profit_pct=7.0,  risk_percent=2.0
+- high:   stop_loss_pct=3.0, take_profit_pct=10.0, risk_percent=3.0
+
+If the user does not specify a ticker, default to "RELIANCE.NS" and exchange "NSE".
+If the user does not specify an interval, default to "1d".
+If the user does not specify capital, default initial_capital to 100000.
+Always set slippage_pct=0.1 and transaction_cost_pct=0.05 unless user specifies otherwise.
+
+RETURN ONLY THE JSON. NO OTHER TEXT.
+"""
+
+# ---------------------------------------------------------------------------
+# Fallback: import heuristic mapper as safety net
+# ---------------------------------------------------------------------------
+from strategy_assistant import suggest_strategy_from_prompt as _heuristic_mapper
+
+
+# ---------------------------------------------------------------------------
+# Core LLM mapping function
+# ---------------------------------------------------------------------------
+def suggest_strategy_llm(
+    prompt: str,
+    ticker: str = "RELIANCE.NS",
+    interval: str = "1d",
+    groq_api_key: str | None = None,
+) -> Dict[str, Any]:
+    """
+    Maps a natural-language trading intent to a StrategyPayload JSON using Groq/Llama-3.
+
+    Falls back to the heuristic mapper if:
+    - Groq is not available (package not installed)
+    - API key is missing
+    - LLM response fails schema validation after retries
+    Returns a payload dict identical in shape to the heuristic mapper output,
+    plus a 'mapping_source' key ("llm" | "heuristic_fallback") for experiment logging.
+    """
+    api_key = groq_api_key or os.getenv("GROQ_API_KEY", "")
+
+    if not _GROQ_AVAILABLE or not api_key:
+        payload = _heuristic_mapper(prompt, ticker, interval)
+        payload["mapping_source"] = "heuristic_fallback"
+        payload["fallback_reason"] = "groq_unavailable_or_no_api_key"
+        return payload
+
+    client = Groq(api_key=api_key)
+    user_message = f"User trading intent: {prompt}\nTicker hint: {ticker}\nInterval hint: {interval}"
+
+    last_error = None
+    for attempt in range(3):  # up to 3 retries for malformed output
+        try:
+            chat = client.chat.completions.create(
+                model="llama3-70b-8192",
+                messages=[
+                    {"role": "system", "content": _SYSTEM_PROMPT.strip()},
+                    {"role": "user", "content": user_message},
+                ],
+                temperature=0.2,          # low temp → deterministic, schema-compliant output
+                max_tokens=800,
+                response_format={"type": "json_object"},
+            )
+            raw = chat.choices[0].message.content.strip()
+            payload = _parse_and_validate(raw, prompt, ticker, interval)
+            payload["mapping_source"] = "llm"
+            payload["llm_model"] = "llama3-70b-8192"
+            return payload
+
+        except (ValueError, KeyError, json.JSONDecodeError) as e:
+            last_error = str(e)
+            continue
+        except Exception as e:
+            # API error (rate limit, network, etc.) — break and fallback
+            last_error = str(e)
+            break
+
+    # All retries exhausted → heuristic fallback
+    payload = _heuristic_mapper(prompt, ticker, interval)
+    payload["mapping_source"] = "heuristic_fallback"
+    payload["fallback_reason"] = last_error or "llm_validation_failed"
+    return payload
+
+
+# ---------------------------------------------------------------------------
+# JSON parsing + schema validation
+# ---------------------------------------------------------------------------
+def _parse_and_validate(
+    raw: str,
+    original_prompt: str,
+    ticker: str,
+    interval: str,
+) -> Dict[str, Any]:
+    """
+    Parse raw LLM output and validate against the fixed StrategyPayload schema.
+    Raises ValueError with a descriptive message on any schema mismatch.
+    """
+    # Strip markdown code fences if the model returns them despite instructions
+    raw = re.sub(r"^```(?:json)?\s*", "", raw, flags=re.MULTILINE)
+    raw = re.sub(r"```\s*$", "", raw, flags=re.MULTILINE).strip()
+
+    data: Dict[str, Any] = json.loads(raw)
+
+    # --- Top-level required keys ---
+    required_top = [
+        "user_intent", "strategy_id", "ticker", "exchange", "interval",
+        "market_mode", "risk_profile", "entry_logic", "exit_logic",
+        "execution_rules", "assistant_rationale",
+    ]
+    missing = [k for k in required_top if k not in data]
+    if missing:
+        raise ValueError(f"LLM output missing top-level keys: {missing}")
+
+    # --- Enum validation ---
+    if data["strategy_id"] not in VALID_STRATEGY_IDS:
+        raise ValueError(f"Invalid strategy_id: {data['strategy_id']}")
+    if data["market_mode"] not in VALID_MARKET_MODES:
+        raise ValueError(f"Invalid market_mode: {data['market_mode']}")
+    if data["risk_profile"] not in VALID_RISK_PROFILES:
+        raise ValueError(f"Invalid risk_profile: {data['risk_profile']}")
+    if data["interval"] not in VALID_INTERVALS:
+        raise ValueError(f"Invalid interval: {data['interval']}")
+    if data["exchange"] not in VALID_EXCHANGES:
+        raise ValueError(f"Invalid exchange: {data['exchange']}")
+
+    # --- Nested key validation ---
+    entry_required = ["fast_ma", "slow_ma", "rsi_buy", "rsi_sell", "mr_k", "rsi_confirm", "macd_confirm"]
+    exit_required = ["stop_loss_pct", "take_profit_pct", "trailing_stop_pct"]
+    exec_required = ["initial_capital", "risk_percent", "slippage_pct", "transaction_cost_pct"]
+
+    for key in entry_required:
+        if key not in data["entry_logic"]:
+            raise ValueError(f"entry_logic missing key: {key}")
+    for key in exit_required:
+        if key not in data["exit_logic"]:
+            raise ValueError(f"exit_logic missing key: {key}")
+    for key in exec_required:
+        if key not in data["execution_rules"]:
+            raise ValueError(f"execution_rules missing key: {key}")
+
+    # --- Type coercion safety ---
+    el = data["entry_logic"]
+    xl = data["exit_logic"]
+    er = data["execution_rules"]
+
+    el["fast_ma"] = int(el["fast_ma"]) if el["fast_ma"] is not None else None
+    el["slow_ma"] = int(el["slow_ma"]) if el["slow_ma"] is not None else None
+    el["rsi_buy"] = float(el["rsi_buy"]) if el["rsi_buy"] is not None else None
+    el["rsi_sell"] = float(el["rsi_sell"]) if el["rsi_sell"] is not None else None
+    el["mr_k"] = float(el["mr_k"]) if el["mr_k"] is not None else None
+    el["rsi_confirm"] = bool(el["rsi_confirm"])
+    el["macd_confirm"] = bool(el["macd_confirm"])
+
+    xl["stop_loss_pct"] = float(xl["stop_loss_pct"])
+    xl["take_profit_pct"] = float(xl["take_profit_pct"])
+    xl["trailing_stop_pct"] = float(xl["trailing_stop_pct"]) if xl["trailing_stop_pct"] is not None else None
+
+    er["initial_capital"] = float(er["initial_capital"])
+    er["risk_percent"] = float(er["risk_percent"])
+    er["slippage_pct"] = float(er["slippage_pct"])
+    er["transaction_cost_pct"] = float(er["transaction_cost_pct"])
+
+    # Ensure user_intent always reflects the original prompt (non-negotiable for paper traceability)
+    data["user_intent"] = original_prompt
+
+    return data
+
+=========================================
+FILE: main.py
+=========================================
+
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from pydantic import BaseModel, Field
+from pathlib import Path
+from typing import Optional, Literal, Dict, Any, List
+import pandas as pd
+import numpy as np
+
+import backtester
+from market_data import MarketDataProvider, YFinanceProvider
+from strategy_assistant import suggest_strategy_from_prompt, validate_strategy_payload
+from llm_mapper import suggest_strategy_llm
+from interpretability import build_interpretability_layer
+from experiment_logger import log_technical, log_trading, log_usability, TimedBlock
+
+app = FastAPI(title="SimuTrade Research Backend v2")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+BASE_DIR = Path(__file__).resolve().parent
+provider: MarketDataProvider = YFinanceProvider()
+
+
+# ---------------------------------------------------------------------------
+# Pydantic Schemas — unchanged from v1
+# ---------------------------------------------------------------------------
+class EntryLogic(BaseModel):
+    fast_ma: Optional[int] = None
+    slow_ma: Optional[int] = None
+    rsi_buy: Optional[float] = None
+    rsi_sell: Optional[float] = None
+    mr_k: Optional[float] = None
+    rsi_confirm: bool = False
+    macd_confirm: bool = False
+
+
+class ExitLogic(BaseModel):
+    stop_loss_pct: float = 2.0
+    take_profit_pct: float = 6.0
+    trailing_stop_pct: Optional[float] = None
+
+
+class ExecutionRules(BaseModel):
+    initial_capital: float = 100000
+    risk_percent: float = 2.0
+    slippage_pct: float = 0.1
+    transaction_cost_pct: float = 0.05
+
+
+class StrategyPayload(BaseModel):
+    user_intent: str
+    strategy_id: Literal['golden_cross', 'mean_reversion', 'rsi_strategy', 'macd_crossover', 'momentum_breakout']
+    ticker: str
+    exchange: Literal['NSE', 'BSE', 'AUTO'] = 'AUTO'
+    interval: Literal['1m', '5m', '15m', '1h', '1d'] = '1d'
+    market_mode: Literal['trend_following', 'mean_reversion', 'momentum', 'reversal'] = 'trend_following'
+    risk_profile: Literal['low', 'medium', 'high'] = 'medium'
+    entry_logic: EntryLogic
+    exit_logic: ExitLogic
+    execution_rules: ExecutionRules
+    assistant_rationale: str
+
+
+class BacktestRequest(BaseModel):
+    strategy: str
+    ticker: str
+    startDate: str
+    endDate: str
+    fastMA: float = 50.0
+    slowMA: float = 200.0
+    mrK: float = 2.0
+    initialCapital: float = 100000.0
+    riskPercent: float = 2.0
+    atrPeriod: float = 14.0
+    stopLoss: float = 2.0
+    takeProfit: float = 6.0
+    slippage: float = 0.1
+    transactionCost: float = 0.05
+    interval: str = '1d'
+
+
+class OptimizeRequest(BaseModel):
+    strategy: str
+    ticker: str
+    startDate: str
+    endDate: str
+    fastMAList: str = "20,50,100"
+    slowMAList: str = "150,200,250"
+    topN: int = 10
+    initialCapital: float = 100000
+    riskPercent: float = 2.0
+    interval: str = "1d"
+
+
+class AssistantRequest(BaseModel):
+    prompt: str = Field(min_length=3)
+    ticker: str = 'RELIANCE.NS'
+    interval: str = '1d'
+
+
+class UsabilityLogRequest(BaseModel):
+    flow_type: Literal['manual', 'heuristic_fallback', 'llm']
+    prompt: str
+    time_to_submit_sec: float
+    form_errors: int = 0
+    apply_button_used: bool = True
+    backtest_triggered: bool = False
+    user_id: Optional[str] = None
+
+
+# ---------------------------------------------------------------------------
+# v1 Routes — untouched
+# ---------------------------------------------------------------------------
+@app.get('/api/health')
+def health():
+    return {'ok': True, 'provider': provider.name, 'version': 'v2'}
+
+
+@app.post('/api/assistant/suggest')
+def assistant_suggest(req: AssistantRequest):
+    payload = suggest_strategy_from_prompt(req.prompt, req.ticker, req.interval)
+    validate_strategy_payload(payload)
+    return payload
+
+
+@app.post('/api/backtest')
+def run_backtest(req: BacktestRequest):
+    try:
+        raw = provider.get_history(req.ticker, req.startDate, req.endDate, req.interval)
+        if raw.empty:
+            raise HTTPException(status_code=400, detail=f"No data for '{req.ticker}'.")
+
+        params = req.dict()
+        data = backtester.add_indicators(raw.copy(), params).dropna(subset=['Close'])
+
+        if len(data) < 20:
+            raise HTTPException(status_code=400, detail='Not enough data after calculating indicators.')
+
+        equity, trades, final_cash, bh_shares, last_price = backtester.run_strategy(req.strategy, data, params)
+        metrics = backtester.calculate_metrics(equity, trades, req.initialCapital, bh_shares, last_price)
+
+        return {'chartData': equity, 'trades': trades, 'metrics': metrics,
+                'ticker': req.ticker, 'strategy': req.strategy}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post('/api/optimize')
+def run_optimization(req: OptimizeRequest):
+    try:
+        raw = provider.get_history(req.ticker, req.startDate, req.endDate, req.interval)
+        if raw.empty:
+            raise HTTPException(status_code=400, detail=f"No data for '{req.ticker}'.")
+
+        fast_mas = [int(x.strip()) for x in req.fastMAList.split(',') if x.strip().isdigit()]
+        slow_mas = [int(x.strip()) for x in req.slowMAList.split(',') if x.strip().isdigit()]
+
+        results = []
+        for f in fast_mas:
+            for s in slow_mas:
+                if f >= s:
+                    continue
+                params = {
+                    'fastMA': f, 'slowMA': s, 'mrK': 2.0, 'atrPeriod': 14.0,
+                    'initialCapital': req.initialCapital, 'riskPercent': req.riskPercent,
+                    'stopLoss': 2.0, 'takeProfit': 6.0, 'slippage': 0.1, 'transactionCost': 0.05,
+                    'ticker': req.ticker, 'startDate': req.startDate,
+                    'endDate': req.endDate, 'interval': req.interval,
+                }
+                data = backtester.add_indicators(raw.copy(), params).dropna(subset=['Close'])
+                if len(data) < 20:
+                    continue
+                equity, trades, final_cash, bh_shares, last_price = backtester.run_strategy(req.strategy, data, params)
+                metrics = backtester.calculate_metrics(equity, trades, req.initialCapital, bh_shares, last_price)
+                results.append({"params": {"fastMA": f, "slowMA": s}, "metrics": metrics})
+
+        results.sort(key=lambda x: x['metrics']['totalReturn'], reverse=True)
+        return {"results": results[:req.topN]}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get('/api/live-chart/{ticker}')
+def get_live_chart(ticker: str, interval: str = '5m'):
+    try:
+        candles = provider.get_live_snapshot(ticker, interval)
+        if not candles:
+            raise HTTPException(status_code=400, detail=f"No data for '{ticker}'.")
+
+        current_price = candles[-1]['close']
+        prev_close = candles[-2]['close'] if len(candles) > 1 else current_price
+        change = round(current_price - prev_close, 2)
+        change_pct = round((change / prev_close) * 100, 2) if prev_close else 0
+
+        return {'ticker': ticker, 'candles': candles, 'current_price': current_price,
+                'change': change, 'change_pct': change_pct, 'interval': interval}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ---------------------------------------------------------------------------
+# v2 Routes — LLM mapper + interpretability + usability logging
+# ---------------------------------------------------------------------------
+
+@app.post('/api/assistant/suggest_llm')
+def assistant_suggest_llm(req: AssistantRequest):
+    """
+    Version 2 LLM endpoint.
+    - Maps prompt → StrategyPayload via Groq/Llama-3 (falls back to heuristic if key missing).
+    - Logs technical metrics (latency, schema validity, backtest completion).
+    - Attaches interpretability overlay from recent OHLCV data.
+    - Returns same payload shape as /api/assistant/suggest so the existing JS works as-is.
+    """
+    try:
+        with TimedBlock() as timer:
+            payload = suggest_strategy_llm(req.prompt, req.ticker, req.interval)
+
+        strategy_id = payload.get("strategy_id", "unknown")
+        mapping_source = payload.get("mapping_source", "llm")
+
+        VALID = {'golden_cross', 'mean_reversion', 'rsi_strategy', 'macd_crossover', 'momentum_breakout'}
+        schema_valid = strategy_id in VALID
+
+        # --- Run a quick backtest to check completion (30-day window for speed) ---
+        backtest_completed = False
+        metrics: Dict[str, Any] = {}
+        bt_error = None
+        try:
+            raw = provider.get_history(req.ticker, "2024-01-01", "2024-12-31", req.interval)
+            if not raw.empty and schema_valid:
+                entry = payload.get("entry_logic", {})
+                exit_l = payload.get("exit_logic", {})
+                exec_r = payload.get("execution_rules", {})
+                params = {
+                    'fastMA': entry.get('fast_ma') or 20,
+                    'slowMA': entry.get('slow_ma') or 50,
+                    'mrK': entry.get('mr_k') or 2.0,
+                    'atrPeriod': 14,
+                    'initialCapital': exec_r.get('initial_capital', 100000),
+                    'riskPercent': exec_r.get('risk_percent', 2.0),
+                    'stopLoss': exit_l.get('stop_loss_pct', 2.0),
+                    'takeProfit': exit_l.get('take_profit_pct', 6.0),
+                    'slippage': exec_r.get('slippage_pct', 0.1),
+                    'transactionCost': exec_r.get('transaction_cost_pct', 0.05),
+                    'ticker': req.ticker,
+                    'startDate': '2024-01-01',
+                    'endDate': '2024-12-31',
+                    'interval': req.interval,
+                    'rsiBuy': entry.get('rsi_buy', 30.0),
+                    'rsiSell': entry.get('rsi_sell', 70.0),
+                }
+                data = backtester.add_indicators(raw.copy(), params).dropna(subset=['Close'])
+                if len(data) >= 20:
+                    equity, trades, final_cash, bh_shares, last_price = backtester.run_strategy(
+                        strategy_id, data, params)
+                    metrics = backtester.calculate_metrics(
+                        equity, trades, params['initialCapital'], bh_shares, last_price)
+                    backtest_completed = True
+        except Exception as e:
+            bt_error = str(e)
+
+        # --- Log technical metrics ---
+        record_id = log_technical(
+            prompt=req.prompt,
+            mapping_source=mapping_source,
+            schema_valid=schema_valid,
+            backtest_completed=backtest_completed,
+            latency_ms=timer.ms,
+            fallback_reason=payload.get("fallback_reason"),
+            llm_model=payload.get("llm_model"),
+            error=bt_error,
+        )
+
+        if backtest_completed:
+            log_trading(
+                record_id=record_id,
+                ticker=req.ticker,
+                strategy_id=strategy_id,
+                mapping_source=mapping_source,
+                metrics=metrics,
+                params_snapshot=payload,
+            )
+
+        # --- Build interpretability overlay ---
+        overlay: Dict[str, Any] = {}
+        try:
+            recent = provider.get_live_snapshot(req.ticker, req.interval)
+            if recent:
+                import pandas as _pd
+                df = _pd.DataFrame(recent)
+                df.columns = [c.capitalize() for c in df.columns]
+                overlay = build_interpretability_layer(df, payload)
+        except Exception:
+            pass
+
+        return {
+            **payload,
+            "record_id": record_id,
+            "latency_ms": round(timer.ms, 2),
+            "backtest_completed": backtest_completed,
+            "metrics_preview": metrics,
+            "interpretability": overlay,
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get('/api/live-chart-v2/{ticker}')
+def get_live_chart_v2(ticker: str, interval: str = '5m', strategy_id: str = 'golden_cross'):
+    """
+    Version 2 live chart endpoint.
+    Returns candles + interpretability overlays (EMA, RSI, BB, MACD, signal annotations).
+    The existing frontend can call this instead of /api/live-chart/{ticker} to get overlays.
+    """
+    try:
+        candles = provider.get_live_snapshot(ticker, interval)
+        if not candles:
+            raise HTTPException(status_code=400, detail=f"No data for '{ticker}'.")
+
+        current_price = candles[-1]['close']
+        prev_close = candles[-2]['close'] if len(candles) > 1 else current_price
+        change = round(current_price - prev_close, 2)
+        change_pct = round((change / prev_close) * 100, 2) if prev_close else 0
+
+        overlay: Dict[str, Any] = {}
+        try:
+            df = pd.DataFrame(candles)
+            df.columns = [c.capitalize() for c in df.columns]
+            stub_payload = {"strategy_id": strategy_id, "entry_logic": {}}
+            overlay = build_interpretability_layer(df, stub_payload)
+        except Exception:
+            pass
+
+        return {
+            'ticker': ticker,
+            'candles': candles,
+            'current_price': current_price,
+            'change': change,
+            'change_pct': change_pct,
+            'interval': interval,
+            'overlays': overlay,
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post('/api/log/usability')
+def log_usability_session(req: UsabilityLogRequest):
+    """
+    Frontend-callable usability logging endpoint.
+    Call this from app.js after each assistant interaction or manual form submission
+    to capture real usability data for the paper's usability evaluation table.
+    """
+    try:
+        log_usability(
+            flow_type=req.flow_type,
+            prompt=req.prompt,
+            time_to_submit_sec=req.time_to_submit_sec,
+            form_errors=req.form_errors,
+            apply_button_used=req.apply_button_used,
+            backtest_triggered=req.backtest_triggered,
+            user_id=req.user_id,
+        )
+        return {"ok": True}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get('/')
+def root():
+    file = BASE_DIR / 'index.html'
+    if file.exists():
+        return FileResponse(file)
+    return {'message': 'SimuTrade v2 backend running.'}
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+
+=========================================
+FILE: market_data.py
+=========================================
+
+from __future__ import annotations
+from abc import ABC, abstractmethod
+from typing import List, Dict
+import pandas as pd
+import numpy as np
+import yfinance as yf
+
+class MarketDataProvider(ABC):
+    name = 'abstract'
+
+    @abstractmethod
+    def get_history(self, ticker: str, start: str, end: str, interval: str) -> pd.DataFrame:
+        raise NotImplementedError
+
+    @abstractmethod
+    def get_live_snapshot(self, ticker: str, interval: str) -> List[Dict]:
+        raise NotImplementedError
+
+
+def flatten_yf_columns(df: pd.DataFrame) -> pd.DataFrame:
+    if isinstance(df.columns, pd.MultiIndex):
+        df.columns = ['_'.join([str(c) for c in col if c]).strip('_') for col in df.columns]
+    col_map = {}
+    for col in df.columns:
+        for standard in ['Open', 'High', 'Low', 'Close', 'Volume', 'Adj Close']:
+            if col.startswith(standard):
+                col_map[col] = standard
+                break
+    df.rename(columns=col_map, inplace=True)
+    df = df.loc[:, ~df.columns.duplicated()]
+    return df
+
+class YFinanceProvider(MarketDataProvider):
+    name = 'yfinance-temporary'
+
+    def get_history(self, ticker: str, start: str, end: str, interval: str) -> pd.DataFrame:
+        raw = yf.download(ticker, start=start, end=end, interval=interval, auto_adjust=False, progress=False)
+        if raw.empty:
+            return pd.DataFrame()
+        return flatten_yf_columns(raw)
+
+    def get_live_snapshot(self, ticker: str, interval: str) -> List[Dict]:
+        interval_map = {
+            '1m': ('1m', '1d'),
+            '5m': ('5m', '5d'),
+            '15m': ('15m', '5d'),
+            '1h': ('60m', '30d'),
+            '1d': ('1d', '180d'),
+        }
+        yf_interval, yf_period = interval_map.get(interval, ('5m', '5d'))
+        raw = yf.download(ticker, period=yf_period, interval=yf_interval, auto_adjust=False, progress=False)
+        if raw.empty:
+            return []
+        raw = flatten_yf_columns(raw)
+        candles = []
+        for idx, row in raw.tail(200).iterrows():
+            try:
+                o, h, l, c = float(row['Open']), float(row['High']), float(row['Low']), float(row['Close'])
+                v = int(float(row['Volume']))
+                if any(np.isnan(x) for x in [o, h, l, c]):
+                    continue
+                candles.append({'time': int(idx.timestamp()), 'open': round(o, 2), 'high': round(h, 2), 'low': round(l, 2), 'close': round(c, 2), 'volume': v})
+            except Exception:
+                continue
+        return candles
+
+class UpstoxProvider(MarketDataProvider):
+    name = 'upstox-plug-in-pending'
+
+    def __init__(self, access_token: str = '', instrument_map: dict | None = None):
+        self.access_token = access_token
+        self.instrument_map = instrument_map or {}
+
+    def get_history(self, ticker: str, start: str, end: str, interval: str) -> pd.DataFrame:
+        raise NotImplementedError('Implement official Upstox historical candle fetch here.')
+
+    def get_live_snapshot(self, ticker: str, interval: str) -> List[Dict]:
+        raise NotImplementedError('Implement Upstox market data websocket or snapshot here.')
+
+=========================================
+FILE: optimizer.py
+=========================================
+
+"""
+optimizer.py
+Grid-search parameter optimizer for SimuTrade.
+Wraps backtester.run_strategy across a parameter grid and returns ranked results.
+Called by /api/optimize in main.py — no changes to that route needed.
+"""
+from __future__ import annotations
+
+from itertools import product
+from typing import Any, Dict, List, Optional
+
+import pandas as pd
+
+import backtester
+
+
+def grid_search(
+    strategy: str,
+    df: pd.DataFrame,
+    param_grid: Dict[str, List[Any]],
+    base_params: Dict[str, Any],
+    top_n: int = 10,
+    sort_by: str = "totalReturn",
+) -> List[Dict[str, Any]]:
+    """
+    Run a grid search over param_grid on top of base_params.
+
+    Parameters
+    ----------
+    strategy   : strategy id string (e.g. 'golden_cross')
+    df         : raw OHLCV DataFrame (pre-fetched, NOT indicators-added yet)
+    param_grid : dict of param_name → list of values to try
+                 e.g. {"fastMA": [10, 20, 50], "slowMA": [100, 150, 200]}
+    base_params: fixed params passed to backtester (capital, risk, dates, etc.)
+    top_n      : how many top results to return
+    sort_by    : metric key to rank by (default: "totalReturn")
+
+    Returns
+    -------
+    List of dicts, each with {"params": {...}, "metrics": {...}}
+    sorted descending by sort_by, limited to top_n.
+    """
+    keys = list(param_grid.keys())
+    values = list(param_grid.values())
+    results: List[Dict[str, Any]] = []
+
+    for combo in product(*values):
+        params = {**base_params, **dict(zip(keys, combo))}
+
+        # Skip invalid combos (fast MA must be strictly less than slow MA)
+        fast = params.get("fastMA", 0)
+        slow = params.get("slowMA", 0)
+        if fast >= slow:
+            continue
+
+        try:
+            data = backtester.add_indicators(df.copy(), params).dropna(subset=["Close"])
+            if len(data) < 20:
+                continue
+
+            equity, trades, final_cash, bh_shares, last_price = backtester.run_strategy(
+                strategy, data, params
+            )
+            metrics = backtester.calculate_metrics(
+                equity, trades, params["initialCapital"], bh_shares, last_price
+            )
+
+            results.append({"params": dict(zip(keys, combo)), "metrics": metrics})
+        except Exception:
+            continue
+
+    results.sort(key=lambda x: x["metrics"].get(sort_by, 0), reverse=True)
+    return results[:top_n]
+
+
+def build_param_grid_from_request(req_dict: Dict[str, Any]) -> Dict[str, List[Any]]:
+    """
+    Convert OptimizeRequest fields into a param_grid dict.
+    Parses comma-separated fastMAList and slowMAList strings.
+    """
+    fast_list = [
+        int(x.strip())
+        for x in str(req_dict.get("fastMAList", "20,50,100")).split(",")
+        if x.strip().isdigit()
+    ]
+    slow_list = [
+        int(x.strip())
+        for x in str(req_dict.get("slowMAList", "150,200,250")).split(",")
+        if x.strip().isdigit()
+    ]
+    return {"fastMA": fast_list, "slowMA": slow_list}
+
+
+def build_base_params(req_dict: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Extract fixed (non-grid) params from an OptimizeRequest dict.
+    """
+    return {
+        "mrK": req_dict.get("mrK", 2.0),
+        "atrPeriod": req_dict.get("atrPeriod", 14),
+        "initialCapital": float(req_dict.get("initialCapital", 100000)),
+        "riskPercent": float(req_dict.get("riskPercent", 2.0)),
+        "stopLoss": float(req_dict.get("stopLoss", 2.0)),
+        "takeProfit": float(req_dict.get("takeProfit", 6.0)),
+        "slippage": float(req_dict.get("slippage", 0.1)),
+        "transactionCost": float(req_dict.get("transactionCost", 0.05)),
+        "ticker": req_dict.get("ticker", "RELIANCE.NS"),
+        "startDate": req_dict.get("startDate", "2023-01-01"),
+        "endDate": req_dict.get("endDate", "2024-12-31"),
+        "interval": req_dict.get("interval", "1d"),
+    }
+
+=========================================
+FILE: paper_tables.py
+=========================================
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import Any, Dict, List
+
+import pandas as pd
+
+from config_loader import load_experiment_config, get_runtime_paths
+
+BASE_DIR = Path(__file__).resolve().parent
+
+
+def _read_ndjson(path: Path) -> List[Dict[str, Any]]:
+    if not path.exists():
+        return []
+    records: List[Dict[str, Any]] = []
+    with path.open("r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                records.append(json.loads(line))
+            except json.JSONDecodeError:
+                continue
+    return records
+
+
+def build_tables(cfg_path: str | None = None) -> None:
+    cfg = load_experiment_config(cfg_path)
+    paths = get_runtime_paths(cfg)
+    log_dir = Path(paths["log_dir"])
+    output_dir = Path(paths["output_dir"])
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    tech = pd.DataFrame(_read_ndjson(log_dir / "technical_eval.ndjson"))
+    trade = pd.DataFrame(_read_ndjson(log_dir / "trading_eval.ndjson"))
+    use = pd.DataFrame(_read_ndjson(log_dir / "usability_eval.ndjson"))
+
+    if not tech.empty:
+        tech.to_csv(output_dir / "technical_eval_raw.csv", index=False)
+        agg_spec = {
+            "schema_valid": "mean",
+            "backtest_completed": "mean",
+            "latency_ms": "mean",
+        }
+        if "strategy_match" in tech.columns:
+            agg_spec["strategy_match"] = "mean"
+        summary = tech.groupby(["mapping_source"], dropna=False).agg(agg_spec).reset_index()
+        summary.rename(columns={
+            "schema_valid": "valid_output_rate",
+            "backtest_completed": "backtest_completion_rate",
+            "strategy_match": "strategy_match_rate",
+            "latency_ms": "avg_latency_ms",
+        }, inplace=True)
+        summary.to_csv(output_dir / "technical_eval_summary.csv", index=False)
+
+    if not trade.empty:
+        trade.to_csv(output_dir / "trading_eval_raw.csv", index=False)
+        summary_t = trade.groupby(["mapping_source"], dropna=False).agg({
+            "total_return_pct": "mean",
+            "sharpe_ratio": "mean",
+            "max_drawdown_pct": "mean",
+            "win_rate_pct": "mean",
+            "total_trades": "mean",
+        }).reset_index()
+        summary_t.to_csv(output_dir / "trading_eval_summary.csv", index=False)
+
+    if not use.empty:
+        use.to_csv(output_dir / "usability_eval_raw.csv", index=False)
+        summary_u = use.groupby(["flow_type"], dropna=False).agg({
+            "time_to_submit_sec": "mean",
+            "form_errors": "mean",
+            "backtest_triggered": "mean",
+        }).reset_index()
+        summary_u.rename(columns={"backtest_triggered": "backtest_trigger_rate"}, inplace=True)
+        summary_u.to_csv(output_dir / "usability_eval_summary.csv", index=False)
+
+
+if __name__ == "__main__":
+    build_tables()
+
+=========================================
+FILE: run_evaluation.py
+=========================================
+
+from __future__ import annotations
+
+import argparse
+import time
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
+
+import backtester
+from market_data import MarketDataProvider, YFinanceProvider
+from llm_mapper import suggest_strategy_llm, VALID_STRATEGY_IDS
+from strategy_assistant import suggest_strategy_from_prompt
+from experiment_logger import log_technical, log_trading, log_usability, NSE_BASKET
+from config_loader import (
+    load_experiment_config,
+    get_runtime_paths,
+    get_runtime_defaults,
+    get_execution_defaults,
+)
+
+provider: MarketDataProvider = YFinanceProvider()
+BASE_DIR = Path(__file__).resolve().parent
+DEFAULT_STRATEGY_REGISTRY = sorted(VALID_STRATEGY_IDS)
+
+
+def resolve_strategy_registry(cfg: Dict[str, Any]) -> List[str]:
+    registry = cfg.get("strategy_registry") or DEFAULT_STRATEGY_REGISTRY
+    return [str(x) for x in registry]
+
+
+def load_benchmarks(cfg: Dict[str, Any], paths: Dict[str, str]) -> Dict[str, Any]:
+    bench_prompts = cfg.get("benchmark_prompts", [])
+    bench_tickers = cfg.get("benchmark_tickers", cfg.get("nse_basket", NSE_BASKET))
+    return {"prompts": bench_prompts, "tickers": bench_tickers}
+
+
+def run_single_mapping(
+        prompt: str,
+        ticker: str,
+        interval: str,
+        method: str,
+) -> Tuple[Dict[str, Any], float]:
+    start = time.perf_counter()
+    if method == "heuristic_fallback":
+        payload = suggest_strategy_from_prompt(prompt, ticker, interval)
+        payload["mapping_source"] = "heuristic_fallback"
+    elif method == "llm":
+        payload = suggest_strategy_llm(prompt, ticker, interval)
+    else:
+        raise ValueError(f"Unknown method: {method}")
+    latency_ms = (time.perf_counter() - start) * 1000.0
+    return payload, latency_ms
+
+
+def payload_to_backtest_params(
+        ticker: str,
+        interval: str,
+        start_date: str,
+        end_date: str,
+        payload: Dict[str, Any],
+        exec_defaults: Dict[str, float],
+) -> Tuple[Optional[str], Dict[str, Any]]:
+    strategy_id = payload.get("strategy_id")
+    if not strategy_id or strategy_id not in VALID_STRATEGY_IDS:
+        return None, {}
+
+    entry = payload.get("entry_logic", {}) or {}
+    exit_l = payload.get("exit_logic", {}) or {}
+    exec_r = payload.get("execution_rules", {}) or {}
+
+    params = {
+        "fastMA": entry.get("fast_ma") if entry.get("fast_ma") is not None else 20,
+        "slowMA": entry.get("slow_ma") if entry.get("slow_ma") is not None else 50,
+        "mrK": entry.get("mr_k") if entry.get("mr_k") is not None else 2.0,
+        "atrPeriod": 14,
+        "initialCapital": exec_r.get("initial_capital", exec_defaults["initial_capital"]),
+        "riskPercent": exec_r.get("risk_percent", exec_defaults["risk_percent"]),
+        "stopLoss": exit_l.get("stop_loss_pct", 2.0),
+        "takeProfit": exit_l.get("take_profit_pct", exec_defaults["take_profit_pct"]),
+        "slippage": exec_r.get("slippage_pct", exec_defaults["slippage_pct"]),
+        "transactionCost": exec_r.get("transaction_cost_pct", exec_defaults["transaction_cost_pct"]),
+        "ticker": ticker,
+        "startDate": start_date,
+        "endDate": end_date,
+        "interval": interval,
+    }
+    return strategy_id, params
+
+
+def run_backtest_for_payload(
+        ticker: str,
+        interval: str,
+        start_date: str,
+        end_date: str,
+        payload: Dict[str, Any],
+        exec_defaults: Dict[str, float],
+) -> Tuple[Dict[str, Any], Optional[str]]:
+    strategy_id, params = payload_to_backtest_params(
+        ticker=ticker,
+        interval=interval,
+        start_date=start_date,
+        end_date=end_date,
+        payload=payload,
+        exec_defaults=exec_defaults,
+    )
+    if not strategy_id:
+        return {}, "invalid_or_missing_strategy_id"
+
+    raw = provider.get_history(ticker, start_date, end_date, interval)
+    if raw.empty:
+        return {}, "no_market_data"
+
+    data = backtester.add_indicators(raw.copy(), params).dropna(subset=["Close"])
+    if len(data) < 20:
+        return {}, "insufficient_indicator_history"
+
+    equity, trades, final_cash, bh_shares, last_price = backtester.run_strategy(strategy_id, data, params)
+    metrics = backtester.calculate_metrics(equity, trades, params["initialCapital"], bh_shares, last_price)
+    return metrics, None
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Run SimuTrade evaluation suite.")
+    parser.add_argument("--config", type=str, default=None, help="Path to experiment_config.json")
+    parser.add_argument("--method", type=str, choices=["heuristic_fallback", "llm", "both"], default="both")
+    parser.add_argument("--start", type=str, default=None, help="Override start date")
+    parser.add_argument("--end", type=str, default=None, help="Override end date")
+    parser.add_argument("--log-usability", action="store_true", help="Log automated usability timing records")
+    args = parser.parse_args()
+
+    cfg = load_experiment_config(args.config)
+    paths = get_runtime_paths(cfg)
+    defaults = get_runtime_defaults(cfg)
+    exec_defaults = get_execution_defaults()
+    strategy_registry = resolve_strategy_registry(cfg)
+
+    start_date = args.start or defaults["start_date"]
+    end_date = args.end or defaults["end_date"]
+    interval = defaults["interval"]
+
+    bench = load_benchmarks(cfg, paths)
+    prompts: List[Dict[str, Any]] = bench["prompts"]
+    tickers: List[str] = bench["tickers"]
+
+    if args.method == "both":
+        methods: List[str] = list(defaults["methods"])
+    else:
+        methods = [args.method]
+
+    print(f"Running evaluation from {start_date} to {end_date}, interval={interval}")
+    print(f"Methods: {methods}")
+    print(f"Benchmarks: {len(prompts)} prompts, {len(tickers)} tickers")
+
+    total_runs = 0
+    exact_match_runs = 0
+
+    for prompt_spec in prompts:
+        prompt = prompt_spec["prompt"]
+        prompt_id = prompt_spec.get("id", "unknown_prompt")
+        expected_strategy = prompt_spec.get("expected_strategy")
+
+        for ticker in tickers:
+            for method in methods:
+                print(f"\n[RUN] method={method} ticker={ticker} prompt='{prompt_id}'")
+                total_runs += 1
+                try:
+                    payload, latency_ms = run_single_mapping(prompt, ticker, interval, method)
+                    strategy_id = payload.get("strategy_id")
+                    mapping_source = payload.get("mapping_source", method)
+                    schema_valid = strategy_id in strategy_registry
+                    strategy_match = bool(expected_strategy and strategy_id == expected_strategy)
+                    if strategy_match:
+                        exact_match_runs += 1
+
+                    metrics, backtest_error = run_backtest_for_payload(
+                        ticker=ticker,
+                        interval=interval,
+                        start_date=start_date,
+                        end_date=end_date,
+                        payload=payload,
+                        exec_defaults=exec_defaults,
+                    )
+                    backtest_completed = bool(metrics)
+
+                    record_id = log_technical(
+                        prompt=prompt,
+                        mapping_source=mapping_source,
+                        schema_valid=schema_valid,
+                        backtest_completed=backtest_completed,
+                        latency_ms=latency_ms,
+                        fallback_reason=payload.get("fallback_reason"),
+                        llm_model=payload.get("llm_model"),
+                        error=backtest_error,
+                        expected_strategy=expected_strategy,
+                        produced_strategy=strategy_id,
+                        strategy_match=strategy_match,
+                        ticker=ticker,
+                        interval=interval,
+                    )
+
+                    if args.log_usability:
+                        log_usability(
+                            flow_type=mapping_source,
+                            prompt=prompt,
+                            time_to_submit_sec=latency_ms / 1000.0,
+                            form_errors=0 if schema_valid else 1,
+                            apply_button_used=True,
+                            backtest_triggered=backtest_completed,
+                            user_id="automated_benchmark",
+                        )
+
+                    if backtest_completed:
+                        log_trading(
+                            record_id=record_id,
+                            ticker=ticker,
+                            strategy_id=strategy_id or "unknown",
+                            mapping_source=mapping_source,
+                            metrics=metrics,
+                            params_snapshot=payload,
+                        )
+
+                    print(
+                        f"[OK] strategy={strategy_id} schema_valid={schema_valid} "
+                        f"match={strategy_match} backtest_completed={backtest_completed} "
+                        f"latency_ms={latency_ms:.2f}"
+                    )
+                except Exception as e:
+                    print(f"[ERROR] {e}")
+
+    if total_runs and any(p.get("expected_strategy") for p in prompts):
+        accuracy = exact_match_runs / total_runs
+        print(f"\nStrategy match accuracy: {exact_match_runs}/{total_runs} = {accuracy:.3f}")
+
+
+if __name__ == "__main__":
+    main()
+
+
+=========================================
+FILE: schemas.py
+=========================================
+
+from pydantic import BaseModel
+from typing import Optional
+
+
+class RegisterRequest(BaseModel):
+    email: str
+    username: str
+    password: str
+
+
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+
+
+class BacktestRequest(BaseModel):
+    strategy: str
+    ticker: str
+    startDate: str
+    endDate: str
+    fastMA: float = 50
+    slowMA: float = 200
+    mrK: float = 2.0
+    initialCapital: float = 100000
+    riskPercent: float = 2.0
+    atrPeriod: float = 14
+    stopLoss: float = 2.0
+    takeProfit: float = 6.0
+    slippage: float = 0.1
+    transactionCost: float = 0.05
+    interval: str = "1d"
+
+
+class OptimizeRequest(BaseModel):
+    strategy: str
+    ticker: str
+    startDate: str
+    endDate: str
+    fastMAList: str = "20,50,100"
+    slowMAList: str = "150,200,250"
+    topN: int = 10
+    initialCapital: float = 100000
+    riskPercent: float = 2.0
+    interval: str = "1d"
+
+
+class AssistantRequest(BaseModel):
+    prompt: str
+    ticker: str = "RELIANCE.NS"
+    interval: str = "1d"
+
+=========================================
+FILE: strategy_assistant.py
+=========================================
+
+"""
+strategy_assistant.py
+Offline keyword-based strategy suggestion engine.
+No external AI API. No ML model. Fully deterministic.
+"""
+from __future__ import annotations
+from typing import Any, Dict
+
+_CATALOGUE: Dict[str, Dict[str, Any]] = {
+    "safe": {
+        "strategy_id": "golden_cross",
+        "market_mode": "trend_following",
+        "risk_profile": "low",
+        "entry_logic": {"fast_ma": 50, "slow_ma": 200, "rsi_buy": None, "rsi_sell": None, "mr_k": None, "rsi_confirm": False, "macd_confirm": False},
+        "exit_logic": {"stop_loss_pct": 2.0, "take_profit_pct": 6.0, "trailing_stop_pct": None},
+        "execution_rules": {"initial_capital": 100000, "risk_percent": 1.0, "slippage_pct": 0.1, "transaction_cost_pct": 0.05},
+        "rationale": "Classic Golden Cross (EMA50/EMA200). Low trade frequency, tight risk management — best for long-term investors.",
+    },
+    "aggressive": {
+        "strategy_id": "momentum_breakout",
+        "market_mode": "momentum",
+        "risk_profile": "high",
+        "entry_logic": {"fast_ma": 10, "slow_ma": 30, "rsi_buy": None, "rsi_sell": None, "mr_k": None, "rsi_confirm": False, "macd_confirm": False},
+        "exit_logic": {"stop_loss_pct": 3.0, "take_profit_pct": 10.0, "trailing_stop_pct": None},
+        "execution_rules": {"initial_capital": 100000, "risk_percent": 3.0, "slippage_pct": 0.1, "transaction_cost_pct": 0.05},
+        "rationale": "Momentum Breakout on short MAs. High-frequency entries capturing strong moves — for active traders with higher risk tolerance.",
+    },
+    "mean": {
+        "strategy_id": "mean_reversion",
+        "market_mode": "mean_reversion",
+        "risk_profile": "medium",
+        "entry_logic": {"fast_ma": 20, "slow_ma": 50, "rsi_buy": None, "rsi_sell": None, "mr_k": 2.0, "rsi_confirm": False, "macd_confirm": False},
+        "exit_logic": {"stop_loss_pct": 1.5, "take_profit_pct": 4.0, "trailing_stop_pct": None},
+        "execution_rules": {"initial_capital": 100000, "risk_percent": 2.0, "slippage_pct": 0.1, "transaction_cost_pct": 0.05},
+        "rationale": "Bollinger Band mean reversion. Buys oversold, sells overbought — best in choppy/sideways markets.",
+    },
+    "trend": {
+        "strategy_id": "golden_cross",
+        "market_mode": "trend_following",
+        "risk_profile": "medium",
+        "entry_logic": {"fast_ma": 20, "slow_ma": 50, "rsi_buy": None, "rsi_sell": None, "mr_k": None, "rsi_confirm": False, "macd_confirm": False},
+        "exit_logic": {"stop_loss_pct": 2.0, "take_profit_pct": 6.0, "trailing_stop_pct": None},
+        "execution_rules": {"initial_capital": 100000, "risk_percent": 2.0, "slippage_pct": 0.1, "transaction_cost_pct": 0.05},
+        "rationale": "Short-term Golden Cross (EMA20/EMA50). Faster signals on daily timeframe — balanced trend-following.",
+    },
+    "rsi": {
+        "strategy_id": "rsi_strategy",
+        "market_mode": "reversal",
+        "risk_profile": "medium",
+        "entry_logic": {"fast_ma": 14, "slow_ma": 50, "rsi_buy": 30.0, "rsi_sell": 70.0, "mr_k": None, "rsi_confirm": True, "macd_confirm": False},
+        "exit_logic": {"stop_loss_pct": 2.0, "take_profit_pct": 5.0, "trailing_stop_pct": None},
+        "execution_rules": {"initial_capital": 100000, "risk_percent": 2.0, "slippage_pct": 0.1, "transaction_cost_pct": 0.05},
+        "rationale": "RSI Bounce strategy. Enters on oversold (< 30), exits on overbought (> 70) — good for volatile equities.",
+    },
+    "macd": {
+        "strategy_id": "macd_crossover",
+        "market_mode": "trend_following",
+        "risk_profile": "medium",
+        "entry_logic": {"fast_ma": 12, "slow_ma": 26, "rsi_buy": None, "rsi_sell": None, "mr_k": None, "rsi_confirm": False, "macd_confirm": True},
+        "exit_logic": {"stop_loss_pct": 2.5, "take_profit_pct": 7.0, "trailing_stop_pct": None},
+        "execution_rules": {"initial_capital": 100000, "risk_percent": 2.5, "slippage_pct": 0.1, "transaction_cost_pct": 0.05},
+        "rationale": "MACD Crossover. Uses histogram transitions as entry/exit triggers — balances momentum and trend confirmation.",
+    },
+}
+
+_RULES = [
+    ("safe", ["safe", "long term", "long-term", "conservative", "low risk", "slow"]),
+    ("aggressive", ["aggressive", "scalp", "momentum", "high frequency", "fast", "short term"]),
+    ("mean", ["mean", "reversion", "bollinger", "range", "sideways", "choppy"]),
+    ("rsi", ["rsi", "oversold", "overbought", "bounce", "reversal"]),
+    ("macd", ["macd", "signal line", "histogram", "divergence"]),
+]
+
+def _classify(prompt: str) -> str:
+    p = prompt.lower()
+    for key, keywords in _RULES:
+        if any(kw in p for kw in keywords):
+            return key
+    return "trend"
+
+def suggest_strategy_from_prompt(prompt: str, ticker: str = "RELIANCE.NS", interval: str = "1d") -> Dict[str, Any]:
+    key = _classify(prompt)
+    cfg = _CATALOGUE[key]
+    return {
+        "user_intent": prompt,
+        "strategy_id": cfg["strategy_id"],
+        "ticker": ticker,
+        "exchange": "AUTO",
+        "interval": interval,
+        "market_mode": cfg["market_mode"],
+        "risk_profile": cfg["risk_profile"],
+        "entry_logic": cfg["entry_logic"],
+        "exit_logic": cfg["exit_logic"],
+        "execution_rules": cfg["execution_rules"],
+        "assistant_rationale": cfg["rationale"],
+    }
+
+def validate_strategy_payload(payload: Dict[str, Any]) -> None:
+    required = ["strategy_id", "ticker", "entry_logic", "exit_logic", "execution_rules"]
+    missing = [k for k in required if k not in payload]
+    if missing:
+        raise ValueError(f"Strategy payload missing keys: {missing}")
+    valid_ids = {"golden_cross", "mean_reversion", "rsi_strategy", "macd_crossover", "momentum_breakout"}
+    if payload["strategy_id"] not in valid_ids:
+        raise ValueError(f"Unknown strategy_id: {payload['strategy_id']}")
+
+=========================================
+FILE: summarize_experiments.py
+=========================================
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import Any, Dict, List
+
+import pandas as pd
+
+from config_loader import load_experiment_config, get_runtime_paths
+
+BASE_DIR = Path(__file__).resolve().parent
+
+
+def _read_ndjson(path: Path) -> List[Dict[str, Any]]:
+    if not path.exists():
+        return []
+    records: List[Dict[str, Any]] = []
+    with path.open("r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                records.append(json.loads(line))
+            except json.JSONDecodeError:
+                continue
+    return records
+
+
+def summarize(cfg_path: str | None = None) -> None:
+    cfg = load_experiment_config(cfg_path)
+    paths = get_runtime_paths(cfg)
+    log_dir = Path(paths["log_dir"])
+
+    tech = pd.DataFrame(_read_ndjson(log_dir / "technical_eval.ndjson"))
+    trade = pd.DataFrame(_read_ndjson(log_dir / "trading_eval.ndjson"))
+    use = pd.DataFrame(_read_ndjson(log_dir / "usability_eval.ndjson"))
+
+    print("=== SimuTrade Experiment Summary ===")
+
+    if tech.empty:
+        print("No technical_eval.ndjson found.")
+    else:
+        print(f"Technical records: {len(tech)}")
+        cols = ["schema_valid", "backtest_completed", "latency_ms"]
+        if "strategy_match" in tech.columns:
+            cols.append("strategy_match")
+        by_method = tech.groupby("mapping_source")[cols].mean().reset_index()
+        print("\nTechnical metrics by method:")
+        print(by_method.to_string(index=False))
+
+    if trade.empty:
+        print("\nNo trading_eval.ndjson found.")
+    else:
+        print(f"\nTrading records: {len(trade)}")
+        by_method_t = trade.groupby("mapping_source").agg({
+            "total_return_pct": "mean",
+            "sharpe_ratio": "mean",
+            "max_drawdown_pct": "mean",
+            "win_rate_pct": "mean",
+            "total_trades": "mean",
+        }).reset_index()
+        print("\nTrading metrics by method:")
+        print(by_method_t.to_string(index=False))
+
+    if use.empty:
+        print("\nNo usability_eval.ndjson found.")
+    else:
+        print(f"\nUsability records: {len(use)}")
+        by_flow = use.groupby("flow_type").agg({
+            "time_to_submit_sec": "mean",
+            "form_errors": "mean",
+            "backtest_triggered": "mean",
+        }).reset_index()
+        print("\nUsability metrics by flow:")
+        print(by_flow.to_string(index=False))
+
+
+if __name__ == "__main__":
+    summarize()
+
+=========================================
+FILE: unified-theme.css
+=========================================
+
+/* =========================================
+   SIMUTRADE / PERPLEXITY CLEAN THEME
+   ========================================= */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --bg-main: #191a1a;
+  --bg-card: #222424;
+  --bg-card-hover: #2a2c2c;
+  --bg-input: #191a1a;
+  --text-primary: #e8e8e6;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-cyan: #22d3ee;
+  --accent-cyan-hover: #06b6d4;
+  --accent-cyan-bg: rgba(34, 211, 238, 0.1);
+  --accent-text: #0f172a;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --success: #10b981;
+  --danger: #f43f5e;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.3);
+  --color-bg: var(--bg-main);
+  --color-surface: var(--bg-card);
+  --color-surface-2: var(--bg-card-hover);
+  --color-surface-offset: var(--bg-input);
+  --color-border: var(--border-color);
+  --color-text: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+  --color-success: var(--success);
+  --color-notification: var(--danger);
+  --color-warning: #f59e0b;
+}
+
+:root[data-theme="light"] {
+  --bg-main: #f9f9f8;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f3f4f6;
+  --bg-input: #f9f9f8;
+  --text-primary: #18181b;
+  --text-secondary: #52525b;
+  --text-muted: #a1a1aa;
+  --accent-cyan: #0891b2;
+  --accent-cyan-hover: #0e7490;
+  --accent-cyan-bg: rgba(8, 145, 178, 0.08);
+  --accent-text: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --success: #059669;
+  --danger: #e11d48;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.05);
+  --color-bg: var(--bg-main);
+  --color-surface: var(--bg-card);
+  --color-surface-2: var(--bg-card-hover);
+  --color-surface-offset: var(--bg-input);
+  --color-border: var(--border-color);
+  --color-text: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+  --color-success: var(--success);
+  --color-notification: var(--danger);
+  --color-warning: #d97706;
+}
+
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg-main);color:var(--text-primary);line-height:1.6}
+a{color:inherit;text-decoration:none}
+
+.navbar{position:sticky;top:0;z-index:1000;background:var(--bg-main);border-bottom:1px solid var(--border-color)}
+.nav-container{max-width:1400px;margin:0 auto;min-height:70px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-brand{font-size:18px;font-weight:800;letter-spacing:-0.5px;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.nav-brand-name{color:var(--accent-cyan)}
+.nav-links{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.nav-btn{padding:8px 14px;border-radius:8px;color:var(--text-secondary);font-size:14px;font-weight:600;transition:.2s ease;background:transparent;border:1px solid transparent}
+.nav-btn:hover{color:var(--text-primary);background:var(--bg-card)}
+.nav-btn.active{color:var(--accent-cyan);background:var(--accent-cyan-bg);border-color:rgba(34,211,238,.18)}
+
+.page-container{max-width:1400px;margin:0 auto;padding:32px 28px 72px}
+.page-header h1{font-size:32px;font-weight:800;letter-spacing:-1px;margin:0 0 6px}
+.page-header p{margin:0 0 22px;color:var(--text-secondary);font-size:15px}
+
+.card{background:var(--bg-card);border:1px solid var(--border-color);border-radius:16px;padding:22px;box-shadow:var(--shadow-sm);margin-bottom:20px}
+.card h2,.card h3,.card h4{margin-top:0;color:var(--text-primary)}
+
+.form-group{margin-bottom:14px}
+label{display:block;margin-bottom:6px;font-size:13px;font-weight:600;color:var(--text-secondary)}
+input,select,textarea{width:100%;padding:11px 14px;background:var(--bg-input);border:1px solid var(--border-color);border-radius:10px;color:var(--text-primary);font:inherit;outline:none;transition:.2s ease}
+input:focus,select:focus,textarea:focus{border-color:var(--accent-cyan);box-shadow:0 0 0 2px var(--accent-cyan-bg)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 16px;border:none;border-radius:10px;font-weight:700;cursor:pointer;transition:.2s ease}
+.btn-primary{background:var(--accent-cyan);color:var(--accent-text)}
+.btn-primary:hover{background:var(--accent-cyan-hover)}
+.btn-secondary{background:var(--bg-card-hover);color:var(--text-primary);border:1px solid var(--border-color)}
+.btn-secondary:hover{border-color:var(--text-muted)}
+
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.metric-card{background:var(--bg-input);border:1px solid var(--border-color);border-radius:12px;padding:16px}
+.metric-title,.metric-label{font-size:12px;color:var(--text-secondary);font-weight:600;letter-spacing:.02em}
+.metric-value{font-size:24px;font-weight:800;letter-spacing:-.5px;color:var(--text-primary)}
+.metric-value.positive{color:var(--success)}
+.metric-value.negative{color:var(--danger)}
+.metric-value.neutral{color:var(--text-primary)}
+
+table{width:100%;border-collapse:collapse}
+th,td{padding:12px;border-bottom:1px solid var(--border-color);text-align:left;font-size:14px}
+th{color:var(--text-secondary);font-weight:700}
+tr:hover{background:var(--bg-card-hover)}
+
+.info-message,.ai-prompt-status{color:var(--text-secondary);font-size:14px;padding:12px 14px;background:var(--bg-input);border:1px solid var(--border-color);border-radius:10px}
+.error-message{color:var(--danger);padding:12px 14px;background:rgba(244,63,94,.1);border-radius:10px}
+.success-message{color:var(--success);padding:12px 14px;background:rgba(16,185,129,.1);border-radius:10px}
+.hidden{display:none!important}
+
+.theme-toggle-wrapper{display:flex;align-items:center;gap:12px;justify-content:flex-end;margin-bottom:18px}
+.theme-toggle-label{font-size:13px;font-weight:700;color:var(--text-secondary)}
+
+.navbar .nav-container, .page-container, .card{animation:fadeInUp .18s ease-out}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+@media (max-width: 900px){
+  .nav-container,.page-container{padding-left:16px;padding-right:16px}
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+  .page-header h1{font-size:26px}
+}

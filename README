@@ -1,0 +1,49 @@
+Build order for Version 1
+
+Replace auth-heavy files with this scaffold.
+
+Keep frontend simple for now: remove login, remove claims of LSTM, rename to assistant-guided strategy builder.
+
+Run backend first with the temporary YFinanceProvider.
+
+Test /api/assistant/suggest, /api/backtest, /api/live-chart/{ticker}.
+
+After backend is stable, implement UpstoxProvider in market_data.py.
+
+Then update dashboard.js to use assistant suggestion payloads and render rationale + overlays.
+
+Immediate tasks you must do next
+
+Put dashboard.html, dashboard.js, app.js, unified-theme.css in the same folder as main.py if serving UI from backend.
+
+Remove all token/auth code from frontend.
+
+Change any 'LSTM' label to 'Strategy Assistant' or 'Projection'.
+
+Add a simple assistant form that posts to /api/assistant/suggest.
+
+When suggestion is returned, autofill backtest parameters.
+
+Backtest using /api/backtest/from-assistant or /api/backtest.
+
+Upstox integration plan
+
+Add access token env handling.
+
+Build instrument lookup map.
+
+Implement get_history using official candle endpoint.
+
+Implement get_live_snapshot with websocket stream aggregation.
+
+Keep the same returned OHLCV structure so UI/backtester code does not change.
+
+Why this order
+
+Schema first keeps the assistant, UI, and backtester aligned.
+
+Provider abstraction prevents lock-in to yfinance.
+
+Backtester cleanup now avoids reworking metrics later.
+
+Live chart can evolve independently once provider output is normalized.

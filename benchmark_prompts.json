@@ -1,0 +1,82 @@
+[
+  {
+    "id": "P01",
+    "prompt": "safe trend-following strategy for large cap stocks",
+    "expected_strategy": "golden_cross",
+    "expected_risk_profile": "low",
+    "difficulty": "easy",
+    "category": "trend"
+  },
+  {
+    "id": "P02",
+    "prompt": "buy the dip on Infosys using bollinger bands",
+    "expected_strategy": "mean_reversion",
+    "expected_risk_profile": "medium",
+    "difficulty": "easy",
+    "category": "mean_reversion"
+  },
+  {
+    "id": "P03",
+    "prompt": "RSI oversold bounce strategy with tight stop loss",
+    "expected_strategy": "rsi_strategy",
+    "expected_risk_profile": "low",
+    "difficulty": "easy",
+    "category": "reversal"
+  },
+  {
+    "id": "P04",
+    "prompt": "MACD crossover with momentum confirmation on TCS",
+    "expected_strategy": "macd_crossover",
+    "expected_risk_profile": "medium",
+    "difficulty": "medium",
+    "category": "momentum"
+  },
+  {
+    "id": "P05",
+    "prompt": "aggressive breakout strategy for high volatility stocks",
+    "expected_strategy": "momentum_breakout",
+    "expected_risk_profile": "high",
+    "difficulty": "easy",
+    "category": "breakout"
+  },
+  {
+    "id": "P06",
+    "prompt": "I want to trade Reliance with moderate risk using moving average crossover",
+    "expected_strategy": "golden_cross",
+    "expected_risk_profile": "medium",
+    "difficulty": "medium",
+    "category": "trend"
+  },
+  {
+    "id": "P07",
+    "prompt": "sideways market mean reversion play on HDFC Bank with wider bands",
+    "expected_strategy": "mean_reversion",
+    "expected_risk_profile": "medium",
+    "difficulty": "medium",
+    "category": "mean_reversion"
+  },
+  {
+    "id": "P08",
+    "prompt": "something safe for beginners that follows the trend",
+    "expected_strategy": "golden_cross",
+    "expected_risk_profile": "low",
+    "difficulty": "hard",
+    "category": "trend"
+  },
+  {
+    "id": "P09",
+    "prompt": "scalp high momentum breakouts on BAJFINANCE intraday",
+    "expected_strategy": "momentum_breakout",
+    "expected_risk_profile": "high",
+    "difficulty": "medium",
+    "category": "breakout"
+  },
+  {
+    "id": "P10",
+    "prompt": "overbought overbought sell signal with RSI 70 on ITC",
+    "expected_strategy": "rsi_strategy",
+    "expected_risk_profile": "medium",
+    "difficulty": "hard",
+    "category": "reversal"
+  }
+]

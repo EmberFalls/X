@@ -1,0 +1,19 @@
+# SimuTrade v2 — Python dependencies
+# Install with: pip install -r requirements_v2.txt
+
+# Core web framework
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+pydantic>=2.7.0
+
+# Data & numerics
+pandas>=2.2.0
+numpy>=1.26.0
+yfinance>=0.2.40
+
+# LLM integration (v2 addition)
+groq>=0.9.0
+
+# Dev / testing utilities
+httpx>=0.27.0          # for FastAPI TestClient
+pytest>=8.2.0

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SimuTrade | Strategy Lab</title>
+  <link rel="stylesheet" href="unified-theme.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <span>SimuTrade</span><span class="nav-brand-name">Research Variant</span>
+      </div>
+      <div class="nav-links">
+        <a class="nav-btn active" href="index.html">Strategy Lab</a>
+        <a class="nav-btn" href="dashboard.html">Live Terminal</a>
+        <a class="nav-btn" href="history.html">History</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-container">
+    <div class="page-header">
+      <h1>Strategy Lab</h1>
+      <p>Define your trading parameters and simulate historical performance.</p>
+    </div>
+
+    <div class="card">
+      <h2>Offline AI Strategy Assistant</h2>
+      <p>Describe your trading style and I’ll recommend a backtesting setup — then apply it directly to the form below.</p>
+
+      <div class="ai-prompt-bar">
+        <span class="ai-prompt-icon">✦</span>
+        <input id="bt-ai-input" class="ai-prompt-input" type="text" placeholder="Example: I want a safe long-term trend following strategy for Indian stocks" />
+        <button id="bt-ai-submit" class="ai-prompt-btn" type="button">Generate</button>
+      </div>
+
+      <div class="chart-chat-quick-prompts">
+        <button class="chart-chat-chip bt-ai-chip" data-prompt="Safe long term trend following strategy">Safe Trend</button>
+        <button class="chart-chat-chip bt-ai-chip" data-prompt="Mean reversion for choppy markets">Mean Reversion</button>
+        <button class="chart-chat-chip bt-ai-chip" data-prompt="RSI bounce for volatile stocks">RSI Bounce</button>
+        <button class="chart-chat-chip bt-ai-chip" data-prompt="MACD crossover with momentum confirmation">MACD Trend</button>
+      </div>
+
+      <div id="bt-ai-status" class="ai-prompt-status">Enter a prompt to generate a strategy.</div>
+
+      <div id="bt-ai-result" class="card hidden" style="margin-top:16px;">
+        <div style="display:flex; justify-content:space-between; gap:16px; align-items:flex-start; flex-wrap:wrap;">
+          <div>
+            <h3 id="bt-ai-label" style="margin-bottom:8px;">Strategy</h3>
+            <p id="bt-ai-description" style="margin-bottom:8px;"></p>
+            <p id="bt-ai-meta" style="font-size:13px; color: var(--text-secondary);"></p>
+          </div>
+          <button id="bt-ai-apply" class="btn btn-secondary" type="button">Apply to Form</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:16px;">
+          <h2 style="margin:0;">Backtest Setup</h2>
+          <span id="results-status" class="info-message" style="margin:0;">Waiting for backtest execution...</span>
+        </div>
+
+        <form id="backtest-form">
+          <div class="form-group">
+            <label for="strategy-select">Strategy Type</label>
+            <select id="strategy-select">
+              <option value="golden_cross">Golden Cross</option>
+              <option value="mean_reversion">Mean Reversion</option>
+              <option value="momentum_breakout">Momentum Breakout</option>
+              <option value="rsi_strategy">RSI Strategy</option>
+              <option value="macd_crossover">MACD Crossover</option>
+            </select>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="ticker">Ticker</label>
+              <input id="ticker" type="text" value="RELIANCE.NS" />
+            </div>
+            <div class="form-group">
+              <label for="interval">Interval</label>
+              <select id="interval">
+                <option value="1d">1 Day</option>
+                <option value="1h">1 Hour</option>
+                <option value="15m">15 Min</option>
+                <option value="5m">5 Min</option>
+                <option value="1m">1 Min</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="start-date">Start Date</label>
+              <input id="start-date" type="date" value="2024-01-01" />
+            </div>
+            <div class="form-group">
+              <label for="end-date">End Date</label>
+              <input id="end-date" type="date" value="2026-01-01" />
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <div class="form-group">
+              <label for="fast-ma">Fast MA</label>
+              <input id="fast-ma" type="number" value="50" />
+            </div>
+            <div class="form-group" id="slow-ma-group">
+              <label for="slow-ma">Slow MA</label>
+              <input id="slow-ma" type="number" value="200" />
+            </div>
+            <div class="form-group hidden" id="mr-k-group">
+              <label for="mr-k">MR K</label>
+              <input id="mr-k" type="number" step="0.1" value="2.0" />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="stop-loss">Stop Loss (%)</label>
+              <input id="stop-loss" type="number" step="0.1" value="2.0" />
+            </div>
+            <div class="form-group">
+              <label for="take-profit">Take Profit (%)</label>
+              <input id="take-profit" type="number" step="0.1" value="6.0" />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="capital">Capital</label>
+              <input id="capital" type="number" value="100000" />
+            </div>
+            <div class="form-group">
+              <label for="risk">Risk/Trade (%)</label>
+              <input id="risk" type="number" step="0.1" value="2.0" />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="slippage">Slippage (%)</label>
+              <input id="slippage" type="number" step="0.01" value="0.1" />
+            </div>
+            <div class="form-group">
+              <label for="transaction-cost">Transaction Cost (%)</label>
+              <input id="transaction-cost" type="number" step="0.01" value="0.05" />
+            </div>
+          </div>
+
+          <button class="btn btn-primary" type="submit">Run Backtest</button>
+        </form>
+      </div>
+
+      <div class="card" data-tab="backtest">
+        <h2>Performance</h2>
+        <div class="metrics-grid" style="margin-bottom:18px;">
+          <div class="metric-card"><div class="metric-label">Total Return</div><div id="metric-total-return" class="metric-value neutral">--</div></div>
+          <div class="metric-card"><div class="metric-label">Max Drawdown</div><div id="metric-max-dd" class="metric-value neutral">--</div></div>
+          <div class="metric-card"><div class="metric-label">Sharpe Ratio</div><div id="metric-sharpe" class="metric-value neutral">--</div></div>
+          <div class="metric-card"><div class="metric-label">Win Rate</div><div id="metric-winrate" class="metric-value neutral">--</div></div>
+          <div class="metric-card"><div class="metric-label">Total Trades</div><div id="metric-trades" class="metric-value neutral">--</div></div>
+          <div class="metric-card"><div class="metric-label">Final Equity</div><div id="metric-final" class="metric-value neutral">--</div></div>
+        </div>
+
+        <div style="height:320px; margin-bottom:18px;">
+          <canvas id="equity-chart"></canvas>
+        </div>
+
+        <h3>Trade Log</h3>
+        <div style="overflow:auto; max-height:320px;">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Signal</th>
+                <th>Entry Price</th>
+                <th>Exit Price</th>
+                <th>P&L</th>
+                <th>P&L %</th>
+              </tr>
+            </thead>
+            <tbody id="trade-table-body">
+              <tr><td colspan="6">No trades generated yet.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:16px;">
+        <h2 style="margin:0;">Grid Search</h2>
+        <span id="opt-status" class="info-message" style="margin:0;">Run optimization to see top combinations.</span>
+      </div>
+
+      <form id="optimize-form">
+        <div class="grid-3">
+          <div class="form-group">
+            <label for="opt-fast-list">Fast MA List</label>
+            <input id="opt-fast-list" type="text" value="10,20,50" />
+          </div>
+          <div class="form-group">
+            <label for="opt-slow-list">Slow MA List</label>
+            <input id="opt-slow-list" type="text" value="50,100,200" />
+          </div>
+          <div class="form-group">
+            <label for="opt-topn">Top N</label>
+            <input id="opt-topn" type="number" value="10" />
+          </div>
+        </div>
+        <button class="btn btn-secondary" type="submit">Run Grid Search</button>
+      </form>
+
+      <div style="overflow:auto; margin-top:18px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Fast MA</th>
+              <th>Slow MA</th>
+              <th>Return %</th>
+              <th>Max DD %</th>
+              <th>Sharpe</th>
+              <th>Win %</th>
+            </tr>
+          </thead>
+          <tbody id="opt-table-body">
+            <tr><td colspan="6">No optimization results yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
