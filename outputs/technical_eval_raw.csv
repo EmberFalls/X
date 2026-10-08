@@ -150,3 +150,854 @@ fdba0737,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback
 d0c68d6c,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.04,groq_unavailable_or_no_api_key,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T08:50:48.496532+00:00,default
 c55093e7,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.04,groq_unavailable_or_no_api_key,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T08:50:48.542998+00:00,default
 c80d5af0,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.04,groq_unavailable_or_no_api_key,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T08:50:48.582406+00:00,default
+1fe916f9,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.01,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:04:33.144184+00:00,default
+53dc95f2,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:04:33.276419+00:00,default
+56199743,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.04,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:04:33.904385+00:00,default
+1b793c9d,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:04:33.975797+00:00,default
+16c516c0,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:04:34.516816+00:00,default
+01fdec84,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:04:34.660540+00:00,default
+5d19b05b,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:04:35.043050+00:00,default
+13ad143f,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:04:35.550686+00:00,default
+c307f152,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:04:35.638216+00:00,default
+26d40d16,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.04,groq_unavailable,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:04:35.687318+00:00,default
+c491b10f,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.03,groq_unavailable,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:04:35.756683+00:00,default
+996ce4f4,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.03,groq_unavailable,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:04:35.834016+00:00,default
+b1ab6a84,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.03,groq_unavailable,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:04:35.904271+00:00,default
+601b3395,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:04:35.977575+00:00,default
+49c45716,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.03,groq_unavailable,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:04:36.050383+00:00,default
+79869b80,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.01,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:04:36.066446+00:00,default
+e34ba44b,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:04:36.130606+00:00,default
+c23e567e,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.04,groq_unavailable,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:04:36.147933+00:00,default
+75d9189b,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:04:36.205887+00:00,default
+0f108f9f,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:04:36.225313+00:00,default
+edf84895,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.05,groq_unavailable,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:04:36.266399+00:00,default
+bcdcbbd1,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.06,groq_unavailable,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:04:36.278356+00:00,default
+0b1b2f55,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.03,groq_unavailable,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:04:36.310635+00:00,default
+657a4721,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.04,groq_unavailable,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:04:36.318894+00:00,default
+7ac1a80c,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.05,groq_unavailable,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:04:36.364941+00:00,default
+10175e96,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,RELIANCE.NS,1d,2026-07-07T17:04:36.400437+00:00,default
+585bb69b,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.04,groq_unavailable,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:04:36.406758+00:00,default
+2bac650f,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.04,groq_unavailable,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:04:36.460917+00:00,default
+1f26428d,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,TCS.NS,1d,2026-07-07T17:04:36.497299+00:00,default
+30b3b9cd,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:04:36.502742+00:00,default
+af144866,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:04:36.556748+00:00,default
+4849f881,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,INFY.NS,1d,2026-07-07T17:04:36.591432+00:00,default
+3efd1e3e,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:04:36.599666+00:00,default
+11f78fa1,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,RELIANCE.NS,1d,2026-07-07T17:04:36.685791+00:00,default
+08a36b8b,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,HDFCBANK.NS,1d,2026-07-07T17:04:36.688448+00:00,default
+efa7111d,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.03,groq_unavailable,,,macd_crossover,momentum_breakout,False,TCS.NS,1d,2026-07-07T17:04:36.796914+00:00,default
+05483848,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,ICICIBANK.NS,1d,2026-07-07T17:04:36.813508+00:00,default
+5f89cfef,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,INFY.NS,1d,2026-07-07T17:04:36.907563+00:00,default
+24b32a00,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.03,groq_unavailable,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:04:36.943153+00:00,default
+15341dc2,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.04,groq_unavailable,,,macd_crossover,momentum_breakout,False,HDFCBANK.NS,1d,2026-07-07T17:04:37.025345+00:00,default
+be1f630d,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:04:37.069340+00:00,default
+5b4824c4,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,ICICIBANK.NS,1d,2026-07-07T17:04:37.137991+00:00,default
+1b031ef3,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:04:37.199364+00:00,default
+e0b4032e,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:04:37.247105+00:00,default
+785f58bc,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.05,groq_unavailable,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:04:37.305257+00:00,default
+8a6a504f,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.03,groq_unavailable,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:04:37.334847+00:00,default
+00cb2f52,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.05,groq_unavailable,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:04:37.396507+00:00,default
+c9efee4e,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.01,groq_unavailable,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:04:37.412885+00:00,default
+4708ad34,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:04:37.475364+00:00,default
+20912c6c,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:04:37.504123+00:00,default
+af8f696c,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.04,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:04:37.539487+00:00,default
+fdbabb67,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.01,groq_unavailable,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:04:37.578864+00:00,default
+3860b160,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:04:37.607071+00:00,default
+c8e72383,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.04,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:04:37.634396+00:00,default
+d4df5a23,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:04:37.685112+00:00,default
+7c3786dc,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:04:37.715880+00:00,default
+9bbbdc9b,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:04:37.787810+00:00,default
+7ce3f744,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:04:37.812382+00:00,default
+13fd63ee,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.03,groq_unavailable,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:04:37.866376+00:00,default
+02d96ed5,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:04:37.907531+00:00,default
+29b75351,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.03,groq_unavailable,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:04:37.936258+00:00,default
+9aee6277,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:04:38.006067+00:00,default
+0611324c,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.05,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:04:38.014510+00:00,default
+bab38901,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:04:38.083243+00:00,default
+540dd2a7,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:04:38.098254+00:00,default
+1550d054,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:04:38.153561+00:00,default
+329e32ff,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:04:38.160263+00:00,default
+2b33b83c,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:04:38.224087+00:00,default
+41c49a12,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:04:38.244197+00:00,default
+3720dea5,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.03,groq_unavailable,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:04:38.272594+00:00,default
+b094f82a,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.03,groq_unavailable,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:04:38.320830+00:00,default
+8d398da9,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:04:38.351731+00:00,default
+5e1eb7a6,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:04:38.385739+00:00,default
+c4328576,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:04:38.456537+00:00,default
+6d3fc087,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:04:38.470816+00:00,default
+bcbd6fe7,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:04:38.547842+00:00,default
+871cb898,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:04:38.553188+00:00,default
+ff0c18bf,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:04:38.622030+00:00,default
+0a23cc96,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:04:38.646998+00:00,default
+903c2b99,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:04:38.731426+00:00,default
+0f3194ca,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:04:38.756159+00:00,default
+7dd1001b,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.05,groq_unavailable,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:04:38.827202+00:00,default
+e0038056,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.03,groq_unavailable,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:04:38.856730+00:00,default
+33d885dc,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.04,groq_unavailable,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:04:38.914142+00:00,default
+5c89516d,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:04:38.953876+00:00,default
+30c0bb71,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.04,groq_unavailable,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:04:38.998020+00:00,default
+e1c57a86,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:04:39.060890+00:00,default
+d8c61a14,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:04:39.098781+00:00,default
+a8ce6199,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:04:39.170134+00:00,default
+559c11cc,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:04:39.194201+00:00,default
+a278ba66,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.03,groq_unavailable,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:04:39.235925+00:00,default
+4ac91549,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.03,groq_unavailable,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:04:39.262148+00:00,default
+b12c8823,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:04:39.318946+00:00,default
+c29f7f60,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:04:39.331052+00:00,default
+492535a5,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.05,groq_unavailable,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:04:39.380927+00:00,default
+2d58a7ab,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:04:39.394248+00:00,default
+594e6c3b,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.04,groq_unavailable,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:04:39.452750+00:00,default
+ae082956,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.05,groq_unavailable,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:04:39.517992+00:00,default
+a4e21ed9,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.05,groq_unavailable,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:04:39.522665+00:00,default
+ed3a21fc,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:04:39.585514+00:00,default
+f4074ba1,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.01,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:14:32.596539+00:00,default
+e4a9f953,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:14:33.031990+00:00,default
+defa2daf,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:14:33.683831+00:00,default
+d3db3e8b,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:14:34.107134+00:00,default
+464382f4,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:14:34.742456+00:00,default
+6a3a947a,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:14:34.806784+00:00,default
+a5b4baba,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:14:34.861046+00:00,default
+adb8592c,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:14:34.925334+00:00,default
+9e01531f,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:14:34.995128+00:00,default
+dfa4b87c,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:14:35.063941+00:00,default
+3329039e,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.03,groq_unavailable,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:14:35.134589+00:00,default
+2f15d690,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:14:35.197724+00:00,default
+5738b22a,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.03,groq_unavailable,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:14:35.260475+00:00,default
+4995800e,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.03,groq_unavailable,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:14:35.314518+00:00,default
+20a0db3e,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:14:35.380030+00:00,default
+1200ae28,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,RELIANCE.NS,1d,2026-07-07T17:14:35.503425+00:00,default
+63414d3c,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,TCS.NS,1d,2026-07-07T17:14:35.611673+00:00,default
+70d112dc,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,INFY.NS,1d,2026-07-07T17:14:35.723921+00:00,default
+a6d1864c,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,HDFCBANK.NS,1d,2026-07-07T17:14:35.857689+00:00,default
+d8075548,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.04,groq_unavailable,,,macd_crossover,momentum_breakout,False,ICICIBANK.NS,1d,2026-07-07T17:14:35.985303+00:00,default
+c4921c13,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:14:36.103632+00:00,default
+b2e7630f,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.04,groq_unavailable,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:14:36.217264+00:00,default
+cac295b4,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.03,groq_unavailable,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:14:36.342985+00:00,default
+13f8681d,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:14:36.466840+00:00,default
+30cf3dee,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.04,groq_unavailable,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:14:36.585529+00:00,default
+f6f2870e,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:14:36.684390+00:00,default
+9130ed19,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:14:36.770477+00:00,default
+57249167,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:14:36.877506+00:00,default
+64308124,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:14:36.977224+00:00,default
+f8ba59d5,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:14:37.062458+00:00,default
+875647fc,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.03,groq_unavailable,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:14:37.129025+00:00,default
+8bcf1c88,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.05,groq_unavailable,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:14:37.198059+00:00,default
+202d616e,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.03,groq_unavailable,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:14:37.256070+00:00,default
+de727c03,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.14,groq_unavailable,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:14:37.341878+00:00,default
+954e8660,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.03,groq_unavailable,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:14:37.415531+00:00,default
+acd05559,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:14:37.524509+00:00,default
+16790b91,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:14:37.624988+00:00,default
+586effc2,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:14:37.730593+00:00,default
+d9e48b73,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:14:37.826523+00:00,default
+22a4ddbd,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:14:37.919748+00:00,default
+61943015,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:14:38.045774+00:00,default
+85c930d4,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:14:38.157450+00:00,default
+502e4a1a,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:14:38.282575+00:00,default
+83062b9d,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.03,groq_unavailable,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:14:38.416211+00:00,default
+741fac4e,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.03,groq_unavailable,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:14:38.524480+00:00,default
+f4617832,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.03,groq_unavailable,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:14:38.589010+00:00,default
+da6c4aa5,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:14:38.779740+00:00,default
+8b879d5e,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:14:38.925584+00:00,default
+f33553f2,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:14:39.006967+00:00,default
+048e5e5a,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:14:39.074684+00:00,default
+7fc33ef4,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.01,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:16:40.872655+00:00,default
+ccac378e,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:16:41.235813+00:00,default
+346de529,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:16:41.713397+00:00,default
+fbf44ba9,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:16:42.101072+00:00,default
+f45747a3,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:16:42.655137+00:00,default
+589eb568,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.05,groq_unavailable,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:16:42.698972+00:00,default
+cb1d90d4,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:16:42.740665+00:00,default
+b9da790b,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:16:42.793539+00:00,default
+e150430c,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:16:42.835913+00:00,default
+00ab21d0,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:16:42.878049+00:00,default
+d8294c75,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:16:42.923131+00:00,default
+90c2f5e0,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:16:42.971561+00:00,default
+9cd18d97,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.04,groq_unavailable,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:16:43.016697+00:00,default
+ab354d6a,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:16:43.059203+00:00,default
+3491fed0,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.03,groq_unavailable,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:16:43.100142+00:00,default
+1d34404a,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,RELIANCE.NS,1d,2026-07-07T17:16:43.191968+00:00,default
+f2f0b953,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.04,groq_unavailable,,,macd_crossover,momentum_breakout,False,TCS.NS,1d,2026-07-07T17:16:43.274632+00:00,default
+fc610f5a,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,INFY.NS,1d,2026-07-07T17:16:43.360378+00:00,default
+60f2b17b,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,HDFCBANK.NS,1d,2026-07-07T17:16:43.439654+00:00,default
+3c1790ba,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.04,groq_unavailable,,,macd_crossover,momentum_breakout,False,ICICIBANK.NS,1d,2026-07-07T17:16:43.533253+00:00,default
+e946c471,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.04,groq_unavailable,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:16:43.620317+00:00,default
+be1a14ba,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.04,groq_unavailable,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:16:43.705315+00:00,default
+9a7ebc4c,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:16:43.786670+00:00,default
+01a9215c,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:16:43.872891+00:00,default
+da8d0157,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.03,groq_unavailable,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:16:43.970479+00:00,default
+d4cdcf28,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:16:44.045771+00:00,default
+05ea126a,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.06,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:16:44.107196+00:00,default
+e19f5892,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.1,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:16:44.172981+00:00,default
+5541114d,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:16:44.241998+00:00,default
+6b65dc51,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.04,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:16:44.304324+00:00,default
+a2926bd7,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:16:44.357513+00:00,default
+1d8cb257,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.07,groq_unavailable,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:16:44.402316+00:00,default
+24ab80c5,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.03,groq_unavailable,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:16:44.444768+00:00,default
+09c7942e,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:16:44.487733+00:00,default
+8730ccc6,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.03,groq_unavailable,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:16:44.531303+00:00,default
+44559ce2,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:16:44.590675+00:00,default
+accc78a4,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:16:44.655218+00:00,default
+b7e45af7,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:16:44.743949+00:00,default
+9368e09e,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:16:44.817673+00:00,default
+af22bc10,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:16:44.879139+00:00,default
+d78c1a98,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:16:44.975075+00:00,default
+4722f55f,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.03,groq_unavailable,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:16:45.061390+00:00,default
+00268975,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:16:45.147585+00:00,default
+be3c9b83,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.17,groq_unavailable,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:16:45.241884+00:00,default
+24a7c512,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.04,groq_unavailable,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:16:45.325329+00:00,default
+b751992a,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.03,groq_unavailable,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:16:45.367065+00:00,default
+f05db45c,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:16:45.413175+00:00,default
+74ab50db,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:16:45.452624+00:00,default
+d5609ec4,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:16:45.505411+00:00,default
+1458d738,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.04,groq_unavailable,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:16:45.551148+00:00,default
+d4528657,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.0,,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:16:49.560061+00:00,default
+d52637ef,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:16:49.850657+00:00,default
+fc9e6b4c,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:16:50.088453+00:00,default
+654e70c3,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:16:50.352108+00:00,default
+2403fa9c,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:16:50.660753+00:00,default
+fdb4df32,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.01,,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:16:50.702130+00:00,default
+32f49d56,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.01,,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:16:50.746420+00:00,default
+5d9d1ba2,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.03,,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:16:50.789375+00:00,default
+acb27596,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.01,,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:16:50.854744+00:00,default
+dd91f39c,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.01,,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:16:50.894614+00:00,default
+022a0bde,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.01,,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:16:50.934253+00:00,default
+fa8f1a42,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.01,,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:16:50.974206+00:00,default
+7450ad39,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:16:51.021488+00:00,default
+0e687446,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.03,,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:16:51.086875+00:00,default
+ef9e329e,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.01,,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:16:51.138465+00:00,default
+a7bbf84c,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,,,,macd_crossover,momentum_breakout,False,RELIANCE.NS,1d,2026-07-07T17:16:51.224242+00:00,default
+c70e99b1,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.01,,,,macd_crossover,momentum_breakout,False,TCS.NS,1d,2026-07-07T17:16:51.320701+00:00,default
+ea0b19b1,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.01,,,,macd_crossover,momentum_breakout,False,INFY.NS,1d,2026-07-07T17:16:51.401375+00:00,default
+86be01a5,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.01,,,,macd_crossover,momentum_breakout,False,HDFCBANK.NS,1d,2026-07-07T17:16:51.491249+00:00,default
+794849b1,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,,,,macd_crossover,momentum_breakout,False,ICICIBANK.NS,1d,2026-07-07T17:16:51.575291+00:00,default
+af9c4898,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:16:51.679119+00:00,default
+1b1ce0f5,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:16:51.770060+00:00,default
+c797ea8f,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:16:51.854481+00:00,default
+eb4d0b04,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:16:51.954985+00:00,default
+b28d17a7,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:16:52.054453+00:00,default
+b08face0,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.04,,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:16:52.125379+00:00,default
+486ab353,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:16:52.185043+00:00,default
+4cb64678,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:16:52.243877+00:00,default
+37aa4e84,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:16:52.316871+00:00,default
+52353709,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:16:52.381982+00:00,default
+6c53f04c,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.01,,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:16:52.437276+00:00,default
+3ef3546b,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:16:52.479925+00:00,default
+b2696321,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:16:52.523767+00:00,default
+7da7b46d,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.01,,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:16:52.565848+00:00,default
+282cc1fe,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.01,,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:16:52.608597+00:00,default
+905ae7c1,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:16:52.669503+00:00,default
+3fbd3400,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:16:52.728303+00:00,default
+4d4a2b11,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:16:52.787859+00:00,default
+f911b98f,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:16:52.856292+00:00,default
+63d14e90,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:16:52.935803+00:00,default
+36dc81b4,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:16:53.036392+00:00,default
+37c80b51,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:16:53.113434+00:00,default
+3e88bd7c,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:16:53.193571+00:00,default
+03be5d40,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:16:53.273310+00:00,default
+2c016a70,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.05,,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:16:53.371478+00:00,default
+71afcdd4,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.01,,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:16:53.428937+00:00,default
+4250f595,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:16:53.472158+00:00,default
+cb055f46,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.01,,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:16:53.515821+00:00,default
+dae9b09e,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.01,,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:16:53.560898+00:00,default
+32bc8254,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.01,,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:16:53.603161+00:00,default
+4e82d181,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.0,,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:21:40.356882+00:00,default
+e4c17568,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:21:40.453963+00:00,default
+a0870743,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.04,,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:21:40.806962+00:00,default
+fe57b66e,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.04,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:21:40.891269+00:00,default
+27c94c7e,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:21:41.385145+00:00,default
+93755f2f,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:21:41.460708+00:00,default
+c6c8a995,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:21:41.948100+00:00,default
+de36a431,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.01,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:21:42.021431+00:00,default
+13add879,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:21:42.403670+00:00,default
+3a9e1fea,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:21:42.477569+00:00,default
+fb43f2c3,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.03,,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:21:42.536247+00:00,default
+20ad2bc4,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.04,groq_unavailable,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:21:42.593904+00:00,default
+7498a4a5,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:21:42.643160+00:00,default
+ab52f68f,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.03,groq_unavailable,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:21:42.688467+00:00,default
+90e1ca68,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:21:42.744561+00:00,default
+277cf7e6,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.03,groq_unavailable,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:21:42.804148+00:00,default
+2548f552,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:21:42.853276+00:00,default
+151195f2,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.04,groq_unavailable,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:21:42.901291+00:00,default
+0c12025e,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.01,,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:21:42.949990+00:00,default
+5584e140,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:21:42.999978+00:00,default
+345fe25e,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:21:43.058382+00:00,default
+9c55034d,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.04,groq_unavailable,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:21:43.116641+00:00,default
+e456aaa0,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:21:43.162724+00:00,default
+18d915cd,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.04,groq_unavailable,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:21:43.210055+00:00,default
+0002b332,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:21:43.255479+00:00,default
+df566169,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.05,groq_unavailable,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:21:43.304686+00:00,default
+b59618d0,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:21:43.347416+00:00,default
+5df248b3,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.05,groq_unavailable,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:21:43.403711+00:00,default
+2b49303b,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:21:43.460499+00:00,default
+118ab785,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.03,groq_unavailable,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:21:43.510800+00:00,default
+aa771df5,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,,,,macd_crossover,momentum_breakout,False,RELIANCE.NS,1d,2026-07-07T17:21:43.606647+00:00,default
+a7bb409e,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.04,groq_unavailable,,,macd_crossover,momentum_breakout,False,RELIANCE.NS,1d,2026-07-07T17:21:43.712179+00:00,default
+2e38eb4a,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,,,,macd_crossover,momentum_breakout,False,TCS.NS,1d,2026-07-07T17:21:43.813601+00:00,default
+b6b76f9f,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,TCS.NS,1d,2026-07-07T17:21:43.909530+00:00,default
+79b322f9,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,,,,macd_crossover,momentum_breakout,False,INFY.NS,1d,2026-07-07T17:21:44.009865+00:00,default
+c0923ed6,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.03,groq_unavailable,,,macd_crossover,momentum_breakout,False,INFY.NS,1d,2026-07-07T17:21:44.100577+00:00,default
+68813750,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,,,,macd_crossover,momentum_breakout,False,HDFCBANK.NS,1d,2026-07-07T17:21:44.196643+00:00,default
+ef539de8,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.03,groq_unavailable,,,macd_crossover,momentum_breakout,False,HDFCBANK.NS,1d,2026-07-07T17:21:44.278421+00:00,default
+fd255760,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.01,,,,macd_crossover,momentum_breakout,False,ICICIBANK.NS,1d,2026-07-07T17:21:44.356691+00:00,default
+7b1f3813,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,ICICIBANK.NS,1d,2026-07-07T17:21:44.436090+00:00,default
+1b0311f6,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:21:44.531173+00:00,default
+a1e96906,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.04,groq_unavailable,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:21:44.621413+00:00,default
+46d0f38c,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:21:44.719615+00:00,default
+5d196cc4,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:21:44.811567+00:00,default
+ba9fb523,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:21:44.899107+00:00,default
+79a636df,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.04,groq_unavailable,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:21:45.001972+00:00,default
+ae6cdfa9,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:21:45.102299+00:00,default
+cf651228,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:21:45.237023+00:00,default
+50fe62ec,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:21:45.348713+00:00,default
+b4958f7b,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.04,groq_unavailable,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:21:45.434556+00:00,default
+b26857e6,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:21:45.521217+00:00,default
+232ec303,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.06,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:21:45.603071+00:00,default
+62b7d4ec,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.03,,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:21:45.689126+00:00,default
+9f3c8ffa,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.05,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:21:45.771489+00:00,default
+0ed72556,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.03,,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:21:45.851829+00:00,default
+2b078942,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.05,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:21:45.928805+00:00,default
+13b9cad0,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.04,,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:21:45.995685+00:00,default
+46b643db,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:21:46.075779+00:00,default
+de6510d3,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:21:46.160034+00:00,default
+dd619c9c,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.05,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:21:46.228522+00:00,default
+5320e55a,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:21:46.287678+00:00,default
+10d7d136,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.04,groq_unavailable,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:21:46.343988+00:00,default
+1ff50aa4,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.03,,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:21:46.401666+00:00,default
+dbd57ba9,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:21:46.466025+00:00,default
+2dfc20d8,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.01,,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:21:46.514682+00:00,default
+6c27fcf9,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.03,groq_unavailable,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:21:46.561026+00:00,default
+8ecb055a,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.01,,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:21:46.608144+00:00,default
+3f123bd1,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.04,groq_unavailable,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:21:46.657500+00:00,default
+7700f6c6,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:21:46.714585+00:00,default
+60b7635d,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:21:46.775829+00:00,default
+7b90f3a2,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:21:46.852926+00:00,default
+8dc8f2d1,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:21:46.927969+00:00,default
+6776ccd4,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:21:47.012443+00:00,default
+2e64aef3,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.04,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:21:47.091365+00:00,default
+b399ca66,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:21:47.171088+00:00,default
+1e06ed1e,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:21:47.250851+00:00,default
+7cd4eb51,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:21:47.336090+00:00,default
+576e12b5,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:21:47.413604+00:00,default
+ce451078,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:21:47.496646+00:00,default
+e7859076,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:21:47.578120+00:00,default
+77dddc4d,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:21:47.687537+00:00,default
+556de4b7,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.04,groq_unavailable,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:21:47.797077+00:00,default
+cbd288b9,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:21:47.882190+00:00,default
+d71fce3a,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:21:47.978615+00:00,default
+64ec9b88,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:21:48.073758+00:00,default
+0f3e7690,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.04,groq_unavailable,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:21:48.172764+00:00,default
+a53bec46,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:21:48.275561+00:00,default
+1207e317,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:21:48.363437+00:00,default
+974be472,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:21:48.460022+00:00,default
+6bed0386,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.06,groq_unavailable,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:21:48.565025+00:00,default
+6b2a29eb,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.01,,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:21:48.626720+00:00,default
+c0f58f6d,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:21:48.682251+00:00,default
+96d2b523,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.05,,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:21:48.731578+00:00,default
+30b394fd,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.03,groq_unavailable,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:21:48.790810+00:00,default
+ee144173,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.03,,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:21:48.854152+00:00,default
+1f43dd65,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.03,groq_unavailable,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:21:48.899294+00:00,default
+ca74e1f2,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.03,,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:21:48.959280+00:00,default
+809bc191,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.05,groq_unavailable,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:21:49.019226+00:00,default
+21e78bdd,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:21:49.065821+00:00,default
+dde4320f,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.05,groq_unavailable,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:21:49.128659+00:00,default
+a99ed6fa,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:24:15.874441+00:00,default
+c234a4a0,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:24:16.174638+00:00,default
+dcbc4970,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.04,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:24:16.534558+00:00,default
+fb255fbb,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:24:17.023647+00:00,default
+e85885f8,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:24:17.364072+00:00,default
+f3ecbe05,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.03,groq_unavailable,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:24:17.421427+00:00,default
+b3a151e8,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:24:17.465395+00:00,default
+0b7c6050,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.03,groq_unavailable,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:24:17.507104+00:00,default
+015bf636,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:24:17.548232+00:00,default
+b4662149,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.03,groq_unavailable,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:24:17.596903+00:00,default
+b8140f00,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:24:17.642331+00:00,default
+19fdba50,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.03,groq_unavailable,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:24:17.685673+00:00,default
+3c6409a0,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.03,groq_unavailable,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:24:17.741585+00:00,default
+5fa31689,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:24:17.801204+00:00,default
+5b56d52d,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:24:17.842895+00:00,default
+3707fc0a,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.04,groq_unavailable,,,macd_crossover,momentum_breakout,False,RELIANCE.NS,1d,2026-07-07T17:24:17.927270+00:00,default
+4ed3e60a,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,TCS.NS,1d,2026-07-07T17:24:18.011669+00:00,default
+5d8322fc,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,INFY.NS,1d,2026-07-07T17:24:18.093235+00:00,default
+a52a59f7,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,HDFCBANK.NS,1d,2026-07-07T17:24:18.191406+00:00,default
+a34362f0,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.04,groq_unavailable,,,macd_crossover,momentum_breakout,False,ICICIBANK.NS,1d,2026-07-07T17:24:18.280651+00:00,default
+cdff1d7f,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.03,groq_unavailable,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:24:18.384062+00:00,default
+0e8c5abc,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.05,groq_unavailable,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:24:18.470709+00:00,default
+4dfb06b0,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.01,groq_unavailable,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:24:18.555967+00:00,default
+a31ff1b5,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:24:18.635511+00:00,default
+c5316a1d,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.04,groq_unavailable,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:24:18.733295+00:00,default
+a2c41e5d,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:24:18.807530+00:00,default
+d5b13bd6,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.05,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:24:18.887288+00:00,default
+e68a9192,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:24:18.946412+00:00,default
+24c34a4e,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:24:19.015049+00:00,default
+1310d410,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:24:19.089270+00:00,default
+0c8b805e,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:24:19.147305+00:00,default
+1d603b81,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:24:19.199483+00:00,default
+3ca4cc98,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:24:19.243764+00:00,default
+8bd142a0,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:24:19.286769+00:00,default
+8a092a2b,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:24:19.340343+00:00,default
+33a16639,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:24:19.397294+00:00,default
+ea54b287,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:24:19.457604+00:00,default
+3681e24b,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:24:19.536121+00:00,default
+af576366,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:24:19.598858+00:00,default
+e6dbc43f,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:24:19.663927+00:00,default
+31d290c4,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:24:19.765922+00:00,default
+3e4611de,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.04,groq_unavailable,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:24:19.851119+00:00,default
+5775f6b8,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:24:19.935393+00:00,default
+d0e4c5db,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.04,groq_unavailable,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:24:20.026498+00:00,default
+9cd5d461,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:24:20.108950+00:00,default
+3c2c063e,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.04,groq_unavailable,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:24:20.173373+00:00,default
+3e5b9cf4,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.03,groq_unavailable,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:24:20.217505+00:00,default
+c1f03f74,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.05,groq_unavailable,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:24:20.268132+00:00,default
+81065317,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.05,groq_unavailable,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:24:20.316864+00:00,default
+848d58fa,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.03,groq_unavailable,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:24:20.360588+00:00,default
+f55bff45,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:24:39.456084+00:00,default
+31308b90,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.04,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:24:39.541348+00:00,default
+c7975d19,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:24:39.818337+00:00,default
+75ec489e,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:24:39.901682+00:00,default
+971de474,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:24:40.242185+00:00,default
+0f964abe,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.04,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:24:40.302014+00:00,default
+65b591f6,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:24:40.618614+00:00,default
+1b318e9a,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:24:40.683780+00:00,default
+1bb0d7af,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:24:41.031606+00:00,default
+f3ffbf48,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.01,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:24:41.096408+00:00,default
+b988389b,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:24:41.144878+00:00,default
+3b800cf9,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:24:41.185590+00:00,default
+41198ec1,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.01,,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:24:41.226866+00:00,default
+7da46313,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:24:41.280657+00:00,default
+6f3ff893,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:24:41.335546+00:00,default
+d0685d22,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.04,groq_unavailable,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:24:41.395630+00:00,default
+dcc35c71,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.01,,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:24:41.438237+00:00,default
+c3ea3b5a,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:24:41.496830+00:00,default
+11e2d8e8,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.01,,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:24:41.550694+00:00,default
+480a7459,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:24:41.606482+00:00,default
+f71e7564,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:24:41.671515+00:00,default
+993a6cbc,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:24:41.731146+00:00,default
+c82b3f68,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.01,,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:24:41.774693+00:00,default
+cdcabfdc,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:24:41.831753+00:00,default
+78a25ad3,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:24:41.882598+00:00,default
+5c687abe,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.05,groq_unavailable,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:24:41.928011+00:00,default
+c57018b8,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.01,,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:24:41.972042+00:00,default
+6931e636,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.05,groq_unavailable,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:24:42.012297+00:00,default
+b36365f2,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.01,,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:24:42.056058+00:00,default
+f142b5fe,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:24:42.105433+00:00,default
+11bbd824,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.01,,,,macd_crossover,momentum_breakout,False,RELIANCE.NS,1d,2026-07-07T17:24:42.201142+00:00,default
+d3f88705,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,groq_unavailable,,,macd_crossover,momentum_breakout,False,RELIANCE.NS,1d,2026-07-07T17:24:42.295166+00:00,default
+5eda5feb,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.01,,,,macd_crossover,momentum_breakout,False,TCS.NS,1d,2026-07-07T17:24:42.397430+00:00,default
+5bece077,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.09,groq_unavailable,,,macd_crossover,momentum_breakout,False,TCS.NS,1d,2026-07-07T17:24:42.487077+00:00,default
+fa12029e,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.03,,,,macd_crossover,momentum_breakout,False,INFY.NS,1d,2026-07-07T17:24:42.568451+00:00,default
+8b83726e,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.2,groq_unavailable,,,macd_crossover,momentum_breakout,False,INFY.NS,1d,2026-07-07T17:24:42.651632+00:00,default
+65f4510e,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.01,,,,macd_crossover,momentum_breakout,False,HDFCBANK.NS,1d,2026-07-07T17:24:42.740430+00:00,default
+7d597d13,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.04,groq_unavailable,,,macd_crossover,momentum_breakout,False,HDFCBANK.NS,1d,2026-07-07T17:24:42.821946+00:00,default
+e8905c32,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,,,,macd_crossover,momentum_breakout,False,ICICIBANK.NS,1d,2026-07-07T17:24:42.913338+00:00,default
+5e7456b2,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.05,groq_unavailable,,,macd_crossover,momentum_breakout,False,ICICIBANK.NS,1d,2026-07-07T17:24:42.999697+00:00,default
+001dff16,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:24:43.090917+00:00,default
+564903c8,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:24:43.179977+00:00,default
+d7d01434,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:24:43.276969+00:00,default
+14b8a0c9,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.03,groq_unavailable,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:24:43.358673+00:00,default
+ef168f3a,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:24:43.441376+00:00,default
+c0bb6895,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:24:43.535900+00:00,default
+ac7608a7,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:24:43.628727+00:00,default
+eca5e6e6,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:24:43.719916+00:00,default
+b08b8d11,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:24:43.802012+00:00,default
+e10c6b83,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:24:43.882745+00:00,default
+dd6965a4,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:24:43.946604+00:00,default
+dfdc2172,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:24:44.022718+00:00,default
+f910cf8b,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:24:44.108852+00:00,default
+2e9d7b38,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.05,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:24:44.180082+00:00,default
+9b6687fe,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:24:44.243444+00:00,default
+55428fc9,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.04,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:24:44.344307+00:00,default
+d2f689cc,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.03,,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:24:44.423676+00:00,default
+b29dc8b2,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.06,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:24:44.487776+00:00,default
+78700514,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.03,,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:24:44.548934+00:00,default
+cdd24d43,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:24:44.605962+00:00,default
+9cbd91b3,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:24:44.663035+00:00,default
+cdade895,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-07T17:24:44.709068+00:00,default
+0f3d5659,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:24:44.753401+00:00,default
+b1a6b2c0,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-07T17:24:44.792984+00:00,default
+4b69f32f,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.01,,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:24:44.846983+00:00,default
+a6d2d5db,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.04,groq_unavailable,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-07T17:24:44.900480+00:00,default
+015326e2,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:24:44.951603+00:00,default
+2cf210e3,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,groq_unavailable,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-07T17:24:45.002023+00:00,default
+7dcbd5fc,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.01,,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:24:45.041300+00:00,default
+d60986ab,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.04,groq_unavailable,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-07T17:24:45.085716+00:00,default
+35b62184,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:24:45.159904+00:00,default
+feac005f,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.04,groq_unavailable,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-07T17:24:45.231495+00:00,default
+55bf0e19,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:24:45.307920+00:00,default
+729931c2,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-07T17:24:45.374771+00:00,default
+ebfb089a,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:24:45.434233+00:00,default
+5ac82019,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-07T17:24:45.506136+00:00,default
+fe0dc006,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:24:45.585250+00:00,default
+2cc2df32,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,groq_unavailable,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-07T17:24:45.648716+00:00,default
+6f293c54,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:24:45.725830+00:00,default
+7b471034,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.03,groq_unavailable,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-07T17:24:45.786842+00:00,default
+97ee52f5,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:24:45.900550+00:00,default
+2abda071,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-07T17:24:45.993698+00:00,default
+9c49e8b5,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:24:46.077642+00:00,default
+70f9ad68,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.03,groq_unavailable,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-07T17:24:46.168009+00:00,default
+d0e2ae2b,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:24:46.255134+00:00,default
+217c499c,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,groq_unavailable,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-07T17:24:46.338807+00:00,default
+bf7a47ed,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:24:46.430745+00:00,default
+c710e532,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.04,groq_unavailable,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-07T17:24:46.548295+00:00,default
+21bbf695,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:24:46.649180+00:00,default
+a8710760,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.03,groq_unavailable,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-07T17:24:46.747358+00:00,default
+2e37da22,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.03,,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:24:46.803603+00:00,default
+1a554b6c,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.04,groq_unavailable,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-07T17:24:46.861760+00:00,default
+b88dbb99,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.01,,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:24:46.915860+00:00,default
+2a78b4e8,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.04,groq_unavailable,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-07T17:24:46.962517+00:00,default
+6cde3e62,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:24:47.016068+00:00,default
+6617af2d,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,groq_unavailable,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-07T17:24:47.059864+00:00,default
+74bcf126,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.01,,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:24:47.105592+00:00,default
+fac5da17,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.04,groq_unavailable,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-07T17:24:47.148537+00:00,default
+d824267e,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:24:47.196772+00:00,default
+68e1edb9,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.03,groq_unavailable,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-07T17:24:47.237750+00:00,default
+f5db9288,low risk trend-following strategy for large cap stocks,heuristic_fallback,True,False,0.04,groq_unavailable,,"float() argument must be a string or a real number, not 'NoneType'",,,,,,2026-07-07T17:28:08.138760+00:00,default
+0d49d796,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,506.95,llm_request_error,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-17T04:52:27.082671+00:00,default
+1a7cee69,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,235.22,llm_request_error,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-17T04:52:27.776452+00:00,default
+6ab2fc43,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,221.72,llm_request_error,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-17T04:52:28.607848+00:00,default
+873fc229,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,236.09,llm_request_error,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-17T04:52:29.670254+00:00,default
+1cda5755,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,214.36,llm_request_error,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-17T04:52:30.435101+00:00,default
+cf6fb960,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,277.2,llm_request_error,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-17T04:52:30.757932+00:00,default
+bcfcb2ce,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,227.34,llm_request_error,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-17T04:52:31.027932+00:00,default
+cf138e6f,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,264.88,llm_request_error,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-17T04:52:31.348409+00:00,default
+545ca498,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,247.01,llm_request_error,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-17T04:52:31.646208+00:00,default
+8097fea8,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,246.43,llm_request_error,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-17T04:52:31.938973+00:00,default
+f15cc799,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,245.85,llm_request_error,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-17T04:52:32.234239+00:00,default
+8fd8ebf0,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,218.35,llm_request_error,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-17T04:52:32.512492+00:00,default
+417d74e5,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,252.62,llm_request_error,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-17T04:52:32.830950+00:00,default
+18d9d847,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,253.52,llm_request_error,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-17T04:52:33.145213+00:00,default
+1e1a1376,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,237.07,llm_request_error,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-17T04:52:33.439607+00:00,default
+538eb520,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,223.14,llm_request_error,,,macd_crossover,momentum_breakout,False,RELIANCE.NS,1d,2026-07-17T04:52:33.758269+00:00,default
+8af20edf,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,236.53,llm_request_error,,,macd_crossover,momentum_breakout,False,TCS.NS,1d,2026-07-17T04:52:34.077151+00:00,default
+a4770436,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,240.61,llm_request_error,,,macd_crossover,momentum_breakout,False,INFY.NS,1d,2026-07-17T04:52:34.391958+00:00,default
+5d3a3c93,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,236.64,llm_request_error,,,macd_crossover,momentum_breakout,False,HDFCBANK.NS,1d,2026-07-17T04:52:34.781955+00:00,default
+25327cb4,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,320.86,llm_request_error,,,macd_crossover,momentum_breakout,False,ICICIBANK.NS,1d,2026-07-17T04:52:35.204547+00:00,default
+2422b41c,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,252.56,llm_request_error,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-17T04:52:35.550053+00:00,default
+70f41407,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,384.51,llm_request_error,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-17T04:52:36.058186+00:00,default
+656c1939,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,320.72,llm_request_error,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-17T04:52:36.493123+00:00,default
+48fb634a,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,259.23,llm_request_error,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-17T04:52:36.875893+00:00,default
+3988c8fe,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,335.54,llm_request_error,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-17T04:52:37.359000+00:00,default
+c84cbafa,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,340.19,llm_request_error,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-17T04:52:37.820950+00:00,default
+69bab3d9,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,365.69,llm_request_error,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-17T04:52:38.298291+00:00,default
+aaf3f1d3,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,352.37,llm_request_error,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-17T04:52:38.757796+00:00,default
+ec297436,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,331.56,llm_request_error,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-17T04:52:39.189098+00:00,default
+e99b36b2,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,269.15,llm_request_error,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-17T04:52:39.630140+00:00,default
+85a906ba,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,275.79,llm_request_error,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-17T04:52:39.980766+00:00,default
+02a75bc2,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,253.31,llm_request_error,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-17T04:52:40.315455+00:00,default
+62685bdd,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,329.87,llm_request_error,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-17T04:52:40.735109+00:00,default
+139bb924,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,368.26,llm_request_error,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-17T04:52:41.259694+00:00,default
+9ac7f26f,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,404.41,llm_request_error,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-17T04:52:41.754033+00:00,default
+a8129c10,something safe for beginners that follows the trend,heuristic_fallback,True,True,304.8,llm_request_error,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-17T04:52:42.188704+00:00,default
+48ff083f,something safe for beginners that follows the trend,heuristic_fallback,True,True,325.02,llm_request_error,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-17T04:52:42.634423+00:00,default
+ec3203c5,something safe for beginners that follows the trend,heuristic_fallback,True,True,332.57,llm_request_error,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-17T04:52:43.085583+00:00,default
+f043153d,something safe for beginners that follows the trend,heuristic_fallback,True,True,369.01,llm_request_error,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-17T04:52:43.587400+00:00,default
+999827fc,something safe for beginners that follows the trend,heuristic_fallback,True,True,321.59,llm_request_error,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-17T04:52:43.997326+00:00,default
+34cd14ae,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,342.19,llm_request_error,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-17T04:52:44.441700+00:00,default
+8da5c494,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,338.01,llm_request_error,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-17T04:52:44.910621+00:00,default
+885901ca,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,319.99,llm_request_error,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-17T04:52:45.373702+00:00,default
+0cc27bc3,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,333.52,llm_request_error,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-17T04:52:45.849234+00:00,default
+eed1bbf3,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,348.88,llm_request_error,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-17T04:52:46.324902+00:00,default
+ee28ff6e,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,361.8,llm_request_error,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-17T04:52:46.771025+00:00,default
+df163947,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,253.39,llm_request_error,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-17T04:52:47.100443+00:00,default
+2c22a5da,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,294.72,llm_request_error,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-17T04:52:47.465588+00:00,default
+adb08da1,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,317.72,llm_request_error,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-17T04:52:47.882516+00:00,default
+8623fecd,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,364.27,llm_request_error,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-17T04:52:48.337133+00:00,default
+e398e1c1,safe trend-following strategy for large cap stocks,llm,True,True,1090.88,,llama3-70b-8192,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-19T09:10:06.279705+00:00,default
+4faf8312,safe trend-following strategy for large cap stocks,llm,True,True,944.02,,llama3-70b-8192,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-19T09:10:07.602593+00:00,default
+1fbb7f0d,safe trend-following strategy for large cap stocks,llm,True,True,930.36,,llama3-70b-8192,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-19T09:10:08.832159+00:00,default
+65d8df4f,safe trend-following strategy for large cap stocks,llm,True,True,904.7,,llama3-70b-8192,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-19T09:10:10.033018+00:00,default
+79c2a52d,safe trend-following strategy for large cap stocks,llm,True,True,917.02,,llama3-70b-8192,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-19T09:10:11.262145+00:00,default
+4e188a32,buy the dip on Infosys using bollinger bands,llm,True,True,910.26,,llama3-70b-8192,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-19T09:10:12.253723+00:00,default
+cbfc29f8,buy the dip on Infosys using bollinger bands,llm,True,True,896.37,,llama3-70b-8192,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-19T09:10:13.233058+00:00,default
+d659acd3,buy the dip on Infosys using bollinger bands,llm,True,True,897.58,,llama3-70b-8192,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-19T09:10:14.189889+00:00,default
+deb52ac1,buy the dip on Infosys using bollinger bands,llm,True,True,963.88,,llama3-70b-8192,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-19T09:10:15.248864+00:00,default
+bce34c10,buy the dip on Infosys using bollinger bands,llm,True,True,965.72,,llama3-70b-8192,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-19T09:10:16.303623+00:00,default
+f244c8c7,RSI oversold bounce strategy with tight stop loss,llm,True,True,842.45,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-19T09:10:17.235696+00:00,default
+44f296ee,RSI oversold bounce strategy with tight stop loss,llm,True,True,2961.36,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-19T09:10:20.247588+00:00,default
+246da042,RSI oversold bounce strategy with tight stop loss,llm,True,True,9049.69,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-19T09:10:29.382519+00:00,default
+a78853fd,RSI oversold bounce strategy with tight stop loss,llm,True,True,2921.13,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-19T09:10:32.392772+00:00,default
+55e0ed53,RSI oversold bounce strategy with tight stop loss,llm,True,True,4898.71,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-19T09:10:37.330889+00:00,default
+7f8f4d1c,MACD crossover with momentum confirmation on TCS,llm,True,True,5995.3,,llama3-70b-8192,,macd_crossover,macd_crossover,True,RELIANCE.NS,1d,2026-07-19T09:10:43.398831+00:00,default
+b2677fc3,MACD crossover with momentum confirmation on TCS,llm,True,True,4960.97,,llama3-70b-8192,,macd_crossover,macd_crossover,True,TCS.NS,1d,2026-07-19T09:10:48.434268+00:00,default
+c447c2d0,MACD crossover with momentum confirmation on TCS,llm,True,True,5040.91,,llama3-70b-8192,,macd_crossover,macd_crossover,True,INFY.NS,1d,2026-07-19T09:10:53.550612+00:00,default
+b18584c8,MACD crossover with momentum confirmation on TCS,llm,True,True,6059.43,,llama3-70b-8192,,macd_crossover,macd_crossover,True,HDFCBANK.NS,1d,2026-07-19T09:10:59.681047+00:00,default
+44743bea,MACD crossover with momentum confirmation on TCS,llm,True,True,4953.09,,llama3-70b-8192,,macd_crossover,macd_crossover,True,ICICIBANK.NS,1d,2026-07-19T09:11:04.723164+00:00,default
+d5457e15,aggressive breakout strategy for high volatility stocks,llm,True,True,4935.16,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-19T09:11:09.768768+00:00,default
+9558f690,aggressive breakout strategy for high volatility stocks,llm,True,True,5985.25,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-19T09:11:15.858944+00:00,default
+848b590f,aggressive breakout strategy for high volatility stocks,llm,True,True,4985.45,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-19T09:11:20.936873+00:00,default
+de1dc4b3,aggressive breakout strategy for high volatility stocks,llm,True,True,4996.13,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-19T09:11:26.054406+00:00,default
+977e903d,aggressive breakout strategy for high volatility stocks,llm,True,True,5958.14,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-19T09:11:32.088926+00:00,default
+5da2028c,I want to trade Reliance with moderate risk using moving average crossover,llm,True,True,4997.71,,llama3-70b-8192,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-19T09:11:37.178006+00:00,default
+91586532,I want to trade Reliance with moderate risk using moving average crossover,llm,True,True,5058.01,,llama3-70b-8192,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-19T09:11:42.405704+00:00,default
+cc1837ab,I want to trade Reliance with moderate risk using moving average crossover,llm,True,True,5091.21,,llama3-70b-8192,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-19T09:11:47.601740+00:00,default
+1edcae57,I want to trade Reliance with moderate risk using moving average crossover,llm,True,True,6217.22,,llama3-70b-8192,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-19T09:11:53.929242+00:00,default
+d035e2e7,I want to trade Reliance with moderate risk using moving average crossover,llm,True,True,5069.89,,llama3-70b-8192,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-19T09:11:59.155491+00:00,default
+ffaa58cd,sideways market mean reversion play on HDFC Bank with wider bands,llm,True,True,5184.34,,llama3-70b-8192,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-19T09:12:04.409161+00:00,default
+b364891c,sideways market mean reversion play on HDFC Bank with wider bands,llm,True,True,6048.92,,llama3-70b-8192,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-19T09:12:10.594929+00:00,default
+2eaf6d64,sideways market mean reversion play on HDFC Bank with wider bands,llm,True,True,5068.26,,llama3-70b-8192,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-19T09:12:15.780963+00:00,default
+643c6612,sideways market mean reversion play on HDFC Bank with wider bands,llm,True,True,5172.88,,llama3-70b-8192,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-19T09:12:21.121031+00:00,default
+e5d04b61,sideways market mean reversion play on HDFC Bank with wider bands,llm,True,True,5059.4,,llama3-70b-8192,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-19T09:12:26.253878+00:00,default
+80a32512,something safe for beginners that follows the trend,llm,True,True,6288.72,,llama3-70b-8192,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-19T09:12:32.691145+00:00,default
+a534f950,something safe for beginners that follows the trend,llm,True,True,4968.94,,llama3-70b-8192,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-19T09:12:37.760400+00:00,default
+4660338c,something safe for beginners that follows the trend,llm,True,True,4970.09,,llama3-70b-8192,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-19T09:12:42.886878+00:00,default
+b047fe39,something safe for beginners that follows the trend,llm,True,True,5293.56,,llama3-70b-8192,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-19T09:12:48.287042+00:00,default
+b6ada604,something safe for beginners that follows the trend,llm,True,True,4998.6,,llama3-70b-8192,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-19T09:12:53.407266+00:00,default
+b9d42030,scalp high momentum breakouts on BAJFINANCE intraday,llm,True,True,6077.82,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-19T09:12:59.601188+00:00,default
+d323ef72,scalp high momentum breakouts on BAJFINANCE intraday,llm,True,True,4884.48,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-19T09:13:04.581955+00:00,default
+9166dee0,scalp high momentum breakouts on BAJFINANCE intraday,llm,True,True,4983.28,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-19T09:13:09.690339+00:00,default
+6cb84255,scalp high momentum breakouts on BAJFINANCE intraday,llm,True,True,5927.03,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-19T09:13:15.717721+00:00,default
+f644be16,scalp high momentum breakouts on BAJFINANCE intraday,llm,True,True,5788.08,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-19T09:13:21.585197+00:00,default
+012bfb41,overbought overbought sell signal with RSI 70 on ITC,llm,True,True,5019.19,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-19T09:13:26.691530+00:00,default
+d830bbf9,overbought overbought sell signal with RSI 70 on ITC,llm,True,True,5153.26,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-19T09:13:31.933211+00:00,default
+64a2b8eb,overbought overbought sell signal with RSI 70 on ITC,llm,True,True,5170.96,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-19T09:13:37.157564+00:00,default
+a5ca0573,overbought overbought sell signal with RSI 70 on ITC,llm,True,True,6049.39,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-19T09:13:43.286979+00:00,default
+5a4114c9,overbought overbought sell signal with RSI 70 on ITC,llm,True,True,5083.19,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-19T09:13:48.440194+00:00,default
+90083971,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-19T09:21:34.849673+00:00,default
+f4e89eb0,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-19T09:21:35.205441+00:00,default
+f6e3f22d,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-19T09:21:35.550529+00:00,default
+07279631,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-19T09:21:35.871630+00:00,default
+6cd369b3,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-19T09:21:36.199757+00:00,default
+d53d1a62,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.03,,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-19T09:21:36.243740+00:00,default
+c5faec9b,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-19T09:21:36.295947+00:00,default
+e1271fed,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.03,,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-19T09:21:36.347025+00:00,default
+0e7b916d,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.06,,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-19T09:21:36.392848+00:00,default
+d8ff523a,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.01,,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-19T09:21:36.433157+00:00,default
+73148956,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-19T09:21:36.487057+00:00,default
+c66bd446,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.01,,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-19T09:21:36.530959+00:00,default
+9451b137,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.03,,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-19T09:21:36.575987+00:00,default
+a30f2519,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.03,,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-19T09:21:36.621937+00:00,default
+0a6586df,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-19T09:21:36.689533+00:00,default
+da44e78c,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,,,,macd_crossover,momentum_breakout,False,RELIANCE.NS,1d,2026-07-19T09:21:36.771986+00:00,default
+46c48b77,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.03,,,,macd_crossover,momentum_breakout,False,TCS.NS,1d,2026-07-19T09:21:36.854164+00:00,default
+b6bc21e7,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,,,,macd_crossover,momentum_breakout,False,INFY.NS,1d,2026-07-19T09:21:36.940725+00:00,default
+165bff93,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.01,,,,macd_crossover,momentum_breakout,False,HDFCBANK.NS,1d,2026-07-19T09:21:37.017455+00:00,default
+2193a86e,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,,,,macd_crossover,momentum_breakout,False,ICICIBANK.NS,1d,2026-07-19T09:21:37.113254+00:00,default
+f48ef08b,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-19T09:21:37.205376+00:00,default
+0bc2ed1c,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-19T09:21:37.292379+00:00,default
+a7d4b1db,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-19T09:21:37.373298+00:00,default
+aba37a50,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-19T09:21:37.455814+00:00,default
+54fcfe2c,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-19T09:21:37.541668+00:00,default
+5c56282d,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-19T09:21:37.605084+00:00,default
+5716bfee,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.03,,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-19T09:21:37.666722+00:00,default
+12baccd2,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.03,,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-19T09:21:37.724140+00:00,default
+80be0f10,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-19T09:21:37.786027+00:00,default
+c6c81c84,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-19T09:21:37.845182+00:00,default
+d73116c8,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.03,,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-19T09:21:37.892328+00:00,default
+a0321f93,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-19T09:21:37.935271+00:00,default
+e506a12d,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.01,,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-19T09:21:37.984724+00:00,default
+7d127820,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.01,,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-19T09:21:38.050546+00:00,default
+37258aa7,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-19T09:21:38.095599+00:00,default
+cb24db91,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-19T09:21:38.160618+00:00,default
+937df45d,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.03,,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-19T09:21:38.249731+00:00,default
+2016801c,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-19T09:21:38.365296+00:00,default
+b95b4c58,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-19T09:21:38.423668+00:00,default
+dd2665a6,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-19T09:21:38.500847+00:00,default
+ad27167d,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-19T09:21:38.594638+00:00,default
+d18ce805,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-19T09:21:38.686680+00:00,default
+0e496756,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-19T09:21:38.771630+00:00,default
+a620ed83,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.06,,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-19T09:21:38.863895+00:00,default
+a19d3047,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.03,,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-19T09:21:38.944981+00:00,default
+9b9a4670,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-19T09:21:38.999800+00:00,default
+c56a099d,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-19T09:21:39.050756+00:00,default
+e7c426ee,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-19T09:21:39.110328+00:00,default
+8cee9d1f,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-19T09:21:39.162702+00:00,default
+3ce27b35,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.01,,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-19T09:21:39.216186+00:00,default
+76cf9916,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-19T12:55:09.540696+00:00,default
+f7d72a02,safe trend-following strategy for large cap stocks,llm,True,True,986.44,,llama3-70b-8192,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-19T12:55:10.600143+00:00,default
+7ee9a76d,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-19T12:55:10.862213+00:00,default
+551e44a4,safe trend-following strategy for large cap stocks,llm,True,True,1143.43,,llama3-70b-8192,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-19T12:55:12.077122+00:00,default
+44e57f58,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-19T12:55:12.382886+00:00,default
+26e8b153,safe trend-following strategy for large cap stocks,llm,True,True,1179.14,,llama3-70b-8192,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-19T12:55:13.643700+00:00,default
+3584b21e,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-19T12:55:13.906504+00:00,default
+c25961f9,safe trend-following strategy for large cap stocks,llm,True,True,1000.57,,llama3-70b-8192,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-19T12:55:14.984599+00:00,default
+ef5f5db0,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-19T12:55:15.291340+00:00,default
+e1f9df1d,safe trend-following strategy for large cap stocks,llm,True,True,1331.83,,llama3-70b-8192,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-19T12:55:16.727609+00:00,default
+39eda2bb,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-19T12:55:16.782895+00:00,default
+24870509,buy the dip on Infosys using bollinger bands,llm,True,True,1166.06,,llama3-70b-8192,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-19T12:55:18.047687+00:00,default
+fd91ff8e,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-19T12:55:18.088524+00:00,default
+faa1cfa7,buy the dip on Infosys using bollinger bands,llm,True,True,1108.79,,llama3-70b-8192,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-19T12:55:19.255888+00:00,default
+e0838542,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-19T12:55:19.311265+00:00,default
+d47609e8,buy the dip on Infosys using bollinger bands,llm,True,True,972.73,,llama3-70b-8192,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-19T12:55:20.377831+00:00,default
+1c183ad0,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.03,,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-19T12:55:20.420336+00:00,default
+5d8e3198,buy the dip on Infosys using bollinger bands,llm,True,True,1077.28,,llama3-70b-8192,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-19T12:55:21.571261+00:00,default
+3937fe0f,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-19T12:55:21.618338+00:00,default
+ba5f7af2,buy the dip on Infosys using bollinger bands,llm,True,True,4418.48,,llama3-70b-8192,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-19T12:55:26.093599+00:00,default
+654466af,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-19T12:55:26.140398+00:00,default
+982a333a,RSI oversold bounce strategy with tight stop loss,llm,True,True,5083.63,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-19T12:55:31.272881+00:00,default
+c95be9ff,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.03,,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-19T12:55:31.314042+00:00,default
+cae320e4,RSI oversold bounce strategy with tight stop loss,llm,True,True,5092.85,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-19T12:55:36.459619+00:00,default
+899f4ad1,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.03,,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-19T12:55:36.516960+00:00,default
+6acc2403,RSI oversold bounce strategy with tight stop loss,llm,True,True,5054.85,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-19T12:55:41.647630+00:00,default
+facfa863,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-19T12:55:41.721975+00:00,default
+c543c0d3,RSI oversold bounce strategy with tight stop loss,llm,True,True,5232.98,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-19T12:55:47.103970+00:00,default
+dd55f898,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.04,,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-19T12:55:47.169196+00:00,default
+d3ba94e2,RSI oversold bounce strategy with tight stop loss,llm,True,True,6410.55,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-19T12:55:53.684594+00:00,default
+bae33b54,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.03,,,,macd_crossover,momentum_breakout,False,RELIANCE.NS,1d,2026-07-19T12:55:53.814461+00:00,default
+87cf93e7,MACD crossover with momentum confirmation on TCS,llm,True,True,4171.12,,llama3-70b-8192,,macd_crossover,macd_crossover,True,RELIANCE.NS,1d,2026-07-19T12:55:58.174524+00:00,default
+af5d9461,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,,,,macd_crossover,momentum_breakout,False,TCS.NS,1d,2026-07-19T12:55:58.347640+00:00,default
+2bcf3eec,MACD crossover with momentum confirmation on TCS,llm,True,True,5407.62,,llama3-70b-8192,,macd_crossover,macd_crossover,True,TCS.NS,1d,2026-07-19T12:56:03.940546+00:00,default
+b032756c,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.01,,,,macd_crossover,momentum_breakout,False,INFY.NS,1d,2026-07-19T12:56:04.062330+00:00,default
+eb7780ea,MACD crossover with momentum confirmation on TCS,llm,True,True,5287.9,,llama3-70b-8192,,macd_crossover,macd_crossover,True,INFY.NS,1d,2026-07-19T12:56:09.557811+00:00,default
+9ebb9b33,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,,,,macd_crossover,momentum_breakout,False,HDFCBANK.NS,1d,2026-07-19T12:56:09.696583+00:00,default
+07280f89,MACD crossover with momentum confirmation on TCS,llm,True,True,5289.22,,llama3-70b-8192,,macd_crossover,macd_crossover,True,HDFCBANK.NS,1d,2026-07-19T12:56:15.191011+00:00,default
+82e64c32,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.04,,,,macd_crossover,momentum_breakout,False,ICICIBANK.NS,1d,2026-07-19T12:56:15.318123+00:00,default
+e6e8d291,MACD crossover with momentum confirmation on TCS,llm,True,True,4274.45,,llama3-70b-8192,,macd_crossover,macd_crossover,True,ICICIBANK.NS,1d,2026-07-19T12:56:19.782010+00:00,default
+6d6f6058,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-19T12:56:19.910417+00:00,default
+d9ce6fa7,aggressive breakout strategy for high volatility stocks,llm,True,True,5210.69,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-19T12:56:25.381283+00:00,default
+219e3a12,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-19T12:56:25.495238+00:00,default
+bfae7e85,aggressive breakout strategy for high volatility stocks,llm,True,True,4923.64,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-19T12:56:30.546512+00:00,default
+41352bac,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.03,,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-19T12:56:30.677703+00:00,default
+3e9ba51a,aggressive breakout strategy for high volatility stocks,llm,True,True,5193.8,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-19T12:56:36.106447+00:00,default
+a14f49ea,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-19T12:56:36.229060+00:00,default
+1e0f2c13,aggressive breakout strategy for high volatility stocks,llm,True,True,5015.57,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-19T12:56:41.454419+00:00,default
+a73f46c5,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-19T12:56:41.577658+00:00,default
+46ce3915,aggressive breakout strategy for high volatility stocks,llm,True,True,5468.53,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-19T12:56:47.209257+00:00,default
+095c251c,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.04,,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-19T12:56:47.317528+00:00,default
+402fff35,I want to trade Reliance with moderate risk using moving average crossover,llm,True,True,5155.73,,llama3-70b-8192,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-19T12:56:52.591903+00:00,default
+e241abe9,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-19T12:56:52.693957+00:00,default
+13da9bc3,I want to trade Reliance with moderate risk using moving average crossover,llm,True,True,5398.98,,llama3-70b-8192,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-19T12:56:58.235257+00:00,default
+d8da76aa,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.03,,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-19T12:56:58.324711+00:00,default
+3f4c7635,I want to trade Reliance with moderate risk using moving average crossover,llm,True,True,5157.4,,llama3-70b-8192,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-19T12:57:03.678168+00:00,default
+a00fb633,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.04,,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-19T12:57:03.749255+00:00,default
+7b001fc4,I want to trade Reliance with moderate risk using moving average crossover,llm,True,True,5099.36,,llama3-70b-8192,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-19T12:57:08.951550+00:00,default
+a2cbb1fd,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.04,,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-19T12:57:09.039848+00:00,default
+cd7546c3,I want to trade Reliance with moderate risk using moving average crossover,llm,True,True,5335.48,,llama3-70b-8192,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-19T12:57:14.478943+00:00,default
+285191d0,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.03,,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-19T12:57:14.548997+00:00,default
+d5d38653,sideways market mean reversion play on HDFC Bank with wider bands,llm,True,True,5022.4,,llama3-70b-8192,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-07-19T12:57:19.711872+00:00,default
+37921bd3,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.03,,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-19T12:57:19.777558+00:00,default
+48944522,sideways market mean reversion play on HDFC Bank with wider bands,llm,True,True,5174.74,,llama3-70b-8192,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-07-19T12:57:25.044033+00:00,default
+aa2b9e64,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-19T12:57:25.140080+00:00,default
+d54df07b,sideways market mean reversion play on HDFC Bank with wider bands,llm,True,True,5226.01,,llama3-70b-8192,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-07-19T12:57:30.461440+00:00,default
+a2297852,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.03,,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-19T12:57:30.517113+00:00,default
+1e01606b,sideways market mean reversion play on HDFC Bank with wider bands,llm,True,True,5258.41,,llama3-70b-8192,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-07-19T12:57:35.900077+00:00,default
+add7dee4,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-19T12:57:35.981574+00:00,default
+f71fab16,sideways market mean reversion play on HDFC Bank with wider bands,llm,True,True,5324.01,,llama3-70b-8192,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-07-19T12:57:41.399274+00:00,default
+bfd137ff,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-19T12:57:41.504833+00:00,default
+f8296970,something safe for beginners that follows the trend,llm,True,True,5184.93,,llama3-70b-8192,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-07-19T12:57:46.840760+00:00,default
+930e14d3,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-19T12:57:46.926443+00:00,default
+e6b5a493,something safe for beginners that follows the trend,llm,True,True,5235.5,,llama3-70b-8192,,golden_cross,golden_cross,True,TCS.NS,1d,2026-07-19T12:57:52.267379+00:00,default
+f6b326be,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-19T12:57:52.377692+00:00,default
+b44a8564,something safe for beginners that follows the trend,llm,True,True,5211.38,,llama3-70b-8192,,golden_cross,golden_cross,True,INFY.NS,1d,2026-07-19T12:57:57.738874+00:00,default
+cecf5a82,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-19T12:57:57.841384+00:00,default
+2c514c71,something safe for beginners that follows the trend,llm,True,True,5173.97,,llama3-70b-8192,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-07-19T12:58:03.202210+00:00,default
+fbb4742b,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-19T12:58:03.305880+00:00,default
+82a00870,something safe for beginners that follows the trend,llm,True,True,5135.33,,llama3-70b-8192,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-07-19T12:58:08.651896+00:00,default
+b0f75040,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.03,,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-19T12:58:08.768429+00:00,default
+37bbd562,scalp high momentum breakouts on BAJFINANCE intraday,llm,True,True,5235.91,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-07-19T12:58:14.164500+00:00,default
+21073aa5,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.03,,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-19T12:58:14.288548+00:00,default
+d473ec3f,scalp high momentum breakouts on BAJFINANCE intraday,llm,True,True,5110.58,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-07-19T12:58:19.573230+00:00,default
+cf940909,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.03,,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-19T12:58:19.694934+00:00,default
+8c2cf120,scalp high momentum breakouts on BAJFINANCE intraday,llm,True,True,5246.6,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-07-19T12:58:25.094079+00:00,default
+7c14babe,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-19T12:58:25.217634+00:00,default
+0c043368,scalp high momentum breakouts on BAJFINANCE intraday,llm,True,True,5139.14,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-07-19T12:58:30.503271+00:00,default
+1bd8dee1,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-19T12:58:30.631135+00:00,default
+23bacbee,scalp high momentum breakouts on BAJFINANCE intraday,llm,True,True,5046.13,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-07-19T12:58:35.908533+00:00,default
+231c99e5,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.03,,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-19T12:58:35.982625+00:00,default
+948c7919,overbought overbought sell signal with RSI 70 on ITC,llm,True,True,5224.33,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-07-19T12:58:41.315026+00:00,default
+5eedc7e2,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-19T12:58:41.393671+00:00,default
+d07ed6fd,overbought overbought sell signal with RSI 70 on ITC,llm,True,True,5143.79,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-07-19T12:58:46.606556+00:00,default
+b0d44977,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-19T12:58:46.665525+00:00,default
+bc5b1208,overbought overbought sell signal with RSI 70 on ITC,llm,True,True,6267.41,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-07-19T12:58:53.063977+00:00,default
+efe8afdd,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.04,,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-19T12:58:53.146537+00:00,default
+2d6f0bb7,overbought overbought sell signal with RSI 70 on ITC,llm,True,True,5069.01,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-07-19T12:58:58.367208+00:00,default
+6e88bf6e,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.04,,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-19T12:58:58.471828+00:00,default
+f564e8c3,overbought overbought sell signal with RSI 70 on ITC,llm,True,True,5166.3,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-07-19T12:59:03.780774+00:00,default
+a2bd9a43,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.0,,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-08-14T14:07:53.529192+00:00,default
+9a0a149b,safe trend-following strategy for large cap stocks,llm,True,True,1003.48,,llama3-70b-8192,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-08-14T14:07:54.647905+00:00,default
+21168098,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-08-14T14:07:54.996013+00:00,default
+54a9c90a,safe trend-following strategy for large cap stocks,llm,True,True,979.16,,llama3-70b-8192,,golden_cross,golden_cross,True,TCS.NS,1d,2026-08-14T14:07:56.043132+00:00,default
+e520bfff,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-08-14T14:07:56.360473+00:00,default
+f3ebe6f7,safe trend-following strategy for large cap stocks,llm,True,True,857.28,,llama3-70b-8192,,golden_cross,golden_cross,True,INFY.NS,1d,2026-08-14T14:07:57.296661+00:00,default
+1557bec6,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-08-14T14:07:57.626480+00:00,default
+89c2fcb5,safe trend-following strategy for large cap stocks,llm,True,True,968.11,,llama3-70b-8192,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-08-14T14:07:58.666623+00:00,default
+53121586,safe trend-following strategy for large cap stocks,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-08-14T14:07:58.980025+00:00,default
+cfb52024,safe trend-following strategy for large cap stocks,llm,True,True,1079.96,,llama3-70b-8192,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-08-14T14:08:00.114617+00:00,default
+573ed0ca,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.03,,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-08-14T14:08:00.170835+00:00,default
+f1c62fef,buy the dip on Infosys using bollinger bands,llm,True,True,1399.63,,llama3-70b-8192,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-08-14T14:08:01.623679+00:00,default
+70a08520,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.03,,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-08-14T14:08:01.677634+00:00,default
+b3957d90,buy the dip on Infosys using bollinger bands,llm,True,True,1190.89,,llama3-70b-8192,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-08-14T14:08:02.923918+00:00,default
+cec244a1,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-08-14T14:08:02.980443+00:00,default
+b7758f42,buy the dip on Infosys using bollinger bands,llm,True,True,907.84,,llama3-70b-8192,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-08-14T14:08:03.935012+00:00,default
+93ea3d09,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-08-14T14:08:03.979070+00:00,default
+136c5628,buy the dip on Infosys using bollinger bands,llm,True,True,1165.08,,llama3-70b-8192,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-08-14T14:08:05.188987+00:00,default
+287de499,buy the dip on Infosys using bollinger bands,heuristic_fallback,True,True,0.03,,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-08-14T14:08:05.247020+00:00,default
+af8f2836,buy the dip on Infosys using bollinger bands,llm,True,True,1078.3,,llama3-70b-8192,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-08-14T14:08:06.383018+00:00,default
+b0b05ee7,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-08-14T14:08:06.441239+00:00,default
+2bfc8c95,RSI oversold bounce strategy with tight stop loss,llm,True,True,4979.14,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-08-14T14:08:11.474989+00:00,default
+5d8bf1af,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.03,,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-08-14T14:08:11.528914+00:00,default
+696ef993,RSI oversold bounce strategy with tight stop loss,llm,True,True,4916.9,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-08-14T14:08:16.507543+00:00,default
+e83ad241,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-08-14T14:08:16.552461+00:00,default
+48f71d95,RSI oversold bounce strategy with tight stop loss,llm,True,True,5089.72,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-08-14T14:08:21.706044+00:00,default
+8f37b316,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-08-14T14:08:21.747362+00:00,default
+1ef26a99,RSI oversold bounce strategy with tight stop loss,llm,True,True,6030.63,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-08-14T14:08:27.836994+00:00,default
+243fc9e1,RSI oversold bounce strategy with tight stop loss,heuristic_fallback,True,True,0.03,,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-08-14T14:08:27.891831+00:00,default
+fc5838e1,RSI oversold bounce strategy with tight stop loss,llm,True,True,5283.49,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-08-14T14:08:33.238915+00:00,default
+1cc29450,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.03,,,,macd_crossover,momentum_breakout,False,RELIANCE.NS,1d,2026-08-14T14:08:33.311499+00:00,default
+687da257,MACD crossover with momentum confirmation on TCS,llm,True,True,4949.77,,llama3-70b-8192,,macd_crossover,macd_crossover,True,RELIANCE.NS,1d,2026-08-14T14:08:38.385446+00:00,default
+34ff04f2,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,,,,macd_crossover,momentum_breakout,False,TCS.NS,1d,2026-08-14T14:08:38.472873+00:00,default
+3d777fdd,MACD crossover with momentum confirmation on TCS,llm,True,True,5030.0,,llama3-70b-8192,,macd_crossover,macd_crossover,True,TCS.NS,1d,2026-08-14T14:08:43.577597+00:00,default
+f890eee3,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.03,,,,macd_crossover,momentum_breakout,False,INFY.NS,1d,2026-08-14T14:08:43.654313+00:00,default
+f7348607,MACD crossover with momentum confirmation on TCS,llm,True,True,4942.86,,llama3-70b-8192,,macd_crossover,macd_crossover,True,INFY.NS,1d,2026-08-14T14:08:48.677125+00:00,default
+e2d994fb,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,,,,macd_crossover,momentum_breakout,False,HDFCBANK.NS,1d,2026-08-14T14:08:48.762862+00:00,default
+f54707ea,MACD crossover with momentum confirmation on TCS,llm,True,True,6138.69,,llama3-70b-8192,,macd_crossover,macd_crossover,True,HDFCBANK.NS,1d,2026-08-14T14:08:55.048014+00:00,default
+90ef24eb,MACD crossover with momentum confirmation on TCS,heuristic_fallback,True,True,0.02,,,,macd_crossover,momentum_breakout,False,ICICIBANK.NS,1d,2026-08-14T14:08:55.189911+00:00,default
+8d3bc582,MACD crossover with momentum confirmation on TCS,llm,True,True,4104.23,,llama3-70b-8192,,macd_crossover,macd_crossover,True,ICICIBANK.NS,1d,2026-08-14T14:08:59.402330+00:00,default
+95e163b3,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-08-14T14:08:59.542612+00:00,default
+22ce6659,aggressive breakout strategy for high volatility stocks,llm,True,True,6090.79,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-08-14T14:09:05.765011+00:00,default
+c495cbba,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-08-14T14:09:05.882504+00:00,default
+7d6e01c3,aggressive breakout strategy for high volatility stocks,llm,True,True,5086.58,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-08-14T14:09:11.104304+00:00,default
+a0fb08e3,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.03,,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-08-14T14:09:11.224819+00:00,default
+fe4a9eaa,aggressive breakout strategy for high volatility stocks,llm,True,True,5058.05,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-08-14T14:09:16.441272+00:00,default
+52f2b35e,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.03,,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-08-14T14:09:16.574042+00:00,default
+3131b232,aggressive breakout strategy for high volatility stocks,llm,True,True,4121.85,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-08-14T14:09:20.840384+00:00,default
+5deca328,aggressive breakout strategy for high volatility stocks,heuristic_fallback,True,True,0.03,,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-08-14T14:09:20.975182+00:00,default
+21991e65,aggressive breakout strategy for high volatility stocks,llm,True,True,5156.84,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-08-14T14:09:26.230624+00:00,default
+562e296d,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.04,,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-08-14T14:09:26.294599+00:00,default
+083070d7,I want to trade Reliance with moderate risk using moving average crossover,llm,True,True,6166.02,,llama3-70b-8192,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-08-14T14:09:32.578175+00:00,default
+f3c313ec,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-08-14T14:09:32.689392+00:00,default
+f163d07f,I want to trade Reliance with moderate risk using moving average crossover,llm,True,True,5641.59,,llama3-70b-8192,,golden_cross,golden_cross,True,TCS.NS,1d,2026-08-14T14:09:38.431735+00:00,default
+78bb6a9d,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.04,,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-08-14T14:09:38.550890+00:00,default
+d4dd14d1,I want to trade Reliance with moderate risk using moving average crossover,llm,True,True,4151.92,,llama3-70b-8192,,golden_cross,golden_cross,True,INFY.NS,1d,2026-08-14T14:09:42.820876+00:00,default
+6b736639,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.04,,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-08-14T14:09:42.934361+00:00,default
+35500df6,I want to trade Reliance with moderate risk using moving average crossover,llm,True,True,5406.84,,llama3-70b-8192,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-08-14T14:09:48.473446+00:00,default
+0b6d9ff8,I want to trade Reliance with moderate risk using moving average crossover,heuristic_fallback,True,True,0.03,,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-08-14T14:09:48.582183+00:00,default
+d515d850,I want to trade Reliance with moderate risk using moving average crossover,llm,True,True,5130.0,,llama3-70b-8192,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-08-14T14:09:53.820909+00:00,default
+a517cd41,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-08-14T14:09:53.912142+00:00,default
+3c356c49,sideways market mean reversion play on HDFC Bank with wider bands,llm,True,True,5197.92,,llama3-70b-8192,,mean_reversion,mean_reversion,True,RELIANCE.NS,1d,2026-08-14T14:09:59.181712+00:00,default
+f32feadb,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.03,,,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-08-14T14:09:59.258835+00:00,default
+32e71c08,sideways market mean reversion play on HDFC Bank with wider bands,llm,True,True,5349.36,,llama3-70b-8192,,mean_reversion,mean_reversion,True,TCS.NS,1d,2026-08-14T14:10:04.678030+00:00,default
+83e9c502,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.03,,,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-08-14T14:10:04.758984+00:00,default
+80927053,sideways market mean reversion play on HDFC Bank with wider bands,llm,True,True,5146.98,,llama3-70b-8192,,mean_reversion,mean_reversion,True,INFY.NS,1d,2026-08-14T14:10:09.988597+00:00,default
+db00cdaf,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.03,,,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-08-14T14:10:10.061627+00:00,default
+881ac25b,sideways market mean reversion play on HDFC Bank with wider bands,llm,True,True,6591.73,,llama3-70b-8192,,mean_reversion,mean_reversion,True,HDFCBANK.NS,1d,2026-08-14T14:10:16.742022+00:00,default
+643f16c5,sideways market mean reversion play on HDFC Bank with wider bands,heuristic_fallback,True,True,0.02,,,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-08-14T14:10:16.796192+00:00,default
+5d093741,sideways market mean reversion play on HDFC Bank with wider bands,llm,True,True,4190.84,,llama3-70b-8192,,mean_reversion,mean_reversion,True,ICICIBANK.NS,1d,2026-08-14T14:10:21.070811+00:00,default
+b462d612,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-08-14T14:10:21.169314+00:00,default
+aed07def,something safe for beginners that follows the trend,llm,True,True,6285.05,,llama3-70b-8192,,golden_cross,golden_cross,True,RELIANCE.NS,1d,2026-08-14T14:10:27.567395+00:00,default
+fef5f89c,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,TCS.NS,1d,2026-08-14T14:10:27.679011+00:00,default
+bdf62149,something safe for beginners that follows the trend,llm,True,True,4032.03,,llama3-70b-8192,,golden_cross,golden_cross,True,TCS.NS,1d,2026-08-14T14:10:31.810586+00:00,default
+efa87711,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.02,,,,golden_cross,golden_cross,True,INFY.NS,1d,2026-08-14T14:10:31.926853+00:00,default
+355f1023,something safe for beginners that follows the trend,llm,True,True,6189.95,,llama3-70b-8192,,golden_cross,golden_cross,True,INFY.NS,1d,2026-08-14T14:10:38.219636+00:00,default
+4a2f559e,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.03,,,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-08-14T14:10:38.317916+00:00,default
+cff744ed,something safe for beginners that follows the trend,llm,True,True,5149.01,,llama3-70b-8192,,golden_cross,golden_cross,True,HDFCBANK.NS,1d,2026-08-14T14:10:43.595864+00:00,default
+60261a2d,something safe for beginners that follows the trend,heuristic_fallback,True,True,0.01,,,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-08-14T14:10:43.698643+00:00,default
+9d77e300,something safe for beginners that follows the trend,llm,True,True,5005.22,,llama3-70b-8192,,golden_cross,golden_cross,True,ICICIBANK.NS,1d,2026-08-14T14:10:48.818463+00:00,default
+d0cb78a9,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-08-14T14:10:48.936010+00:00,default
+1b8784da,scalp high momentum breakouts on BAJFINANCE intraday,llm,True,True,5317.29,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,RELIANCE.NS,1d,2026-08-14T14:10:54.373907+00:00,default
+64d8b599,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-08-14T14:10:54.529966+00:00,default
+d65898f5,scalp high momentum breakouts on BAJFINANCE intraday,llm,True,True,5180.6,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,TCS.NS,1d,2026-08-14T14:10:59.855537+00:00,default
+1f163d5e,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.01,,,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-08-14T14:10:59.952131+00:00,default
+962555ae,scalp high momentum breakouts on BAJFINANCE intraday,llm,True,True,5292.39,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,INFY.NS,1d,2026-08-14T14:11:05.384840+00:00,default
+2e447696,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.02,,,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-08-14T14:11:05.502872+00:00,default
+acde7407,scalp high momentum breakouts on BAJFINANCE intraday,llm,True,True,5455.74,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,HDFCBANK.NS,1d,2026-08-14T14:11:11.072497+00:00,default
+42eb1c07,scalp high momentum breakouts on BAJFINANCE intraday,heuristic_fallback,True,True,0.04,,,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-08-14T14:11:11.187202+00:00,default
+856f970a,scalp high momentum breakouts on BAJFINANCE intraday,llm,True,True,4148.39,,llama3-70b-8192,,momentum_breakout,momentum_breakout,True,ICICIBANK.NS,1d,2026-08-14T14:11:15.455337+00:00,default
+fed2a373,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-08-14T14:11:15.527169+00:00,default
+c84b7b41,overbought overbought sell signal with RSI 70 on ITC,llm,True,True,6158.53,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,RELIANCE.NS,1d,2026-08-14T14:11:21.780777+00:00,default
+9ef8a1ae,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.03,,,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-08-14T14:11:21.864256+00:00,default
+77f9cd8f,overbought overbought sell signal with RSI 70 on ITC,llm,True,True,5220.08,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,TCS.NS,1d,2026-08-14T14:11:27.158503+00:00,default
+66d7ad40,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-08-14T14:11:27.222387+00:00,default
+1e41a765,overbought overbought sell signal with RSI 70 on ITC,llm,True,True,5542.27,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,INFY.NS,1d,2026-08-14T14:11:32.847950+00:00,default
+ed354b41,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-08-14T14:11:32.926908+00:00,default
+607ce653,overbought overbought sell signal with RSI 70 on ITC,llm,True,True,5115.56,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,HDFCBANK.NS,1d,2026-08-14T14:11:38.120224+00:00,default
+ea99baf3,overbought overbought sell signal with RSI 70 on ITC,heuristic_fallback,True,True,0.02,,,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-08-14T14:11:38.204949+00:00,default
+4837dc44,overbought overbought sell signal with RSI 70 on ITC,llm,True,True,5177.64,,llama3-70b-8192,,rsi_strategy,rsi_strategy,True,ICICIBANK.NS,1d,2026-08-14T14:11:43.468685+00:00,default

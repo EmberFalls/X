@@ -4,11 +4,14 @@ import argparse
 import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+from dotenv import load_dotenv
+load_dotenv()
 
 import backtester
 from market_data import MarketDataProvider, YFinanceProvider
 from llm_mapper import suggest_strategy_llm, VALID_STRATEGY_IDS
 from strategy_assistant import suggest_strategy_from_prompt
+from schemas import StrategyPayload
 from experiment_logger import log_technical, log_trading, log_usability, NSE_BASKET
 from config_loader import (
     load_experiment_config,
@@ -166,7 +169,13 @@ def main() -> None:
                     payload, latency_ms = run_single_mapping(prompt, ticker, interval, method)
                     strategy_id = payload.get("strategy_id")
                     mapping_source = payload.get("mapping_source", method)
-                    schema_valid = strategy_id in strategy_registry
+                    try:
+                        StrategyPayload.model_validate(
+                            {key: payload[key] for key in StrategyPayload.model_fields if key in payload}
+                        )
+                        schema_valid = strategy_id in strategy_registry
+                    except Exception:
+                        schema_valid = False
                     strategy_match = bool(expected_strategy and strategy_id == expected_strategy)
                     if strategy_match:
                         exact_match_runs += 1

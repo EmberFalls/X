@@ -1,2 +1,3 @@
 mapping_source,valid_output_rate,backtest_completion_rate,avg_latency_ms,strategy_match_rate
-heuristic_fallback,1.0,0.9933774834437086,0.026622516556291387,0.9
+heuristic_fallback,1.0,0.9976525821596244,17.52742957746479,0.9
+llm,1.0,1.0,4397.903933333333,1.0

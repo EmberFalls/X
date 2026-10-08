@@ -9,7 +9,7 @@ import pandas as pd
 import backtester
 from market_data import MarketDataProvider, YFinanceProvider
 from strategy_assistant import suggest_strategy_from_prompt, validate_strategy_payload
-from llm_mapper import suggest_strategy_llm
+from llm_mapper import suggest_strategy_llm, VALID_STRATEGY_IDS
 from interpretability import build_interpretability_layer
 from experiment_logger import log_technical, log_trading, log_usability, TimedBlock
 
@@ -25,12 +25,8 @@ app.add_middleware(
 BASE_DIR = Path(__file__).resolve().parent
 provider: MarketDataProvider = YFinanceProvider()
 
-# === ADD to main.py ===
-# Place near the top, after `provider = YFinanceProvider()`:
-
 _latest_assistant_payload: Dict[str, Any] = {}
 
-# Add these two routes anywhere among the other v2 routes:
 
 @app.post('/api/state/latest-assistant')
 def set_latest_assistant_payload(payload: Dict[str, Any]):
@@ -51,41 +47,12 @@ def get_latest_assistant_payload():
     return _latest_assistant_payload
 
 
-class EntryLogic(BaseModel):
-    fast_ma: Optional[int] = None
-    slow_ma: Optional[int] = None
-    rsi_buy: Optional[float] = None
-    rsi_sell: Optional[float] = None
-    mr_k: Optional[float] = None
-    rsi_confirm: bool = False
-    macd_confirm: bool = False
-
-
-class ExitLogic(BaseModel):
-    stop_loss_pct: float = 2.0
-    take_profit_pct: float = 6.0
-    trailing_stop_pct: Optional[float] = None
-
-
-class ExecutionRules(BaseModel):
-    initial_capital: float = 100000
-    risk_percent: float = 2.0
-    slippage_pct: float = 0.1
-    transaction_cost_pct: float = 0.05
-
-
-class StrategyPayload(BaseModel):
-    user_intent: str
-    strategy_id: Literal['golden_cross', 'mean_reversion', 'rsi_strategy', 'macd_crossover', 'momentum_breakout']
-    ticker: str
-    exchange: Literal['NSE', 'BSE', 'AUTO'] = 'AUTO'
-    interval: Literal['1m', '5m', '15m', '1h', '1d'] = '1d'
-    market_mode: Literal['trend_following', 'mean_reversion', 'momentum', 'reversal'] = 'trend_following'
-    risk_profile: Literal['low', 'medium', 'high'] = 'medium'
-    entry_logic: EntryLogic
-    exit_logic: ExitLogic
-    execution_rules: ExecutionRules
-    assistant_rationale: str
+# NOTE: EntryLogic / ExitLogic / ExecutionRules / StrategyPayload used to be
+# defined here. They now live in schemas.py so that llm_mapper.py can import
+# StrategyPayload directly (without a circular import back through main.py)
+# and validate the LLM's raw output against it. main.py doesn't need to
+# import them itself since it only handles the already-validated payload
+# dict returned by suggest_strategy_llm().
 
 
 class BacktestRequest(BaseModel):
@@ -262,8 +229,13 @@ def assistant_suggest_llm(req: AssistantRequest):
         strategy_id = payload.get("strategy_id", "unknown")
         mapping_source = payload.get("mapping_source", "llm")
 
-        valid = {'golden_cross', 'mean_reversion', 'rsi_strategy', 'macd_crossover', 'momentum_breakout'}
-        schema_valid = strategy_id in valid
+        # NOTE: schema_valid here just confirms the returned strategy_id is one
+        # of the five known strategies for downstream routing/logging purposes.
+        # The actual full-payload schema validation (required fields, enums,
+        # nested entry/exit/execution types) already happened inside
+        # llm_mapper.suggest_strategy_llm() via the StrategyPayload pydantic
+        # model before this payload was ever returned.
+        schema_valid = strategy_id in VALID_STRATEGY_IDS
 
         backtest_completed = False
         metrics: Dict[str, Any] = {}

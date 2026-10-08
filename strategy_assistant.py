@@ -5,6 +5,7 @@ No external AI API. No ML model. Fully deterministic.
 """
 from __future__ import annotations
 from typing import Any, Dict
+from schemas import StrategyPayload
 
 _CATALOGUE: Dict[str, Dict[str, Any]] = {
     "safe": {
@@ -65,10 +66,10 @@ _CATALOGUE: Dict[str, Dict[str, Any]] = {
 
 _RULES = [
     ("safe", ["safe", "long term", "long-term", "conservative", "low risk", "slow"]),
+    ("macd", ["macd", "signal line", "histogram", "divergence"]),
     ("aggressive", ["aggressive", "scalp", "momentum", "high frequency", "fast", "short term"]),
     ("mean", ["mean", "reversion", "bollinger", "range", "sideways", "choppy"]),
     ("rsi", ["rsi", "oversold", "overbought", "bounce", "reversal"]),
-    ("macd", ["macd", "signal line", "histogram", "divergence"]),
 ]
 
 def _classify(prompt: str) -> str:
@@ -96,10 +97,4 @@ def suggest_strategy_from_prompt(prompt: str, ticker: str = "RELIANCE.NS", inter
     }
 
 def validate_strategy_payload(payload: Dict[str, Any]) -> None:
-    required = ["strategy_id", "ticker", "entry_logic", "exit_logic", "execution_rules"]
-    missing = [k for k in required if k not in payload]
-    if missing:
-        raise ValueError(f"Strategy payload missing keys: {missing}")
-    valid_ids = {"golden_cross", "mean_reversion", "rsi_strategy", "macd_crossover", "momentum_breakout"}
-    if payload["strategy_id"] not in valid_ids:
-        raise ValueError(f"Unknown strategy_id: {payload['strategy_id']}")
+    StrategyPayload.model_validate(payload)
